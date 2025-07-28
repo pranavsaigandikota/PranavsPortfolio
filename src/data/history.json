@@ -1,0 +1,36 @@
+[
+  {
+    "role": "Research Assistant (VR and HCI Lab)",
+    "organisation": "University of Central Florida",
+    "startDate": "September, 2024",
+    "endDate": "Present",
+    "experiences": [
+      "Assisting PhD researcher in virtual reality innovations, focusing on human-computer interaction.",
+      "Conducting user studies for a VR Sensor Awareness project."
+    ],
+    "imageSrc": "history/ucf.png"
+  },
+  {
+    "role": "Cultural Secretary",
+    "organisation": "Student Government, Ithaka International School",
+    "startDate": "June, 2022",
+    "endDate": "April, 2023",
+    "experiences": [
+      "Initiated and led science/tech fairs, cultural festivals, and sports competitions for all students.",
+      "Showcased leadership skills, collaboration, and teamwork with the student government.",
+      "Organized and maintained the structure of event operations for smooth execution."
+    ],
+    "imageSrc": "history/ithaka.png"
+  },
+  {
+    "role": "Space Settlement Researcher",
+    "organisation": "National Space Society",
+    "startDate": "December, 2022",
+    "endDate": "February, 2023",
+    "experiences": [
+      "Developed a comprehensive 50-page research document on sustainability, space habitation, and resource management.",
+      "Presented both oral and poster presentations to industry professionals at the ISDC 2023 in Arlington, Virginia."
+    ],
+    "imageSrc": "history/nss.png"
+  }
+]
