@@ -44,15 +44,12 @@ export const Hero = () => {
           </motion.h1>
           <motion.h2 className="hero-subtitle" variants={fadeInUp}>
             {" "}
-            Fullstack Web Developer
+            About Me:
           </motion.h2>
           <motion.p className="hero-description" variants={fadeInUp}>
-           Computer Science student at UCF passionate about AI, software engineering, and pushing the boundaries of technology. I enjoy building everything from innovative apps and games to contributing to cutting-edge VR research and fine-tuning of AI models.
 
-I’ve had the chance to lead and collaborate on projects in hackathons, competitions, and research teams, where strong communication and teamwork were key to success. I believe great ideas come from working closely with others, sharing knowledge, and staying open to new perspectives.
-
-Always eager to learn and tackle challenging problems with creativity and determination, I’m ready to bring my skills and collaborative spirit to your team.
-          </motion.p>
+I'm currently pursuing a degree in Computer Science at UCF and am interested in software engineering, AI, and being part of the latest tech. I enjoy building fun and creative apps and games, and I look forward to making a positive impact wherever I can. I have previously worked in VR research for Human Computer Interaction and fine-tuning of AI models. I also have previous web development experience with some of my projects found below. I have had the chance to lead multiple collaborative projects, research teams, and hackathons, which I enjoy taking part in. Academics aside, I am also the Diwali and Banquet director at the largest Indian club at UCF (Indian Student Association), and am an active member of badminton and KnightHacks. I am always eager for the next challenge and opportunity to learn.
+           </motion.p>
 
           <motion.div className="cta-buttons" variants={staggerContainer}>
             <motion.a
@@ -138,7 +135,7 @@ Always eager to learn and tackle challenging problems with creativity and determ
               <span className="card-icon"> 💻 </span>
               <span className="card-text">
                 {" "}
-                Currently working on something awesome!
+                Scroll down for more awesome projects of mine!
               </span>
             </div>
           </motion.div>

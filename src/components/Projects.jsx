@@ -22,7 +22,7 @@ const projectsData = [
       "Developed a debt management website aimed particularly at underrepresented communities, interpreting bank statements to offer personalized debt management suggestions. Contributed to user experience and interface (UX/UI) design.",
     skills: ["HTML", "CSS", "ReactJS", "JavaScript"],
     demo: "https://freedomfinances.xyz/",
-    source: "https://github.com/colemaring/Freedom-Finanaces",
+    source: "https://github.com/colemaring/Freedom-Finances", // ✅ Fixed typo
   },
   {
     title: "Vision - Knight Hacks VII",
@@ -100,6 +100,7 @@ export const Projects = () => {
       >
         My Projects
       </motion.h2>
+
       <motion.div
         className="project-grid"
         variants={staggerContainer}
@@ -130,28 +131,59 @@ export const Projects = () => {
                 gap: "12px",
               }}
             >
-            <a
-  href={project.demo}
-  target="_blank"
-  rel="noopener noreferrer"
-  className="btn-demo"
-  style={buttonStyle}
->
-  Demo
-</a>
-<a
-  href={project.source}
-  target="_blank"
-  rel="noopener noreferrer"
-  className="btn-source"
-  style={buttonStyle}
->
-  Source
-</a>
-
+              <a
+                href={project.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-demo"
+                style={buttonStyle}
+              >
+                Demo
+              </a>
+              <a
+                href={project.source}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-source"
+                style={buttonStyle}
+              >
+                Source
+              </a>
             </div>
           </motion.div>
         ))}
+
+        {/* More of My Projects card */}
+        <motion.div
+          key="more-projects"
+          className="project-card"
+          variants={fadeInUp}
+          whileHover={{ y: -10, transition: { duration: 0.2 } }}
+        >
+          <h3>More of My Projects</h3>
+          <p>
+            To view all my projects, including 3D animations, research papers, robot creations, music, and more, click here!
+          </p>
+          <div
+              style={{
+                marginTop: "10px",
+                marginBottom: "20px",
+                display: "flex",
+                justifyContent: "center",
+                gap: "12px",
+              }}
+            >
+            <a
+              href="https://pranavsaigandikota.wixsite.com/filmasticpg"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-demo"
+              style={buttonStyle}
+            >
+              View More Cool Projects
+            </a>
+          </div>
+        </motion.div>
       </motion.div>
     </motion.section>
   );

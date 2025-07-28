@@ -83,7 +83,7 @@ export const Contact = () => {
 
   return (
     <motion.section
-      id="contact"
+      id="contacts"
       className="contact"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}

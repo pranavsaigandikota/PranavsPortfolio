@@ -1,18 +1,18 @@
 const assignmentsData = [
   {
     title: "Project #1: Instructions",
-    description: "Placeholder description for Project #1.",
-    fileUrl: "/files/project1.pdf",
+    description: "Instructions on setting up Full Stack Development Environment",
+    fileUrl: "src/assets/projects/proj 1.pdf",
   },
   {
     title: "Project #2: Resume, Cover Letter, & Position Analysis",
-    description: "Placeholder description for Project #2.",
-    fileUrl: "/files/project2.pdf",
+    description: "My current Resume, Cover Letter, and Position Analysis for a job I applied to.",
+    fileUrl: "src/assets/projects/proj 2.pdf",
   },
   {
     title: "Project #3: Proposal",
-    description: "Placeholder description for Project #3.",
-    fileUrl: "/files/project3.pdf",
+    description: "Proposal for a research project I am working on.",
+    fileUrl: "src/assets/projects/proj 3.pdf",
   },
 
 ];

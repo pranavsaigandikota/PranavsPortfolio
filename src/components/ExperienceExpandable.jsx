@@ -50,13 +50,13 @@ const experiences = [
     imageSrc: "/history/ithaka.png",
   },
   {
-    role: "Space Settlement Researcher",
+    role: "NSS Space Settlement First Place Winner",
     organisation: "National Space Society",
     startDate: "December 2022",
     endDate: "February 2023",
     experiences: [
       "Developed a comprehensive 50-page research document on sustainability, space habitation, and resource management.",
-      "Presented oral and poster presentations to industry professionals at ISDC 2023 in Arlington, Virginia.",
+      "Presented oral and poster presentations to industry professionals at ISDC Conference 2023 in Arlington, Virginia.",
     ],
     imageSrc: "/history/nss.png",
   },
