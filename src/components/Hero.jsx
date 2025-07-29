@@ -62,7 +62,7 @@ I'm currently pursuing a degree in Computer Science at UCF and am interested in 
               View My Work
             </motion.a>
             <motion.a
-  href="src/assets/projects/Pranav Resume Spaced.pdf"
+  href="https://drive.google.com/file/d/1vzCYhZYYPTHPoqV0iQLqnx2Yi95O8zcd/view?usp=sharing"
   className="cta-secondary"
   whileHover={{ scale: 1.05 }}
   whileTap={{ scale: 0.95 }}
