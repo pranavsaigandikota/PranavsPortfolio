@@ -62,13 +62,16 @@ I'm currently pursuing a degree in Computer Science at UCF and am interested in 
               View My Work
             </motion.a>
             <motion.a
-              href="#contacts"
-              className="cta-secondary"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Contact Me
-            </motion.a>
+  href="src/assets/projects/Pranav Resume Spaced.pdf"
+  className="cta-secondary"
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  Resume
+</motion.a>
+
           </motion.div>
           <motion.div className="social-links" variants={staggerContainer}>
             <motion.a href="https://github.com/pranavsaigandikota" target="_blank">

@@ -1,20 +1,34 @@
+import { motion } from "framer-motion";
+
 const assignmentsData = [
   {
-    title: "Project #1: Instructions",
-    description: "Instructions on setting up Full Stack Development Environment",
-    fileUrl: "src/assets/projects/proj 1.pdf",
+    title: "Proj #1: Instructions",
+    description: "Instructions on setting up Full Stack Development Environment using Angular 2+, Node.js, and SQL Server with Bootstrap styling. This guide is aimed at those who are beginning web development or are switching to Angular and want a simple quick guide to setting up all the required tools and connect the back and front ends.",
+    fileUrl: "https://drive.google.com/file/d/1gn9sceRnB_Wv95NszQxjzWIMn_drEh5x/view?usp=sharing",
   },
   {
-    title: "Project #2: Resume, Cover Letter, & Position Analysis",
-    description: "My current Resume, Cover Letter, and Position Analysis for a job I applied to.",
-    fileUrl: "src/assets/projects/proj 2.pdf",
+    title: "Proj #2: Resume, Cover Letter, & Position Analysis",
+    description: "My current Resume, Cover Letter, and Position Analysis for the Supplemental Instruction Leader - UCF position I applied to. The cover letter shows an example of my technical writing skills, and the position analysis shows my ability to analyze job requirements and match them with my skills.",
+    extraFiles: [
+      {
+        label: "Resume",
+        url: "https://drive.google.com/file/d/1vzCYhZYYPTHPoqV0iQLqnx2Yi95O8zcd/view?usp=sharing",
+      },
+      {
+        label: "Cover Letter",
+        url: "https://drive.google.com/file/d/1llYsNsLSxOY3PuyNjTpwtdI-2Omo98VN/view?usp=sharing",
+      },
+      {
+        label: "Position Analysis",
+        url: "https://drive.google.com/file/d/1lSV8OSZmaPVnzJA_Xb1GmbvlZK4xjond/view?usp=sharing",
+      },
+    ],
   },
   {
-    title: "Project #3: Proposal",
-    description: "Proposal for a research project I am working on.",
-    fileUrl: "src/assets/projects/proj 3.pdf",
+    title: "Proj #3: Research Proposal",
+    description: "This is a research project proposal for a study that investigates how generative AI feedback compares to human feedback in terms of improving a college student’s writing skills throughout a semester. This study investigates which feedback type, AI compared to human, gives better writing results, how the students satisfaction and confidence in their writing ability is affected, and how many of the suggestions human vs AI, the students are more likely to implement.",
+    fileUrl: "https://drive.google.com/file/d/1wGKm-XA9Fn2PsgGnFZ_Wliq6UkgaDzg8/view?usp=sharing",
   },
-
 ];
 
 const buttonStyle = {
@@ -33,6 +47,8 @@ const buttonStyle = {
   alignItems: "center",
   justifyContent: "center",
   transition: "all 0.2s ease-in-out",
+  marginRight: "8px",
+  marginTop: "10px",
 };
 
 const MajorAssignments = () => {
@@ -41,19 +57,46 @@ const MajorAssignments = () => {
       <h2 className="text-2xl font-bold mb-6">Technical Writing - Major Assignments</h2>
 
       <div className="project-grid">
-        {assignmentsData.map(({ title, description, fileUrl }, index) => (
-          <div key={index} className="project-card">
+        {assignmentsData.map(({ title, description, fileUrl, extraFiles }, index) => (
+          <motion.div
+            key={index}
+            className="project-card"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: index * 0.1 }}
+          >
             <h3>{title}</h3>
             <p>{description}</p>
-            <a
-              href={fileUrl}
-              download
-              style={buttonStyle}
-              className="btn-demo"
-            >
-              Download
-            </a>
-          </div>
+
+            {extraFiles ? (
+              extraFiles.map(({ label, url }, i) => (
+                <motion.a
+                  key={i}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-demo"
+                  style={buttonStyle}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {label}
+                </motion.a>
+              ))
+            ) : (
+              <motion.a
+                href={fileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-demo"
+                style={buttonStyle}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Download
+              </motion.a>
+            )}
+          </motion.div>
         ))}
       </div>
     </section>

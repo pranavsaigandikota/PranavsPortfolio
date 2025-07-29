@@ -22,7 +22,7 @@ const projectsData = [
       "Developed a debt management website aimed particularly at underrepresented communities, interpreting bank statements to offer personalized debt management suggestions. Contributed to user experience and interface (UX/UI) design.",
     skills: ["HTML", "CSS", "ReactJS", "JavaScript"],
     demo: "https://freedomfinances.xyz/",
-    source: "https://github.com/colemaring/Freedom-Finances", // ✅ Fixed typo
+    source: "https://github.com/pranavsaigandikota/Freedom-Finanaces", // ✅ Fixed typo
   },
   {
     title: "Vision - Knight Hacks VII",
