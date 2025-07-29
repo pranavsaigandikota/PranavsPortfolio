@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "deploy": "npm run build && gh-pages -d dist"
+    "deploy": "npm run build && gh-pages -d dist",
+    "publish": "git add . && git commit -m \"Update project\" && git push origin main && npm run build && npm run deploy"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",

@@ -99,6 +99,16 @@ const MajorAssignments = () => {
           </motion.div>
         ))}
       </div>
+      <br></br>
+      <motion.div
+        className="project-card"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: assignmentsData.length * 0.1 }}
+        >
+        <h3>Assessment of Digital Portfolio</h3>
+        <p>While making this website, there were many things I learnt going from content to visual appeal. When it comes to the progress of the site, I would like to note that it is still under development and I look forward to adding more links and more styling to make the site more visually appealing. I will also be adding more sections to the site. As for navigation, I feel satisfied with the way it is currently formatted and find the fonts and text color choices easy to read. Having made this website through react and vite instead of wix or another provider, I have been able to have more freedom in styling and component arrangement with some experience on making a site. I also was able to learn more on what to actually include in a personal portfolio with the help of my technical writing course. Aspects of making this site that were difficult or confusing might be getting certain text to format a certain way on the front end which took a bit extra effort. Some reasources that helped me in this was Youtube for tutorials, ChatGPT for debugging and sites such as aceternity.com for UI elements that were creative and visually appealing.</p>
+            </motion.div>
     </section>
   );
 };
