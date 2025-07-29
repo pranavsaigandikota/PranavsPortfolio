@@ -101,6 +101,7 @@ const MajorAssignments = () => {
       </div>
       <br></br>
       <motion.div
+        id ="assessdp"
         className="project-card"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
