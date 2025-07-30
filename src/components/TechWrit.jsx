@@ -27,7 +27,7 @@ const assignmentsData = [
   {
     title: "Proj #3: Research Proposal",
     description: "This is a research project proposal for a study that investigates how generative AI feedback compares to human feedback in terms of improving a college student’s writing skills throughout a semester. This study investigates which feedback type, AI compared to human, gives better writing results, how the students satisfaction and confidence in their writing ability is affected, and how many of the suggestions human vs AI, the students are more likely to implement.",
-    fileUrl: "https://drive.google.com/file/d/1wGKm-XA9Fn2PsgGnFZ_Wliq6UkgaDzg8/view?usp=sharing",
+    fileUrl: "https://drive.google.com/file/d/1SZCe69LI4-aCtvvYKnv_84Tyfqm1l0FX/view?usp=sharing",
   },
 ];
 

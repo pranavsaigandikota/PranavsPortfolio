@@ -1,38 +1,57 @@
-import React from "react";
+import { motion } from "framer-motion";
 
-import styles from "./Achievements.module.css";
-import { getImageUrl } from "../../utils";
+const fadeInUp = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6 },
+};
 
-export const Achievements = ({
-  project: { title, imageSrc, description, skills, demo, date, link },
-}) => {
+export const Achievements = () => {
   return (
-    <div className={styles.container}>
-      <img
-        src={getImageUrl(imageSrc)}
-        alt={`Image of ${title}`}
-        className={styles.image}
-      />
-      <h3 className={styles.title}>{title}</h3>
-      <p className={styles.description}>{description}</p>
-      {date && <p className={styles.date}>{date}</p>} {/* Display date if available */}
-      <ul className={styles.skills}>
-        {skills.map((skill, index) => (
-          <li key={index} className={styles.skill}>
-            {skill}
-          </li>
-        ))}
-      </ul>
-      <div className={styles.links}>
-        <a href={demo} className={styles.link} target="_blank" rel="noopener noreferrer">
-          Link To View
-        </a>
-        {link && ( // Display the link if available
-          <a href={link} className={styles.link} target="_blank" rel="noopener noreferrer">
-            More Info
-          </a>
-        )}
-      </div>
-    </div>
+    <motion.section
+      id="achievements"
+      className="projects"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+    >
+      <motion.h2
+        variants={fadeInUp}
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true }}
+      >
+        My Achievements
+      </motion.h2>
+
+      <motion.div
+        className="project-grid"
+        variants={fadeInUp}
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true }}
+      >
+        <motion.div
+          id="achievement-card"
+          className="project-card"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h3>National Space Society Space Settlement Contest 2022 (First Prize)</h3>
+          <p>
+            December 2022 – February 2023<br />
+            • Developed a 50-page research document on sustainability, space habitation, and resource management.<br />
+            • Presented oral and poster presentations to industry professionals at the 2022 International Space Development Conference (ISDC).
+          </p>
+          <br />
+          <h3>President’s Honor Roll</h3>
+          <p>
+            • Awarded for outstanding academic performance in Fall 2024 and Spring 2025.
+          </p>
+        </motion.div>
+      </motion.div>
+    </motion.section>
   );
 };

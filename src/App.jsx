@@ -8,7 +8,8 @@ import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
 import ExperienceExpandable from "./components/ExperienceExpandable";
 import MajorAssignments from "./components/TechWrit";
-
+import { Achievements } from "./components/Achievements";
+import { Skills } from "./components/Skills";
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -38,6 +39,8 @@ function App() {
       <Hero />
       <ExperienceExpandable />
       <Projects />
+      <Skills />
+      <Achievements />
       <MajorAssignments />
       <Contact />
 

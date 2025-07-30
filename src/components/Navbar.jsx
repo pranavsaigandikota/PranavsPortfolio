@@ -55,6 +55,13 @@ export const Navbar = () => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
         >
+          <a href="#skills">Skills</a>
+        </motion.li>
+        <motion.li
+          variants={fadeInUp}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+        >
           <a href="#experienceexpandable"> Experience</a>
         </motion.li>
           <motion.li
@@ -63,6 +70,13 @@ export const Navbar = () => {
           whileTap={{ scale: 0.95 }}
         >
           <a href="#major-assignments">Technical Writing</a>
+        </motion.li>
+           <motion.li
+          variants={fadeInUp}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <a href="#achievement-card">Achievements</a>
         </motion.li>
         <motion.li
           variants={fadeInUp}
