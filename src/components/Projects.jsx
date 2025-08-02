@@ -60,13 +60,11 @@ const projectsData = [
   title: "Humanotone - Face & Hand Controlled Instrument",
   imageSrc: "projects/humanotone.png",
   description:
-    "Humanotone is a browser-based instrument built with React, TensorFlow.js, and Mediapipe that transforms facial expressions and hand gestures into musical input. I used TensorFlow.js with the face-landmarks-detection model to track facial features like mouth openness, eyebrow position, and head tilt in real time. Hand movements were captured using Mediapipe’s Holistic model, allowing users to change notes like a theremin. Integrated Tone.js to generate dynamic sound, added a visualizer for feedback, and built a custom UI with React for controlling octaves and playback. This project helped me explore real-time computer vision and audio synthesis in the browser.",
+    "Humanotone is a browser-based instrument that turns facial expressions and hand gestures into music. Built with React, TensorFlow.js, and Mediapipe, it tracks movements in real time to control notes like a theremin. Tone.js handles sound generation, with a custom UI for octaves and playback.",
   skills: ["React", "TensorFlow.js", "Mediapipe", "Tone.js", "Webcam Input", "Audio Visualization", "Real-Time Interaction"],
   demo: "https://pranavsaigandikota.github.io/Humanotone/",
   source: "https://github.com/pranavsaigandikota/Humanotone/"
-}
-
-,
+},
 
   {
     title: "Exodus Space Settlement - NSS Space Settlement Competition",
