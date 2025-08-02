@@ -60,11 +60,12 @@ const projectsData = [
   title: "Humanotone - Face & Hand Controlled Instrument",
   imageSrc: "projects/humanotone.png",
   description:
-    "Built a browser-based musical instrument using React and TensorFlow.js that turns facial expressions and hand gestures into music. Users can raise eyebrows to switch tones, open their mouth to control volume, tilt their head to shift pitch, and move their hand like a theremin to play notes. Includes a sound visualizer and octave control for a dynamic, hands-free music experience.",
-  skills: ["React", "TensorFlow.js", "Mediapipe", "Tone.js", "Webcam Input"],
+    "Humanotone is a browser-based instrument built with React, TensorFlow.js, and Mediapipe that transforms facial expressions and hand gestures into musical input. I used TensorFlow.js with the face-landmarks-detection model to track facial features like mouth openness, eyebrow position, and head tilt in real time. Hand movements were captured using Mediapipe’s Holistic model, allowing users to change notes like a theremin. Integrated Tone.js to generate dynamic sound, added a visualizer for feedback, and built a custom UI with React for controlling octaves and playback. This project helped me explore real-time computer vision and audio synthesis in the browser.",
+  skills: ["React", "TensorFlow.js", "Mediapipe", "Tone.js", "Webcam Input", "Audio Visualization", "Real-Time Interaction"],
   demo: "https://pranavsaigandikota.github.io/Humanotone/",
   source: "https://github.com/pranavsaigandikota/Humanotone/"
 }
+
 ,
 
   {
