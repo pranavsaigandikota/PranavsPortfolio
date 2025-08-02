@@ -30,11 +30,12 @@ const projectsData = [
   title: "Vision - Knight Hacks VII",
   imageSrc: "projects/vision.png",
   description:
-    "Built an assistive drawing app that lets users create art using only eye movements and voice commands. I learned how to implement real-time eye tracking with OpenCV, voice control with speech recognition, and design accessible interfaces with Pygame. Worked in a team to integrate multiple Python libraries into a seamless experience.",
+    "Built an assistive drawing app that lets users create art using only eye movements and voice commands. I learned how to implement real-time eye tracking with OpenCV, voice control with speech recognition, and design accessible interfaces with Pygame. Worked in a team to integrate multiple Python libraries into a seamless experience. Vision was awarded Honorable Mention at Knight Hacks VII.",
   skills: ["Python", "OpenCV", "Pygame", "Speech Recognition", "Accessibility Design"],
   demo: "https://devpost.com/software/vision-q7yp45",
   source: "https://github.com/pranavsaigandikota/Vision"
 },
+
 
 ,
   {
