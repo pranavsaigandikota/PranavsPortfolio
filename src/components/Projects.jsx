@@ -15,24 +15,28 @@ const staggerContainer = {
 };
 
 const projectsData = [
-  {
-    title: "Freedom Finances - Shell Hacks 2024",
-    imageSrc: "projects/freedom-finances.png",
-    description:
-      "Developed a debt management website aimed particularly at underrepresented communities, interpreting bank statements to offer personalized debt management suggestions. Contributed to user experience and interface (UX/UI) design.",
-    skills: ["HTML", "CSS", "ReactJS", "JavaScript"],
-    demo: "https://freedomfinances.xyz/",
-    source: "https://github.com/pranavsaigandikota/Freedom-Finanaces", // ✅ Fixed typo
-  },
-  {
-    title: "Vision - Knight Hacks VII",
-    imageSrc: "projects/vision.png",
-    description:
-      "Built a Python app that empowers users with limited mobility to draw on a virtual canvas using eye tracking and voice commands. Integrated multiple Python libraries into the project.",
-    skills: ["Python", "OpenCV", "Speech Recognition"],
-    demo: "https://devpost.com/software/vision-q7yp45",
-    source: "https://github.com/pranavsaigandikota/Vision",
-  },
+{
+  title: "Freedom Finances - ShellHacks 2024",
+  imageSrc: "projects/freedom-finances.png",
+  description:
+    "Created a web app to help users manage debt and improve financial literacy by analyzing banking data using Plaid and GPT-3.5. I learned React from scratch, contributed to UI design, and collaborated on integrating Appwrite for authentication and storage.",
+  skills: ["React.js", "JavaScript", "Plaid API", "Appwrite", "OpenAI", "UI/UX Design"],
+  demo: "https://freedomfinances.xyz/",
+  source: "https://github.com/colemaring/Freedom-Finanaces"
+},
+
+
+{
+  title: "Vision - Knight Hacks VII",
+  imageSrc: "projects/vision.png",
+  description:
+    "Built an assistive drawing app that lets users create art using only eye movements and voice commands. I learned how to implement real-time eye tracking with OpenCV, voice control with speech recognition, and design accessible interfaces with Pygame. Worked in a team to integrate multiple Python libraries into a seamless experience.",
+  skills: ["Python", "OpenCV", "Pygame", "Speech Recognition", "Accessibility Design"],
+  demo: "https://devpost.com/software/vision-q7yp45",
+  source: "https://github.com/pranavsaigandikota/Vision"
+},
+
+,
   {
     title: "Freelance Game and App Development",
     imageSrc: "projects/freelance-game-dev.png",
@@ -42,6 +46,26 @@ const projectsData = [
     demo: "https://simmer.io/@FilmasticPG/jenny-s-playtime",
     source: "https://www.youtube.com/@earthlytomcat11",
   },
+{
+  title: "NextFlix - Movie Discovery & Watchlist App",
+  imageSrc: "projects/nextflix.png",
+  description:
+    "Built a mobile app with React Native and Expo to browse movies, watch trailers, and manage a personal watchlist. Integrated Appwrite for user auth and data storage. Learned API integration, responsive design with NativeWind, and scalable app structure using Expo Router.",
+  skills: ["React Native", "Expo", "Appwrite", "API Integration", "UI/UX Design"],
+  demo: "",
+  source: "https://github.com/pranavsaigandikota/NextFlix/"
+},
+{
+  title: "Humanotone - Face & Hand Controlled Instrument",
+  imageSrc: "projects/humanotone.png",
+  description:
+    "Built a browser-based musical instrument using React and TensorFlow.js that turns facial expressions and hand gestures into music. Users can raise eyebrows to switch tones, open their mouth to control volume, tilt their head to shift pitch, and move their hand like a theremin to play notes. Includes a sound visualizer and octave control for a dynamic, hands-free music experience.",
+  skills: ["React", "TensorFlow.js", "Mediapipe", "Tone.js", "Webcam Input"],
+  demo: "https://pranavsaigandikota.github.io/Humanotone/",
+  source: "https://github.com/pranavsaigandikota/Humanotone/"
+}
+,
+
   {
     title: "Exodus Space Settlement - NSS Space Settlement Competition",
     imageSrc: "projects/exodus.png",
