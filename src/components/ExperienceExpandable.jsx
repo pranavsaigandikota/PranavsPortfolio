@@ -17,14 +17,29 @@ const staggerContainer = {
 const experiences = [
   {
     role: "Research Assistant (VR and Human Computer Interaction Lab)",
-    organisation: "University of Central Florida",
+    organisation: "University of Central Florida | ISUE Lab",
     startDate: "September 2024",
     endDate: "Present",
     experiences: [
-      "Assisted PhD researcher in conducting user studies for VR Sensor Awareness project.",
-      "4th authored in SIGGRAPH paper submission for 3D Scene Generation from natural language.",
-      "Implemented QLORA fine tuning and weighted use of models for optimization of survey LLM.",
-      "Working on improving previously made survey LLM and implementing it in VR.",
+      "Assisted PhD researcher in improving pipeline for selective text-to-3D generation and creating a GUI.",
+      "Conducted user studies for VR Sensor Awareness project.",
+      "Authored related works in SIGGRAPH paper submission for 3D Scene Generation from natural language.",
+      "Implemented QLORA fine-tuning and weighted use of models for optimization of LLM.",
+      "Worked on improving previously made survey LLM to enhance efficiency and implement it in VR.",
+
+    ],
+    imageSrc: "/history/ucf.png",
+  },
+  {
+    role: "Supplemental Instruction (SI) Leader – Computer Science I",
+    organisation: "University of Central Florida | SARC",
+    startDate: "August 2025",
+    endDate: "Present",
+    experiences: [
+      "Lead weekly SI sessions for students in COP 3502C (CS1) under Dr. Arup Guha.",
+      "Develop interactive coding exercises, problem-solving activities, and review materials to reinforce C programming concepts, recursion, memory management, and topics of data structures and algorithms.",
+      "Foster a collaborative learning environment by encouraging group discussions and peer-to-peer interactions.",
+      "Collaborate with faculty and fellow SI leaders to assess student needs and adapt instructional strategies for maximum impact."
     ],
     imageSrc: "/history/ucf.png",
   },
@@ -34,7 +49,8 @@ const experiences = [
     startDate: "June 2025",
     endDate: "Present",
     experiences: [
-      "Responsible for organizing and maintaining the structure of the event operations for smooth execution.",
+      "Responsible for organizing and hosting the Diwali and Banquet events with a team, including planning, coordinating with other clubs, and presenting the events for the college community.",
+      "Contributed creative ideas and collaborated with team members to support club events."
     ],
     imageSrc: "/history/ucf.png",
   },

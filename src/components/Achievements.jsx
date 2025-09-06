@@ -45,10 +45,13 @@ export const Achievements = () => {
             • Developed a 50-page research document on sustainability, space habitation, and resource management.<br />
             • Presented oral and poster presentations to industry professionals at the 2022 International Space Development Conference (ISDC).
           </p>
-          <br />
           <h3>President’s Honor Roll</h3>
           <p>
             • Awarded for outstanding academic performance in Fall 2024 and Spring 2025.
+          </p>
+          <h3>Honor Society and SCLA Honor</h3>
+          <p>
+            • Given for outstanding academic performance and leadership.
           </p>
         </motion.div>
       </motion.div>

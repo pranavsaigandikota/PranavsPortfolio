@@ -41,7 +41,7 @@ function App() {
       <Projects />
       <Skills />
       <Achievements />
-      <MajorAssignments />
+      {/* <MajorAssignments /> */}
       <Contact />
 
       <motion.footer

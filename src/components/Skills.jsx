@@ -67,13 +67,14 @@ export const Skills = () => {
       <motion.div style={styles.skillCategory} variants={fadeInUp}>
         <h3 style={styles.categoryTitle}>Programming Languages</h3>
         <ul style={styles.skillList}>
-          <li style={styles.skillItem}>C (Intermediate)</li>
-          <li style={styles.skillItem}>HTML (Intermediate)</li>
-          <li style={styles.skillItem}>CSS (Intermediate)</li>
-          <li style={styles.skillItem}>C# (Intermediate)</li>
-          <li style={styles.skillItem}>Python (Beginner)</li>
-          <li style={styles.skillItem}>JavaScript (Beginner)</li>
-          <li style={styles.skillItem}>SQL / MySQL (Beginner)</li>
+          <li style={styles.skillItem}>C</li>
+          <li style={styles.skillItem}>HTML</li>
+          <li style={styles.skillItem}>CSS</li>
+          <li style={styles.skillItem}>C#</li>
+          <li style={styles.skillItem}>Python</li>
+          <li style={styles.skillItem}>Java</li>
+          <li style={styles.skillItem}>JavaScript</li>
+          <li style={styles.skillItem}>SQL / MySQL</li>
         </ul>
       </motion.div>
 
