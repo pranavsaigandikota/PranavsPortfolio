@@ -18,7 +18,7 @@ import path from "path";
 
 export default defineConfig({
   plugins: [react()],
-  base: "/PranavsPortfolio/",
+  base: "/",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),  // <-- this enables "@/data/..."
