@@ -94,6 +94,8 @@ export const Skills = () => {
         <ul style={styles.skillList}>
           <li style={styles.skillItem}>Unity (C#)</li>
           <li style={styles.skillItem}>Asset Creation (SketchFab)</li>
+          <li style={styles.skillItem}>3D Modeling/Animating (Blender)</li>
+          <li style={styles.skillItem}>AR/VR Development</li>
         </ul>
       </motion.div>
 

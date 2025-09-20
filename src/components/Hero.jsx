@@ -3,7 +3,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { useState, useEffect } from "react";
 
-// Typewriter effect for code
+// Full code string
 const codeString = `const aboutMe: DeveloperProfile = {
   codename: "Pranavsai Gandikota",
   origin: "Orlando, FL",
@@ -25,22 +25,41 @@ const codeString = `const aboutMe: DeveloperProfile = {
 };
 `;
 
+// Typewriter component with mistakes
 const TypewriterCode = () => {
   const [displayedCode, setDisplayedCode] = useState("");
+  const [i, setI] = useState(0);
+  const [mistake, setMistake] = useState(false);
+  const [wrongWord, setWrongWord] = useState("");
 
   useEffect(() => {
-    let i = 0;
-    const interval = setInterval(() => {
-      if (i < codeString.length) {
-        setDisplayedCode((prev) => prev + codeString.charAt(i));
-        i++;
-      } else {
-        clearInterval(interval); // stop when done
-      }
-    }, 15); // typing speed in ms
+    if (i >= codeString.length) return;
 
-    return () => clearInterval(interval);
-  }, []);
+    const timeout = setTimeout(() => {
+      // Randomly insert a wrong word
+      if (!mistake && Math.random() < 0.03 && displayedCode.length > 10) {
+        const sampleMistakes = ["cont", "DevProfile", "codne", "recat", "Stack"];
+        const word = sampleMistakes[Math.floor(Math.random() * sampleMistakes.length)];
+        setWrongWord(word);
+        setDisplayedCode((prev) => prev + word);
+        setMistake(true);
+      } else if (mistake) {
+        // Delete wrong word character by character
+        if (wrongWord.length > 0) {
+          setDisplayedCode((prev) => prev.slice(0, -1));
+          setWrongWord((prev) => prev.slice(0, -1));
+        } else {
+          setMistake(false);
+        }
+      } else {
+        // Normal typing
+        setDisplayedCode((prev) => prev + codeString.charAt(i));
+        setI(i + 1);
+      }
+    }, 20);
+
+    return () => clearTimeout(timeout);
+  }, [displayedCode, i, mistake, wrongWord]);
 
   return (
     <SyntaxHighlighter
@@ -63,7 +82,7 @@ const TypewriterCode = () => {
   );
 };
 
-// Framer Motion variants
+// Motion variants
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
@@ -88,6 +107,7 @@ export const Hero = () => {
       transition={{ duration: 0.8, delay: 0.2 }}
     >
       <div className="hero-container">
+        {/* Hero Text Content */}
         <motion.div
           className="hero-content"
           variants={staggerContainer}
@@ -137,7 +157,7 @@ export const Hero = () => {
               View My Work
             </motion.a>
             <motion.a
-              href="https://drive.google.com/file/d/1z9en524SNW6XO8g9hODLRbKCoKF2jo4E/view?usp=sharing"
+              href="https://drive.google.com/file/d/1AhBa-Xb4037hgf-w5UAprwJimeZCchHD/view?usp=sharing"
               className="cta-secondary"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -164,6 +184,7 @@ export const Hero = () => {
           </motion.div>
         </motion.div>
 
+        {/* Code Section */}
         <motion.div
           className="hero-image-container"
           initial={{ opacity: 0, x: 50 }}
@@ -174,6 +195,7 @@ export const Hero = () => {
             <TypewriterCode />
           </div>
 
+          {/* Floating Scroll Card */}
           <motion.div
             className="floating-card"
             animate={{ y: [0, -10, 0], rotate: [0, 2, 0] }}
