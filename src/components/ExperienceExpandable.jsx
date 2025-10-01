@@ -30,6 +30,7 @@ const experiences = [
     ],
     imageSrc: "/history/ucf.png",
   },
+  
   {
     role: "Supplemental Instruction (SI) Leader – Computer Science I",
     organisation: "University of Central Florida | SARC",
@@ -43,6 +44,18 @@ const experiences = [
     ],
     imageSrc: "/history/ucf.png",
   },
+  {
+  role: "Web Design and 3D Animation - Design Team",
+  organisation: "KnightHacks, University of Central Florida",
+  startDate: "September 2025",
+  endDate: "Present",
+  experiences: [
+    "Designing the official KnightHacks website UI/UX.",
+    "Creating 3D animations for UCF’s largest software development organization with 500+ members."
+  ],
+  imageSrc: "/history/knighthacks.png",
+},
+
   {
     role: "Diwali and Banquet Director – Indian Student Association UCF",
     organisation: "University of Central Florida",
