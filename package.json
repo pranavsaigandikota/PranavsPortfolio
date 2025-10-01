@@ -14,7 +14,8 @@
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "clsx": "^2.1.1",
-    "framer-motion": "^12.16.0",
+    "framer-motion": "^12.23.22",
+    "matter-js": "^0.20.0",
     "motion": "^12.23.9",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

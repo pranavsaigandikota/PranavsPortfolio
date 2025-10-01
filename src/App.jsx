@@ -42,7 +42,7 @@ function App() {
       <Skills />
       <Achievements />
       {/* <MajorAssignments /> */}
-      <Contact />
+      {/* <Contact /> */}
 
       <motion.footer
         className="footer"
@@ -51,7 +51,7 @@ function App() {
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <p>2025 Pranavsai Gandikota Portfolio</p>
+        <p>2025 - Pranavsai Gandikota</p>
       </motion.footer>
     </div>
   );

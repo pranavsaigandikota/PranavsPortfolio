@@ -9,15 +9,15 @@ const codeString = `const aboutMe: DeveloperProfile = {
   origin: "Orlando, FL",
   role: "Aspiring Software Engineer & AI Enthusiast",
   stack: {
-    languages: ["C", "Python", "JavaScript", "TypeScript", "SQL", "HTML", "CSS"],
-    frameworks: ["React", "Next.js", "TailwindCSS", "Supabase", "Angular", "Unity"],
+    languages: ["C", "Java", "Python", "JavaScript", "TypeScript", "SQL", "HTML", "CSS"],
+    frameworks: ["React.js", "Next.js", "TailwindCSS", "Supabase", "Angular", "Unity"],
   },
   traits: [
     "problem solver",
     "team player",
     "AI explorer",
-    "VR researcher",
-    "creative coder",
+    "VR research assistant",
+    "creative thinker",
   ],
   missionStatement:
     "Building impactful tech that solves real problems and pushes boundaries",

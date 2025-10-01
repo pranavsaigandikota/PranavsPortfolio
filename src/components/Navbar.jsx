@@ -18,6 +18,7 @@ export const Navbar = () => {
   return (
     <motion.nav
       className="navbar"
+      style={{ position: "fixed", top: 0, left: 0, width: "100%", zIndex: 1000 }}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
@@ -63,27 +64,6 @@ export const Navbar = () => {
           whileTap={{ scale: 0.95 }}
         >
           <a href="#experienceexpandable"> Experience</a>
-        </motion.li>
-          <motion.li
-          variants={fadeInUp}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <a href="#major-assignments">Technical Writing</a>
-        </motion.li>
-           <motion.li
-          variants={fadeInUp}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <a href="#achievement-card">Achievements</a>
-        </motion.li>
-        <motion.li
-          variants={fadeInUp}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <a href="#contacts"> Contact</a>
         </motion.li>
       </motion.ul>
     </motion.nav>

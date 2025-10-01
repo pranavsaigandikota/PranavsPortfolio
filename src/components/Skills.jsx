@@ -1,130 +1,108 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const fadeInUp = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6 },
+const container = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.15, // animate children one after another
+    },
+  },
 };
 
-const styles = {
-  section: {
-    padding: "6rem 5%",
-    backgroundColor: "var(--background)",
-    color: "var(--text-color)",
-    maxWidth: "1200px",
-    margin: "0 auto",
-  },
-  heading: {
-    fontSize: "2.5rem",
-    marginBottom: "3rem",
-    textAlign: "center",
-  },
-  skillCategory: {
-    marginBottom: "2rem",
-  },
-  categoryTitle: {
-    fontWeight: "700",
-    fontSize: "1.3rem",
-    marginBottom: "0.8rem",
-    color: "var(--accent-color)",
-  },
-  skillList: {
-    listStyle: "none",
-    paddingLeft: 0,
-    margin: 0,
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "0.8rem",
-  },
-  skillItem: {
-    backgroundColor: "var(--card-bg)",
-    padding: "0.5rem 1rem",
-    borderRadius: "20px",
-    fontSize: "1rem",
-    boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
-    color: "var(--text-color)",
+const fadeInSpring = {
+  hidden: { opacity: 0, y: 10 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring", // physics-based animation
+      stiffness: 120, // spring stiffness
+      damping: 20,    // bounce damping
+      mass: 0.5,      // mass of the element
+    },
   },
 };
 
 export const Skills = () => {
+  const skillsData = [
+    {
+      title: "Programming Languages",
+      items: ["C", "HTML", "CSS", "C#", "Python", "Java", "JavaScript", "SQL / MySQL"],
+    },
+    {
+      title: "Frameworks & Libraries",
+      items: ["ReactJS", "React Native", "Angular", ".NET", "Bootstrap"],
+    },
+    {
+      title: "Game Development & 3D",
+      items: ["Unity (C#)", "Asset Creation (SketchFab)", "3D Modeling/Animating (Blender)", "AR/VR Development"],
+    },
+    {
+      title: "AI & Machine Learning",
+      items: ["OpenCV (Computer Vision)", "LLaMA (Large Language Models)", "QLORA Fine-Tuning"],
+    },
+    {
+      title: "Development Tools & Practices",
+      items: ["Full-stack Development Lifecycle", "Database Design & Integration", "UI/UX Design & Implementation", "VR & Human-Computer Interaction"],
+    },
+    {
+      title: "Languages (Human)",
+      items: ["English (Fluent)", "Telugu (Fluent)"],
+    },
+  ];
+
   return (
     <motion.section
       id="skills"
-      style={styles.section}
-      initial="initial"
-      whileInView="animate"
+      style={{
+        padding: "6rem 5%",
+        backgroundColor: "var(--background)",
+        color: "var(--text-color)",
+        maxWidth: "1200px",
+        margin: "0 auto",
+      }}
+      initial="hidden"
+      whileInView="show"
       viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
+      variants={container}
     >
       <motion.h2
-        style={styles.heading}
-        variants={fadeInUp}
+        style={{ fontSize: "2.5rem", marginBottom: "3rem", textAlign: "center" }}
+        variants={fadeInSpring}
       >
         Skills
       </motion.h2>
 
-      <motion.div style={styles.skillCategory} variants={fadeInUp}>
-        <h3 style={styles.categoryTitle}>Programming Languages</h3>
-        <ul style={styles.skillList}>
-          <li style={styles.skillItem}>C</li>
-          <li style={styles.skillItem}>HTML</li>
-          <li style={styles.skillItem}>CSS</li>
-          <li style={styles.skillItem}>C#</li>
-          <li style={styles.skillItem}>Python</li>
-          <li style={styles.skillItem}>Java</li>
-          <li style={styles.skillItem}>JavaScript</li>
-          <li style={styles.skillItem}>SQL / MySQL</li>
-        </ul>
-      </motion.div>
-
-      <motion.div style={styles.skillCategory} variants={fadeInUp}>
-        <h3 style={styles.categoryTitle}>Frameworks & Libraries</h3>
-        <ul style={styles.skillList}>
-          <li style={styles.skillItem}>ReactJS</li>
-          <li style={styles.skillItem}>React Native</li>
-          <li style={styles.skillItem}>Angular</li>
-          <li style={styles.skillItem}>.NET</li>
-          <li style={styles.skillItem}>Bootstrap</li>
-        </ul>
-      </motion.div>
-
-      <motion.div style={styles.skillCategory} variants={fadeInUp}>
-        <h3 style={styles.categoryTitle}>Game Development & 3D</h3>
-        <ul style={styles.skillList}>
-          <li style={styles.skillItem}>Unity (C#)</li>
-          <li style={styles.skillItem}>Asset Creation (SketchFab)</li>
-          <li style={styles.skillItem}>3D Modeling/Animating (Blender)</li>
-          <li style={styles.skillItem}>AR/VR Development</li>
-        </ul>
-      </motion.div>
-
-      <motion.div style={styles.skillCategory} variants={fadeInUp}>
-        <h3 style={styles.categoryTitle}>AI & Machine Learning</h3>
-        <ul style={styles.skillList}>
-          <li style={styles.skillItem}>OpenCV (Computer Vision)</li>
-          <li style={styles.skillItem}>LLaMA (Large Language Models)</li>
-          <li style={styles.skillItem}>QLORA Fine-Tuning</li>
-        </ul>
-      </motion.div>
-
-      <motion.div style={styles.skillCategory} variants={fadeInUp}>
-        <h3 style={styles.categoryTitle}>Development Tools & Practices</h3>
-        <ul style={styles.skillList}>
-          <li style={styles.skillItem}>Full-stack Development Lifecycle</li>
-          <li style={styles.skillItem}>Database Design & Integration</li>
-          <li style={styles.skillItem}>UI/UX Design & Implementation</li>
-          <li style={styles.skillItem}>VR & Human-Computer Interaction</li>
-        </ul>
-      </motion.div>
-
-      <motion.div style={styles.skillCategory} variants={fadeInUp}>
-        <h3 style={styles.categoryTitle}>Languages (Human)</h3>
-        <ul style={styles.skillList}>
-          <li style={styles.skillItem}>English (Fluent)</li>
-          <li style={styles.skillItem}>Telugu (Fluent)</li>
-        </ul>
-      </motion.div>
+      {skillsData.map((category, idx) => (
+        <motion.div
+          key={idx}
+          style={{ marginBottom: "2rem" }}
+          variants={fadeInSpring}
+        >
+          <h3 style={{ fontWeight: 700, fontSize: "1.3rem", marginBottom: "0.8rem", color: "var(--accent-color)" }}>
+            {category.title}
+          </h3>
+          <ul style={{ listStyle: "none", paddingLeft: 0, margin: 0, display: "flex", flexWrap: "wrap", gap: "0.8rem" }}>
+            {category.items.map((item, i) => (
+              <motion.li
+                key={i}
+                style={{
+                  backgroundColor: "var(--card-bg)",
+                  padding: "0.5rem 1rem",
+                  borderRadius: "20px",
+                  fontSize: "1rem",
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+                  color: "var(--text-color)",
+                }}
+                variants={fadeInSpring}
+              >
+                {item}
+              </motion.li>
+            ))}
+          </ul>
+        </motion.div>
+      ))}
     </motion.section>
   );
 };
