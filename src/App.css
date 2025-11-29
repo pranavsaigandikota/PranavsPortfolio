@@ -65,7 +65,7 @@ body {
   background: var(--nav-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  z-index: 1000;
+  z-index: 10000;
   border-bottom: 1px solid var(--card-border);
   transition: all 0.3s ease;
 }

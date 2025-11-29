@@ -62,53 +62,71 @@ export const Achievements = () => {
       </motion.h2>
 
       <motion.div
-        className="project-grid"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"
         variants={staggerContainer}
       >
         {achievements.map((item, i) => (
           <motion.div
             key={i}
             variants={fadeInUp}
-            className="project-card flex flex-col p-10"
+            className="project-card group relative overflow-hidden flex flex-col"
             style={{
               "--theme-color": item.borderColor,
             }}
             whileHover={{ y: -10, transition: { duration: 0.2 } }}
           >
-            <div className="flex items-center gap-3 mb-4">
-              <div
-                className="p-2 rounded-lg border"
-                style={{
-                  borderColor: item.borderColor,
-                  color: item.borderColor,
-                  backgroundColor: `${item.borderColor}10`,
-                  boxShadow: `0 0 20px ${item.borderColor}20`
-                }}
-              >
-                {item.icon}
-              </div>
-              <div>
-                <h3
-                  className="project-title text-lg leading-tight"
-                  style={{ color: "white" }}
+            {/* Abstract Background */}
+            <div
+              className="absolute inset-0 z-0 opacity-30 transition-opacity duration-300 group-hover:opacity-50"
+              style={{
+                backgroundImage: `
+                  radial-gradient(circle at 20% 30%, #1e1b4b 0%, transparent 50%),
+                  radial-gradient(circle at 80% 70%, #312e81 0%, transparent 50%),
+                  radial-gradient(circle at 50% 50%, #4c1d95 0%, transparent 60%),
+                  linear-gradient(45deg, #0f172a 0%, #172554 100%)
+                `,
+                backgroundAttachment: "fixed",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            />
+
+            <div className="project-content relative z-10 bg-black/40 backdrop-blur-sm flex-grow flex flex-col p-6">
+              <div className="flex items-center gap-3 mb-4">
+                <div
+                  className="p-2 rounded-lg border"
+                  style={{
+                    borderColor: item.borderColor,
+                    color: item.borderColor,
+                    backgroundColor: `${item.borderColor}10`,
+                    boxShadow: `0 0 20px ${item.borderColor}20`
+                  }}
                 >
-                  {item.title}
-                </h3>
-                <span className="text-xs text-gray-400">{item.subtitle}</span>
+                  {item.icon}
+                </div>
+                <div>
+                  <h3
+                    className="project-title text-lg leading-tight"
+                    style={{ color: "white" }}
+                  >
+                    {item.title}
+                  </h3>
+                  <span className="text-xs text-gray-400">{item.subtitle}</span>
+                </div>
               </div>
+
+              <p className="project-description-preview mb-4 text-sm">
+                {item.description}
+              </p>
+
+              <ul className="space-y-2 mt-auto list-disc pl-5 marker:text-[var(--theme-color)]">
+                {item.points.map((point, idx) => (
+                  <li key={idx} className="text-[var(--light-text)] text-sm">
+                    {point}
+                  </li>
+                ))}
+              </ul>
             </div>
-
-            <p className="project-description-preview mb-4 text-sm">
-              {item.description}
-            </p>
-
-            <ul className="space-y-2 mt-auto list-disc pl-5 marker:text-[var(--theme-color)]">
-              {item.points.map((point, idx) => (
-                <li key={idx} className="text-[var(--light-text)] text-sm">
-                  {point}
-                </li>
-              ))}
-            </ul>
           </motion.div>
         ))}
       </motion.div>

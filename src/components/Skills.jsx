@@ -18,45 +18,64 @@ const staggerContainer = {
 const skillsData = [
   {
     category: "Languages",
-    skills: ["C", "Java", "Python", "JavaScript", "TypeScript", "SQL", "HTML", "CSS"],
+    skills: ["C", "Python", "Java", "JavaScript", "TypeScript", "HTML", "CSS", "SQL"],
     themeColor: "#3b82f6", // Blue
     icon: <Code size={32} />,
-    description: "Core programming languages for system and web development."
+    description: "Core languages for systems, web, and data.",
   },
   {
-    category: "Frameworks & Libraries",
-    skills: ["React.js", "Next.js", "TailwindCSS", "Node.js", "Express.js", "Three.js"],
+    category: "Frameworks / Libraries",
+    skills: ["React", "React Native", "TailwindCSS", "Supabase", "Appwrite"],
     themeColor: "#8b5cf6", // Violet
     icon: <Layers size={32} />,
-    description: "Modern tools for building scalable applications."
+    description: "Modern tools for building scalable applications.",
   },
   {
-    category: "Tools & Platforms",
-    skills: ["Git", "GitHub", "VS Code", "Unix/Linux", "Vercel", "Supabase"],
-    themeColor: "#ec4899", // Pink
-    icon: <Terminal size={32} />,
-    description: "Essential development and deployment workflows."
-  },
-  {
-    category: "Game Dev & VR",
-    skills: ["Unity", "C#", "Blender", "Oculus SDK", "A-Frame"],
-    themeColor: "#f59e0b", // Amber
-    icon: <Box size={32} />,
-    description: "Creating immersive 3D experiences and games."
-  },
-  {
-    category: "AI & Machine Learning",
-    skills: ["PyTorch", "TensorFlow", "OpenAI API", "Hugging Face", "LangChain"],
+    category: "AI / ML",
+    skills: [
+      "Google Gemini",
+      "GPT",
+      "LLaMA",
+      "PyTorch",
+      "TensorFlow.js",
+      "Transformers",
+      "Hugging Face",
+      "OpenCV",
+      "Mediapipe",
+    ],
     themeColor: "#10b981", // Emerald
     icon: <Cpu size={32} />,
-    description: "Leveraging AI for intelligent solutions."
+    description: "Advanced AI models and machine learning libraries.",
+  },
+  {
+    category: "Tools",
+    skills: [
+      "Git/GitHub",
+      "Conda",
+      "Expo",
+      "NativeWind",
+      "Unity",
+      "Blender",
+      "Figma",
+      "Canva",
+      "Premiere Pro",
+    ],
+    themeColor: "#ec4899", // Pink
+    icon: <Terminal size={32} />,
+    description: "Essential tools for development, design, and 3D creation.",
   },
   {
     category: "Soft Skills",
-    skills: ["Leadership", "Communication", "Problem Solving", "Teamwork", "Mentoring"],
+    skills: [
+      "Leadership",
+      "Communication",
+      "Problem Solving",
+      "Teamwork",
+      "Time Management",
+    ],
     themeColor: "#ef4444", // Red
     icon: <MessageCircle size={32} />,
-    description: "Personal attributes that drive professional success."
+    description: "Interpersonal skills that drive team success.",
   },
 ];
 
@@ -77,7 +96,7 @@ export const Skills = () => {
       </motion.h2>
 
       <motion.div
-        className="project-grid"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"
         variants={staggerContainer}
       >
         {skillsData.map((skillGroup, index) => (
@@ -130,7 +149,7 @@ export const Skills = () => {
                 {skillGroup.description}
               </p>
 
-              <div className="flex flex-wrap gap-2 mt-auto">
+              <div className="flex flex-wrap gap-2 mt-auto w-full">
                 {skillGroup.skills.map((skill, idx) => (
                   <span
                     key={idx}
@@ -148,6 +167,6 @@ export const Skills = () => {
           </motion.div>
         ))}
       </motion.div>
-    </motion.section >
+    </motion.section>
   );
 };
