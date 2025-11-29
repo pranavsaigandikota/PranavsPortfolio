@@ -134,7 +134,7 @@ export const Skills = () => {
                 {skillGroup.skills.map((skill, idx) => (
                   <span
                     key={idx}
-                    className="tech-tag transition-colors duration-300 hover:bg-white/10"
+                    className="tech-tag transition-colors duration-300 hover:bg-white/10 whitespace-nowrap"
                     style={{
                       borderColor: `${skillGroup.themeColor}40`,
                       color: "white"

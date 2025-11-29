@@ -69,7 +69,7 @@ export const Achievements = () => {
           <motion.div
             key={i}
             variants={fadeInUp}
-            className="project-card flex flex-col p-8"
+            className="project-card flex flex-col p-10"
             style={{
               "--theme-color": item.borderColor,
             }}
@@ -102,13 +102,9 @@ export const Achievements = () => {
               {item.description}
             </p>
 
-            <ul className="space-y-2 mt-auto">
+            <ul className="space-y-2 mt-auto list-disc pl-5 marker:text-[var(--theme-color)]">
               {item.points.map((point, idx) => (
-                <li key={idx} className="flex items-start gap-2 text-[var(--light-text)] text-sm">
-                  <span
-                    className="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0"
-                    style={{ backgroundColor: item.borderColor }}
-                  ></span>
+                <li key={idx} className="text-[var(--light-text)] text-sm">
                   {point}
                 </li>
               ))}
