@@ -46,7 +46,7 @@ const experiences = [
     role: "Research Assistant",
     organisation: "University of Central Florida | ISUE Lab",
     startDate: "Sep 2024",
-    endDate: "Present",
+    endDate: "Dec 2025",
     type: "Work",
     themeColor: "#3b82f6", // Blue
     images: [isueLab, isueUserStudy, isueProcGen, isueRoomGen, isueWhisper],
@@ -60,7 +60,7 @@ const experiences = [
     role: "SI Leader – Computer Science I",
     organisation: "University of Central Florida | SARC",
     startDate: "Aug 2025",
-    endDate: "Present",
+    endDate: "Dec 2025",
     type: "Work",
     themeColor: "#3b82f6", // Blue
     images: [siGroup, siGroupFunny],

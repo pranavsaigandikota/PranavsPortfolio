@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 const codeString = `const aboutMe: DeveloperProfile = {
   codename: "Pranavsai Gandikota",
   origin: "Orlando, FL",
-  role: "Aspiring Software Engineer & AI Enthusiast",
+  role: "Software Engineer & AI Enthusiast",
   stack: {
     languages: ["C", "Java", "Python", "JavaScript", "TypeScript", "SQL", "HTML", "CSS"],
     frameworks: ["React.js", "Next.js", "TailwindCSS", "Supabase", "Angular", "Unity"],
