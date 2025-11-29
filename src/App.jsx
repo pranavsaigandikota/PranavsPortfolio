@@ -51,7 +51,7 @@ function App() {
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <p>2025 - Pranavsai Gandikota</p>
+        <p>Made with love by Pranavsai Gandikota</p>
       </motion.footer>
     </div>
   );

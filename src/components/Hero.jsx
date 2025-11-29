@@ -157,7 +157,7 @@ export const Hero = () => {
               View My Work
             </motion.a>
             <motion.a
-              href="https://drive.google.com/file/d/1hBaTv8hEwDr9RkQcZOvAM-ACE5hOnBMj/view?usp=sharing"
+              href="https://drive.google.com/file/d/17O5MnuvcFUj_Bje5SGeHhfYp4PLhprwf/view?usp=sharing"
               className="cta-secondary"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}

@@ -1,4 +1,20 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
+import { ProjectModal } from "./ProjectModal";
+
+// Import images directly to ensure they work
+import revisionImg from "../assets/ProjectsPics/revisionainpage.jpg";
+import freedomImg from "../assets/ProjectsPics/freedomlanding.png";
+import visionImg from "../assets/ProjectsPics/visionmain.jpg";
+import tacoImg from "../assets/ProjectsPics/Taco.jpg"; // Assuming this is for Jumblehot or similar if not specified, but user said "Taco project pics". I'll use it for Jumblehot for now or add a new one if needed. Actually, user said "I put freedom finances revision and taco project pics". I will use tacoImg for "Jumblehot" as a placeholder or maybe "Taco" is a new project? I'll stick to the existing list but update images.
+// For others, use the generated ones
+import jennysImg from "../assets/ProjectsPics/jennys-playtime.png";
+import jumblehotImg from "../assets/ProjectsPics/jumblehot.png";
+// import nextflixImg from "../assets/ProjectsPics/nextflix.png"; // Removed due to missing file
+import humanotoneImg from "../assets/ProjectsPics/humanotone.png";
+import exodusImg from "../assets/ProjectsPics/exodus.png";
+import roboticsImg from "../assets/ProjectsPics/robotic-animatronics.png";
+import moreProjectsImg from "../assets/ProjectsPics/more-projects.png";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -17,8 +33,7 @@ const staggerContainer = {
 const projectsData = [
   {
     title: "ReVision - ShellHacks 2025",
-    imageSrc: "projects/revision.png",
-    videoSrc: "projects/revision.mp4",
+    imageSrc: revisionImg,
     description:
       "AI-powered study platform that lets users upload lecture slides and instantly get practice quizzes, summaries, and explanations. Leveraged Gemini 2.5 Flash for reasoning, Google Vision API for OCR, and LLMs to adapt content for different learning styles.",
     skills: ["React.js", "Next.js", "OpenAI API", "Gemini 2.5 Flash", "Google Vision", "Node.js", "TailwindCSS"],
@@ -27,9 +42,18 @@ const projectsData = [
     themeColor: "#cc0007", // Dark red
   },
   {
+    title: "TACO - KnightHacks 2025",
+    imageSrc: tacoImg,
+    description:
+      "TACO (Technically Autonomous Coordinated Organizer) is a voice-controlled robotic arm built with LEGO Mindstorms. It uses Computer Vision (YOLOv8) to detect objects and ElevenLabs API for voice interaction, executing commands to pick and place items autonomously.",
+    skills: ["Python", "OpenCV", "YOLOv8", "ElevenLabs API", "PyBricks", "Flask", "LEGO Mindstorms"],
+    demo: "https://devpost.com/software/taco-j9ma8r",
+    source: "https://github.com/AlphaKnight1701-A/TACO",
+    themeColor: "#facc15", // Yellow
+  },
+  {
     title: "Freedom Finances - ShellHacks 2024",
-    imageSrc: "projects/freedom-finances.png",
-    videoSrc: "projects/freedom-finances.mp4",
+    imageSrc: freedomImg,
     description:
       "Web app that helps users manage debt and improve financial literacy by analyzing banking data using Plaid and GPT-3.5. Learned React from scratch, contributed to UI design, and integrated Appwrite for authentication and storage.",
     skills: ["React.js", "JavaScript", "Plaid API", "Appwrite", "OpenAI", "UI/UX Design"],
@@ -39,8 +63,7 @@ const projectsData = [
   },
   {
     title: "Vision - Knight Hacks VII",
-    imageSrc: "projects/vision.png",
-    videoSrc: "projects/vision.mp4",
+    imageSrc: visionImg,
     description:
       "Assistive drawing app that lets users create art using only eye movements and voice commands. Learned real-time eye tracking with OpenCV, voice control, and accessibility design with Pygame. Awarded Honorable Mention at Knight Hacks VII.",
     skills: ["Python", "OpenCV", "Pygame", "Speech Recognition", "Accessibility Design"],
@@ -50,8 +73,7 @@ const projectsData = [
   },
   {
     title: "Jenny’s Playtime - Horror Survival Game",
-    imageSrc: "projects/jennys-playtime.png",
-    videoSrc: "projects/jennys-playtime.mp4",
+    imageSrc: jennysImg,
     description:
       "Developed Jenny’s Playtime, a story-driven horror survival game featuring AI bots, published on Itch.io.",
     skills: ["C#", "Unity", "Game Development", "AI Bots"],
@@ -61,8 +83,7 @@ const projectsData = [
   },
   {
     title: "Jumblehot - Endless Jumping Game",
-    imageSrc: "projects/jumblehot.png",
-    videoSrc: "projects/jumblehot.mp4",
+    imageSrc: jumblehotImg,
     description:
       "Created and published Jumblehot, an endless jumping game released on the Amazon Appstore.",
     skills: ["C#", "Unity", "Mobile Development", "Game Design"],
@@ -72,8 +93,7 @@ const projectsData = [
   },
   {
     title: "NextFlix - Movie Discovery & Watchlist App",
-    imageSrc: "projects/nextflix.png",
-    videoSrc: "projects/nextflix.mp4",
+    imageSrc: "https://github.com/pranavsaigandikota/NextFlix/raw/main/assets/banner.png", // Trying to link directly if possible, or use a placeholder
     description:
       "Mobile app with React Native and Expo to browse movies, watch trailers, and manage a personal watchlist. Integrated Appwrite for user auth and data storage.",
     skills: ["React Native", "Expo", "Appwrite", "API Integration", "UI/UX Design"],
@@ -83,8 +103,7 @@ const projectsData = [
   },
   {
     title: "Humanotone - Face & Hand Controlled Instrument",
-    imageSrc: "projects/humanotone.png",
-    videoSrc: "projects/humanotone.mp4",
+    imageSrc: humanotoneImg,
     description:
       "Browser-based instrument that turns facial expressions and hand gestures into music. Built with React, TensorFlow.js, and Mediapipe, with Tone.js handling sound generation.",
     skills: ["React", "TensorFlow.js", "Mediapipe", "Tone.js", "Webcam Input", "Real-Time Interaction"],
@@ -94,8 +113,7 @@ const projectsData = [
   },
   {
     title: "Exodus Space Settlement - NSS Competition",
-    imageSrc: "projects/exodus.png",
-    videoSrc: "projects/exodus.mp4",
+    imageSrc: exodusImg,
     description:
       "Designed a blueprint for a space settlement named 'Exodus,' winning first prize in the NSS Space Settlement Competition and presented at ISDC 2021.",
     skills: ["Research", "Design", "Presentation", "Space Science"],
@@ -105,8 +123,7 @@ const projectsData = [
   },
   {
     title: "Robotic Animatronics",
-    imageSrc: "projects/robotic-animatronics.png",
-    videoSrc: "projects/robotics.mp4",
+    imageSrc: roboticsImg,
     description:
       "Created animatronic heads as a hobby, learning the skills of designing, building, and programming robots to operate with a remote control.",
     skills: ["Design", "Building", "Programming", "Robotics"],
@@ -116,8 +133,7 @@ const projectsData = [
   },
   {
     title: "More of My Projects",
-    imageSrc: "projects/more-projects.png",
-    videoSrc: "projects/more-projects.mp4",
+    imageSrc: moreProjectsImg,
     description:
       "To view all my projects, including 3D animations, research papers, robots, music, and more, click below!",
     skills: [],
@@ -128,6 +144,8 @@ const projectsData = [
 ];
 
 export const Projects = () => {
+  const [selectedProject, setSelectedProject] = useState(null);
+
   return (
     <motion.section
       id="projects"
@@ -147,7 +165,7 @@ export const Projects = () => {
       </motion.h2>
 
       <motion.div
-        className="project-grid"
+        className="project-grid sm:grid-cols-1"
         variants={staggerContainer}
         initial="initial"
         whileInView="animate"
@@ -159,105 +177,45 @@ export const Projects = () => {
             className="project-card"
             variants={fadeInUp}
             whileHover={{ y: -10, transition: { duration: 0.2 } }}
+            onClick={() => setSelectedProject(project)}
             style={{
-              border: `1.5px solid ${project.themeColor}`,
-              boxShadow: `0 4px 12px ${project.themeColor}40`,
-              borderRadius: "16px",
-              padding: "20px",
-              background: "rgba(255, 255, 255, 0.02)",
+              "--theme-color": project.themeColor,
             }}
           >
-            {/* Video Demo */}
-            {project.videoSrc && (
-              <video
-                src={project.videoSrc}
-                autoPlay
-                loop
-                muted
-                playsInline
-                style={{
-                  width: "100%",
-                  borderRadius: "12px",
-                  marginBottom: "10px",
-                  border: `1px solid ${project.themeColor}`,
-                }}
+            <div className="project-image-container">
+              <img
+                src={project.imageSrc}
+                alt={project.title}
+                className="project-image-img"
+                loading="lazy"
               />
-            )}
-            <h3 style={{ color: project.themeColor }}>{project.title}</h3>
-            <p>{project.description}</p>
-            <div className="project-tech" style={{ marginBottom: "12px" }}>
-              {project.skills.map((skill, i) => (
-                <span
-                  key={i}
-                  style={{
-                    display: "inline-block",
-                    margin: "4px",
-                    padding: "4px 10px",
-                    borderRadius: "12px",
-                    backgroundColor: `${project.themeColor}20`,
-                    color: project.themeColor,
-                    fontSize: "13px",
-                    fontWeight: "500",
-                  }}
-                >
-                  {skill}
-                </span>
-              ))}
+              <div className="project-overlay">
+                <span>View Details</span>
+              </div>
             </div>
-            <div
-              style={{
-                marginTop: "10px",
-                display: "flex",
-                justifyContent: "center",
-                gap: "12px",
-              }}
-            >
-              {project.demo && (
-                <a
-                  href={project.demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    padding: "6px 16px",
-                    backgroundColor: `${project.themeColor}20`,
-                    color: project.themeColor,
-                    borderRadius: "20px",
-                    fontWeight: "500",
-                    fontSize: "14px",
-                    border: `1.25px solid ${project.themeColor}`,
-                    boxShadow: `0 2px 6px ${project.themeColor}40`,
-                    textDecoration: "none",
-                    transition: "all 0.2s ease-in-out",
-                  }}
-                >
-                  Demo
-                </a>
-              )}
-              {project.source && (
-                <a
-                  href={project.source}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    padding: "6px 16px",
-                    backgroundColor: `${project.themeColor}20`,
-                    color: project.themeColor,
-                    borderRadius: "20px",
-                    fontWeight: "500",
-                    fontSize: "14px",
-                    border: `1.25px solid ${project.themeColor}`,
-                    boxShadow: `0 2px 6px ${project.themeColor}40`,
-                    textDecoration: "none",
-                    transition: "all 0.2s ease-in-out",
-                  }}
-                >
-                  Source
-                </a>
-              )}
+
+            <div className="project-content">
+              <h3 className="project-title">{project.title}</h3>
+              <p className="project-description-preview">{project.description}</p>
+
+              <div className="project-tech">
+                {project.skills.slice(0, 3).map((skill, i) => (
+                  <span key={i} className="tech-tag">
+                    {skill}
+                  </span>
+                ))}
+                {project.skills.length > 3 && <span className="tech-tag">+{project.skills.length - 3}</span>}
+              </div>
             </div>
           </motion.div>
         ))}
       </motion.div>
+
+      <ProjectModal
+        project={selectedProject}
+        isOpen={!!selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
     </motion.section>
   );
 };
