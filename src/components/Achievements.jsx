@@ -73,21 +73,14 @@ export const Achievements = () => {
             style={{
               "--theme-color": item.borderColor,
             }}
-            whileHover={{ y: -10, transition: { duration: 0.2 } }}
+            whileHover={{ scale: 1.02 }}
           >
-            {/* Abstract Background */}
+            {/* Retro Background Pattern */}
             <div
-              className="absolute inset-0 z-0 opacity-30 transition-opacity duration-300 group-hover:opacity-50"
+              className="absolute inset-0 z-0 opacity-20"
               style={{
-                backgroundImage: `
-                  radial-gradient(circle at 20% 30%, #1e1b4b 0%, transparent 50%),
-                  radial-gradient(circle at 80% 70%, #312e81 0%, transparent 50%),
-                  radial-gradient(circle at 50% 50%, #4c1d95 0%, transparent 60%),
-                  linear-gradient(45deg, #0f172a 0%, #172554 100%)
-                `,
-                backgroundAttachment: "fixed",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
+                backgroundImage: "linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)",
+                backgroundSize: "20px 20px"
               }}
             />
 

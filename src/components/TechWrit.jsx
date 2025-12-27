@@ -32,23 +32,24 @@ const assignmentsData = [
 ];
 
 const buttonStyle = {
-  padding: "6px 16px",
-  backgroundColor: "rgba(255, 255, 255, 0.1)",
+  padding: "10px 20px",
+  backgroundColor: "#000",
   color: "#ff66b2",
-  borderRadius: "20px",
-  fontWeight: "600",
+  borderRadius: "0px",
+  fontWeight: "bold",
   fontSize: "14px",
-  backdropFilter: "blur(8px)",
-  border: "1.25px solid rgba(255, 102, 178, 0.4)",
-  boxShadow: "0 2px 6px rgba(255, 102, 178, 0.15)",
+  fontFamily: '"Press Start 2P", monospace',
+  border: "4px solid #ff66b2",
+  boxShadow: "6px 6px 0px rgba(0,0,0,0.5)",
   cursor: "pointer",
   textDecoration: "none",
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  transition: "all 0.2s ease-in-out",
-  marginRight: "8px",
-  marginTop: "10px",
+  transition: "all 0.1s ease-in-out",
+  marginRight: "16px",
+  marginTop: "16px",
+  textTransform: "uppercase",
 };
 
 const MajorAssignments = () => {

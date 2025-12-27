@@ -18,10 +18,9 @@ export const Navbar = () => {
   return (
     <motion.nav
       className="navbar"
-      style={{ position: "fixed", top: 0, left: 0, width: "100%", zIndex: 1000 }}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      transition={{ duration: 0.1, ease: "linear" }}
     >
       <motion.div
         className="logo"

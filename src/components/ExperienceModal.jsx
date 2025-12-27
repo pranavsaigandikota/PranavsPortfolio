@@ -1,7 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-import { X, ChevronLeft, ChevronRight, Calendar, MapPin } from "lucide-react";
-
+import { X, ChevronLeft, ChevronRight, Calendar, Maximize2 } from "lucide-react";
+import { ImageModal } from "./ImageModal";
+import PropTypes from "prop-types";
 const overlayVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
@@ -20,6 +21,7 @@ const modalVariants = {
 
 export const ExperienceModal = ({ experience, isOpen, onClose }) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [previewImage, setPreviewImage] = useState(null);
 
     useEffect(() => {
         if (isOpen) {
@@ -35,7 +37,8 @@ export const ExperienceModal = ({ experience, isOpen, onClose }) => {
         };
     }, [isOpen]);
 
-    // Auto-scroll images
+    // Auto-scroll disabled
+    /*
     useEffect(() => {
         if (!isOpen || !experience?.images || experience.images.length <= 1) return;
 
@@ -45,6 +48,7 @@ export const ExperienceModal = ({ experience, isOpen, onClose }) => {
 
         return () => clearInterval(interval);
     }, [isOpen, experience]);
+    */
 
     const nextImage = (e) => {
         e.stopPropagation();
@@ -90,19 +94,18 @@ export const ExperienceModal = ({ experience, isOpen, onClose }) => {
                     }}
                 >
                     <motion.div
-                        className="modal-content"
+                        className="modal-content retro-window"
                         variants={modalVariants}
                         onClick={(e) => e.stopPropagation()}
                         style={{
-                            borderTop: `4px solid ${experience.themeColor}`,
+                            "--theme-color": experience.themeColor,
                             width: "100%",
                             maxWidth: "900px",
                             maxHeight: "90vh",
                             overflowY: "auto",
-                            background: "#1a1a1a",
-                            borderRadius: "16px",
+                            background: "#000",
                             position: "relative",
-                            boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)",
+                            boxShadow: "12px 12px 0px rgba(0, 0, 0, 0.5)",
                         }}
                     >
                         <button
@@ -112,18 +115,14 @@ export const ExperienceModal = ({ experience, isOpen, onClose }) => {
                                 position: "absolute",
                                 top: "1rem",
                                 right: "1rem",
-                                background: "rgba(0,0,0,0.5)",
-                                border: "none",
-                                borderRadius: "50%",
-                                width: "36px",
-                                height: "36px",
+                                width: "40px",
+                                height: "40px",
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
                                 cursor: "pointer",
-                                color: "white",
                                 zIndex: 20,
-                                transition: "background 0.2s",
+                                fontFamily: '"Press Start 2P"',
                             }}
                         >
                             <X size={20} />
@@ -131,28 +130,33 @@ export const ExperienceModal = ({ experience, isOpen, onClose }) => {
 
                         {/* Image Carousel Section */}
                         {hasImages ? (
-                            <div className="relative w-full h-[300px] md:h-[400px] bg-black overflow-hidden group">
+                            <div className="relative w-full h-[300px] md:h-[400px] bg-black overflow-hidden group border-b-4 border-white flex items-center justify-center">
                                 <motion.img
                                     key={currentImageIndex}
                                     src={experience.images[currentImageIndex]}
                                     alt={`${experience.role} - Image ${currentImageIndex + 1}`}
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
-                                    transition={{ duration: 0.5 }}
-                                    className="w-full h-full object-contain"
+                                    transition={{ duration: 0.1 }}
+                                    className="max-w-full max-h-full object-contain image-pixelated"
+                                    style={{ imageRendering: "pixelated", cursor: "zoom-in" }}
+                                    onClick={() => setPreviewImage(experience.images[currentImageIndex])}
                                 />
+                                <div className="absolute top-2 right-2 bg-black/50 p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                                    <Maximize2 size={16} color="white" />
+                                </div>
 
                                 {experience.images.length > 1 && (
                                     <>
                                         <button
                                             onClick={prevImage}
-                                            className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/70"
+                                            className="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-black text-white border-2 border-white hover:bg-white hover:text-black hover:border-black transition-colors"
                                         >
                                             <ChevronLeft size={24} />
                                         </button>
                                         <button
                                             onClick={nextImage}
-                                            className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/70"
+                                            className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-black text-white border-2 border-white hover:bg-white hover:text-black hover:border-black transition-colors"
                                         >
                                             <ChevronRight size={24} />
                                         </button>
@@ -161,60 +165,58 @@ export const ExperienceModal = ({ experience, isOpen, onClose }) => {
                                             {experience.images.map((_, idx) => (
                                                 <div
                                                     key={idx}
-                                                    className={`w-2 h-2 rounded-full transition-colors ${idx === currentImageIndex ? 'bg-white' : 'bg-white/30'}`}
+                                                    className={`w-3 h-3 border-2 border-white ${idx === currentImageIndex ? 'bg-white' : 'bg-transparent'}`}
                                                 />
                                             ))}
                                         </div>
                                     </>
                                 )}
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-transparent to-transparent opacity-60 pointer-events-none" />
                             </div>
                         ) : (
-                            <div className="w-full h-[200px] bg-gradient-to-br from-gray-900 to-black flex items-center justify-center">
+                            <div className="w-full h-[200px] bg-black flex items-center justify-center border-b-4 border-white">
                                 <div style={{ color: experience.themeColor, transform: "scale(2)" }}>
                                     {experience.icon}
                                 </div>
                             </div>
                         )}
 
-                        <div className="p-8">
+                        <div className="p-8 font-mono">
                             <div className="flex flex-col md:flex-row justify-between items-start gap-4 mb-6">
                                 <div>
-                                    <h2 className="text-3xl font-bold mb-2 text-white" style={{ color: experience.themeColor }}>
+                                    <h2 className="text-2xl font-bold mb-2 uppercase" style={{ color: "#fff", textShadow: `2px 2px 0px ${experience.themeColor}`, fontFamily: '"Press Start 2P"' }}>
                                         {experience.role}
                                     </h2>
-                                    <h3 className="text-xl text-gray-300 font-medium">
+                                    <h3 className="text-xl text-gray-400 font-bold uppercase">
                                         {experience.organisation}
                                     </h3>
                                 </div>
                                 <div className="flex flex-col items-end gap-2">
                                     <div
-                                        className="flex items-center gap-2 px-4 py-2 rounded-full border bg-opacity-10"
+                                        className="flex items-center gap-2 px-4 py-2 border-2 bg-opacity-10"
                                         style={{
                                             borderColor: experience.themeColor,
-                                            backgroundColor: `${experience.themeColor}10`,
+                                            backgroundColor: `${experience.themeColor}20`,
                                             color: experience.themeColor
                                         }}
                                     >
                                         <Calendar size={16} />
-                                        <span className="font-semibold">{experience.startDate} - {experience.endDate}</span>
+                                        <span className="font-bold uppercase">{experience.startDate} - {experience.endDate}</span>
                                     </div>
-                                    <span className="text-sm text-gray-400 uppercase tracking-wider font-bold">
+                                    <span className="text-sm bg-gray-800 text-white px-2 py-1 uppercase tracking-wider font-bold border border-gray-600">
                                         {experience.type}
                                     </span>
                                 </div>
                             </div>
 
                             <div className="space-y-4">
-                                <h4 className="text-lg font-semibold text-white border-b border-gray-700 pb-2">Key Responsibilities & Achievements</h4>
+                                <h4 className="text-lg font-bold text-white border-b-4 border-gray-700 pb-2 uppercase" style={{ fontFamily: '"Press Start 2P"', fontSize: '0.8rem' }}>MISSION REPORT</h4>
                                 <ul className="space-y-3">
                                     {experience.experiences.map((point, i) => (
-                                        <li key={i} className="flex items-start gap-3 text-gray-300 leading-relaxed">
+                                        <li key={i} className="flex items-start gap-3 text-gray-300 leading-relaxed group">
                                             <span
-                                                className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0"
-                                                style={{ backgroundColor: experience.themeColor }}
+                                                className="mt-1.5 w-3 h-3 flex-shrink-0 border border-white group-hover:bg-white transition-colors"
                                             ></span>
-                                            <span>{point}</span>
+                                            <span className="uppercase">{point}</span>
                                         </li>
                                     ))}
                                 </ul>
@@ -223,6 +225,29 @@ export const ExperienceModal = ({ experience, isOpen, onClose }) => {
                     </motion.div>
                 </motion.div>
             )}
+            {/* Image Modal for Fullscreen View */}
+            <ImageModal 
+                src={previewImage} 
+                alt="Experience Detail" 
+                isOpen={!!previewImage} 
+                onClose={() => setPreviewImage(null)} 
+            />
         </AnimatePresence>
     );
+};
+
+ExperienceModal.propTypes = {
+    experience: PropTypes.shape({
+        role: PropTypes.string,
+        organisation: PropTypes.string,
+        startDate: PropTypes.string,
+        endDate: PropTypes.string,
+        type: PropTypes.string,
+        themeColor: PropTypes.string,
+        images: PropTypes.arrayOf(PropTypes.string),
+        icon: PropTypes.node,
+        experiences: PropTypes.arrayOf(PropTypes.string),
+    }),
+    isOpen: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
 };

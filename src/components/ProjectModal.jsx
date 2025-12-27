@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect } from "react";
 import { X, ExternalLink, Github } from "lucide-react";
+import PropTypes from "prop-types";
 
 const overlayVariants = {
     hidden: { opacity: 0 },
@@ -56,7 +57,7 @@ export const ProjectModal = ({ project, isOpen, onClose }) => {
                         alignItems: "center",
                         justifyContent: "center",
                         zIndex: 2000,
-                        background: "rgba(0, 0, 0, 0.7)",
+                        background: "rgba(0, 0, 0, 0.8)",
                         backdropFilter: "blur(8px)",
                         padding: "20px",
                     }}
@@ -66,13 +67,12 @@ export const ProjectModal = ({ project, isOpen, onClose }) => {
                         variants={modalVariants}
                         onClick={(e) => e.stopPropagation()}
                         style={{
-                            borderTop: `4px solid ${project.themeColor}`,
+                            "--theme-color": project.themeColor,
                             width: "100%",
                             maxWidth: "800px",
                             maxHeight: "90vh",
                             overflowY: "auto",
-                            background: "#1a1a1a",
-                            borderRadius: "16px",
+                            background: "#000",
                             position: "relative",
                             boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)",
                         }}
@@ -84,18 +84,13 @@ export const ProjectModal = ({ project, isOpen, onClose }) => {
                                 position: "absolute",
                                 top: "1rem",
                                 right: "1rem",
-                                background: "rgba(255,255,255,0.1)",
-                                border: "none",
-                                borderRadius: "50%",
                                 width: "36px",
                                 height: "36px",
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
                                 cursor: "pointer",
-                                color: "white",
                                 zIndex: 10,
-                                transition: "background 0.2s",
                             }}
                         >
                             <X size={20} />
@@ -131,7 +126,7 @@ export const ProjectModal = ({ project, isOpen, onClose }) => {
                         </div>
 
                         <div className="modal-body" style={{ padding: "2rem" }}>
-                            <h2 className="modal-title" style={{ color: project.themeColor, fontSize: "2rem", fontWeight: "bold", marginBottom: "1rem" }}>
+                            <h2 className="modal-title" style={{ fontSize: "2rem", fontWeight: "bold", marginBottom: "1rem" }}>
                                 {project.title}
                             </h2>
 
@@ -141,11 +136,7 @@ export const ProjectModal = ({ project, isOpen, onClose }) => {
                                         key={index}
                                         className="modal-tag"
                                         style={{
-                                            backgroundColor: `${project.themeColor}15`,
-                                            color: project.themeColor,
-                                            border: `1px solid ${project.themeColor}30`,
                                             padding: "0.25rem 0.75rem",
-                                            borderRadius: "999px",
                                             fontSize: "0.875rem",
                                             fontWeight: "500",
                                         }}
@@ -155,7 +146,17 @@ export const ProjectModal = ({ project, isOpen, onClose }) => {
                                 ))}
                             </div>
 
-                            <p className="modal-description" style={{ color: "#d1d5db", lineHeight: "1.6", marginBottom: "2rem" }}>{project.description}</p>
+                            {Array.isArray(project.fullDescription) ? (
+                                <ul className="modal-description" style={{ color: "#d1d5db", lineHeight: "1.6", marginBottom: "2rem", listStyleType: "disc", paddingLeft: "1.5rem" }}>
+                                    {project.fullDescription.map((point, i) => (
+                                        <li key={i} style={{ marginBottom: "0.5rem" }}>{point}</li>
+                                    ))}
+                                </ul>
+                            ) : (
+                                <p className="modal-description" style={{ color: "#d1d5db", lineHeight: "1.6", marginBottom: "2rem" }}>
+                                    {project.fullDescription}
+                                </p>
+                            )}
 
                             <div className="modal-links" style={{ display: "flex", gap: "1rem" }}>
                                 {project.demo && (
@@ -189,7 +190,8 @@ export const ProjectModal = ({ project, isOpen, onClose }) => {
                                         className="modal-btn outline"
                                         style={{
                                             border: `2px solid ${project.themeColor}`,
-                                            color: project.themeColor,
+                                            backgroundColor: "#004400",
+                                            color: "#fff",
                                             padding: "0.75rem 1.5rem",
                                             borderRadius: "8px",
                                             display: "flex",
@@ -211,4 +213,22 @@ export const ProjectModal = ({ project, isOpen, onClose }) => {
             )}
         </AnimatePresence>
     );
+};
+
+ProjectModal.propTypes = {
+    project: PropTypes.shape({
+        title: PropTypes.string,
+        imageSrc: PropTypes.string,
+        videoSrc: PropTypes.string,
+        themeColor: PropTypes.string,
+        skills: PropTypes.arrayOf(PropTypes.string),
+        fullDescription: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.arrayOf(PropTypes.string)
+        ]),
+        demo: PropTypes.string,
+        source: PropTypes.string,
+    }),
+    isOpen: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
 };

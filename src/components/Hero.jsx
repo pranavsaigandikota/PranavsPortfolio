@@ -9,19 +9,23 @@ const codeString = `const aboutMe: DeveloperProfile = {
   origin: "Orlando, FL",
   role: "Software Engineer & AI Enthusiast",
   stack: {
+    // (More skills adding)
     languages: ["C", "Java", "Python", "JavaScript", "TypeScript", "SQL", "HTML", "CSS"],
-    frameworks: ["React.js", "Next.js", "TailwindCSS", "Supabase", "Angular", "Unity"],
+    frameworks: ["React.js", "Spring Boot", "Next.js", "TailwindCSS", "Supabase", "Unity", ...],
+    ai: ["GPT", "Gemini", "LLaMA", "OpenCV", "TensorFlow", "HuggingFace", ...],
   },
   traits: [
-    "problem solver",
-    "team player",
-    "AI explorer",
-    "VR research assistant",
-    "creative thinker",
+    "Curious learner",
+    "Problem solver",
+    "Initiative leader",
+    "Adaptable thinker",
+    "Calm & persistent",
   ],
-  missionStatement:
-    "Building impactful tech that solves real problems and pushes boundaries",
+  missionStatement: "Building impactful tech that solves real problems and shipping reliable code",
+  // ... and tackling any problems encountered (calmly).
   availability: "Available for internships and part-time roles",
+  contact: "pranavsaigandikota@gmail.com | pr337157@ucf.edu",
+  funFact: "I love playing the piano and watching movies."
 };
 `;
 
@@ -74,6 +78,7 @@ const TypewriterCode = () => {
         marginBottom: 50,
         fontFamily: "Fira Code, monospace",
         fontSize: "0.9rem",
+        color: "#fff",
       }}
       style={vscDarkPlus}
     >
@@ -115,7 +120,7 @@ export const Hero = () => {
           animate="animate"
         >
           <motion.div className="hero-badge">
-            <span>Hello, I'm</span>
+            <span>Hello, I&apos;m</span>
           </motion.div>
           <motion.h1
             className="glitch"
@@ -128,7 +133,7 @@ export const Hero = () => {
             About Me:
           </motion.h2>
           <motion.p className="hero-description" variants={fadeInUp}>
-            I'm currently pursuing a degree in Computer Science at UCF and am
+            I&apos;m currently pursuing a degree in Computer Science at UCF and am
             interested in software engineering, AI, and being part of the latest
             tech. I enjoy building fun and creative apps and games, and I look
             forward to making a positive impact wherever I can.
@@ -157,7 +162,7 @@ export const Hero = () => {
               View My Work
             </motion.a>
             <motion.a
-              href="https://drive.google.com/file/d/17O5MnuvcFUj_Bje5SGeHhfYp4PLhprwf/view?usp=sharing"
+              href="https://drive.google.com/file/d/1i0F5qsnw_daXSnDnKkG1BPjPz84rBEff/view?usp=sharing"
               className="cta-secondary"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -191,23 +196,21 @@ export const Hero = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <div className="code-display">
-            <TypewriterCode />
+          <div className="retro-window">
+            <div className="flex items-center justify-between px-2 py-1 border-b-2 border-gray-500 bg-gray-800">
+             <span className="text-xs text-white font-bold" style={{ fontFamily: '"Press Start 2P"', fontSize: '0.6rem' }}>TERMINAL.EXE</span>
+             <div className="flex gap-1">
+               <div className="w-3 h-3 bg-gray-500 border border-white"></div>
+               <div className="w-3 h-3 bg-gray-500 border border-white"></div>
+               <div className="w-3 h-3 bg-red-600 border border-white"></div>
+             </div>
+            </div>
+            <div className="p-4 bg-black">
+              <TypewriterCode />
+            </div>
           </div>
 
-          {/* Floating Scroll Card */}
-          <motion.div
-            className="floating-card"
-            animate={{ y: [0, -10, 0], rotate: [0, 2, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <div className="card-content">
-              <span className="card-icon"> 💻 </span>
-              <span className="card-text">
-                Scroll down for more awesome projects of mine!
-              </span>
-            </div>
-          </motion.div>
+
         </motion.div>
       </div>
     </motion.section>
