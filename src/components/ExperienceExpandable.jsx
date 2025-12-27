@@ -49,8 +49,8 @@ const experiences = [
     organisation: "ISUE Lab (AI/ML - VR and Human Computer Interaction), UCF",
     startDate: "Sep. 2024",
     endDate: "Dec. 2025",
-    type: "Work",
-    themeColor: "#3b82f6", // Blue
+    type: "Research",
+    themeColor: "#8b5cf6", // Purple
     images: [isueLab, isueUserStudy, isueProcGen, isueRoomGen, isueWhisper],
     experiences: [
       "Contributed in streamlining a user-driven text-to-3D generation pipeline.",
