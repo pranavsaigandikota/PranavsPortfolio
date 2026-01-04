@@ -62,7 +62,7 @@ export const Navbar = () => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
         >
-          <a href="#experienceexpandable"> Experience</a>
+          <a href="#experience"> Experience</a>
         </motion.li>
       </motion.ul>
     </motion.nav>

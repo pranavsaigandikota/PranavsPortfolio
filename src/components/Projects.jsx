@@ -41,7 +41,7 @@ const projectsData = [
       "Integrated Spring AI with GPT to parse shopping bills/lists, auto-add inventory items, and power an inventory-aware chatbot for assistance and planning.",
       "Secured inventory access using Spring Security and Auth0, and deployed via multi-stage Docker builds and CI/CD on Render."
     ],
-    skills: ["Spring Boot", "Spring Data JPA", "Spring AI", "Spring Security", "OAuth 2.0", "Auth0", "Docker", "PostgreSQL", "React", "GPT"],
+    skills: ["Spring Boot", "PostgreSQL", "React", "Spring Data JPA", "Spring AI", "Spring Security", "OAuth 2.0", "Auth0", "Docker", "GPT"],
     demo: "https://satchel-frontend-one.vercel.app/",
     source: "https://github.com/pranavsaigandikota/Satchel",
     themeColor: "#864212",
