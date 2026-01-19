@@ -28,6 +28,7 @@ import nssNewspaper from "../assets/ExperiencesPics/NSSonNewspaper.jpeg";
 // import nssPress from "../assets/ExperiencesPics/NssPressmeet.jpeg";
 import bnyImg from "../assets/ExperiencesPics/BNY.jpg";
 import perplexityImg from "../assets/ExperiencesPics/perplexity.png";
+import ucfCecsImg from "../assets/ExperiencesPics/UCFCECS.png";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -45,19 +46,17 @@ const staggerContainer = {
 
 const experiences = [
   {
-    role: "Undergraduate Research Assistant",
-    organisation: "ISUE Lab (AI/ML - VR and Human Computer Interaction), UCF",
-    startDate: "Sep. 2024",
-    endDate: "Dec. 2025",
-    type: "Research",
-    themeColor: "#8b5cf6", // Purple
-    images: [isueLab, isueUserStudy, isueProcGen, isueRoomGen, isueWhisper],
+    role: "Teacher Assistant - Object Oriented Programming w/ Java",
+    organisation: "CECS, UCF",
+    startDate: "Jan. 2025",
+    endDate: "Present",
+    type: "Work",
+    themeColor: "#FFC904", // UCF Gold
+    images: [ucfCecsImg],
     experiences: [
-      "Contributed in streamlining a user-driven text-to-3D generation pipeline.",
-      "Co-authored related works in SIGGRAPH paper submission for 3D Scene Generation from natural language.",
-      "Implemented QLORA fine-tuning of Llama and weighted use of models for optimization of survey LLM.",
-      "Conducted user studies for the VR Sensor Awareness project.",
+      "Assisting the professor, Dr. Arup Guha, with course administration and grading while holding weekly office hours for 240+ students.",
     ],
+    imageFit: "contain",
   },
   {
     role: "Supplemental Instruction (SI) Leader - Computer Science 1",
@@ -76,8 +75,23 @@ const experiences = [
     ],
   },
   {
-    role: "Web Design and 3D Animation - KnightHacks",
-    organisation: "KnightHacks, University of Central Florida",
+    role: "Undergraduate Research Assistant",
+    organisation: "ISUE Lab (AI/ML - VR and Human Computer Interaction), UCF",
+    startDate: "Sep. 2024",
+    endDate: "Dec. 2025",
+    type: "Research",
+    themeColor: "#8b5cf6", // Purple
+    images: [isueLab, isueUserStudy, isueProcGen, isueRoomGen, isueWhisper],
+    experiences: [
+      "Contributed in streamlining a user-driven text-to-3D generation pipeline.",
+      "Co-authored related works in SIGGRAPH paper submission for 3D Scene Generation from natural language.",
+      "Implemented QLORA fine-tuning of Llama and weighted use of models for optimization of survey LLM.",
+      "Conducted user studies for the VR Sensor Awareness project.",
+    ],
+  },
+  {
+    role: "Web Design and 3D Animation",
+    organisation: "KnightHacks, UCF",
     startDate: "Sep. 2025",
     endDate: "Present",
     type: "Club",
@@ -160,7 +174,7 @@ const experiences = [
   },
 ];
 
-const CardImageCarousel = ({ images, interval = 3000 }) => {
+const CardImageCarousel = ({ images, interval = 3000, imageFit = "cover" }) => {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -188,6 +202,7 @@ const CardImageCarousel = ({ images, interval = 3000 }) => {
             src={images[index]}
             alt="Experience"
             className="project-image-img w-full h-full"
+            style={{ objectFit: imageFit }}
           />
         </motion.div>
       </AnimatePresence>
@@ -198,6 +213,7 @@ const CardImageCarousel = ({ images, interval = 3000 }) => {
 CardImageCarousel.propTypes = {
   images: PropTypes.arrayOf(PropTypes.string).isRequired,
   interval: PropTypes.number,
+  imageFit: PropTypes.string,
 };
 
 const ExperienceExpandable = () => {
@@ -256,6 +272,7 @@ const ExperienceExpandable = () => {
               {exp.images && exp.images.length > 0 ? (
                 <CardImageCarousel 
                   images={exp.images} 
+                  imageFit={exp.imageFit}
                 />
               ) : (
                 <div className="w-full h-full bg-gray-800 flex items-center justify-center text-gray-500 font-mono">
@@ -263,9 +280,7 @@ const ExperienceExpandable = () => {
                 </div>
               )}
 
-              <div className="project-overlay pointer-events-none">
-                <span className="font-mono uppercase">[ Click for Details ]</span>
-              </div>
+
             </div>
 
             <div className="project-content">

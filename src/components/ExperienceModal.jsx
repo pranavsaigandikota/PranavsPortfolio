@@ -1,8 +1,9 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-import { X, ChevronLeft, ChevronRight, Calendar, Maximize2 } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, Calendar } from "lucide-react";
 import { ImageModal } from "./ImageModal";
 import PropTypes from "prop-types";
+
 const overlayVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
@@ -36,19 +37,6 @@ export const ExperienceModal = ({ experience, isOpen, onClose }) => {
             document.body.style.paddingRight = "0px";
         };
     }, [isOpen]);
-
-    // Auto-scroll disabled
-    /*
-    useEffect(() => {
-        if (!isOpen || !experience?.images || experience.images.length <= 1) return;
-
-        const interval = setInterval(() => {
-            setCurrentImageIndex((prev) => (prev + 1) % experience.images.length);
-        }, 3000);
-
-        return () => clearInterval(interval);
-    }, [isOpen, experience]);
-    */
 
     const nextImage = (e) => {
         e.stopPropagation();
@@ -94,18 +82,18 @@ export const ExperienceModal = ({ experience, isOpen, onClose }) => {
                     }}
                 >
                     <motion.div
-                        className="modal-content retro-window"
+                        className="modal-content"
                         variants={modalVariants}
                         onClick={(e) => e.stopPropagation()}
                         style={{
                             "--theme-color": experience.themeColor,
                             width: "100%",
-                            maxWidth: "900px",
+                            maxWidth: "800px",
                             maxHeight: "90vh",
                             overflowY: "auto",
                             background: "#000",
                             position: "relative",
-                            boxShadow: "12px 12px 0px rgba(0, 0, 0, 0.5)",
+                            boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)",
                         }}
                     >
                         <button
@@ -115,108 +103,124 @@ export const ExperienceModal = ({ experience, isOpen, onClose }) => {
                                 position: "absolute",
                                 top: "1rem",
                                 right: "1rem",
-                                width: "40px",
-                                height: "40px",
+                                width: "36px",
+                                height: "36px",
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
                                 cursor: "pointer",
-                                zIndex: 20,
-                                fontFamily: '"Press Start 2P"',
+                                zIndex: 10,
                             }}
                         >
                             <X size={20} />
                         </button>
 
-                        {/* Image Carousel Section */}
-                        {hasImages ? (
-                            <div className="relative w-full h-[300px] md:h-[400px] bg-black overflow-hidden group border-b-4 border-white flex items-center justify-center">
-                                <motion.img
-                                    key={currentImageIndex}
-                                    src={experience.images[currentImageIndex]}
-                                    alt={`${experience.role} - Image ${currentImageIndex + 1}`}
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    transition={{ duration: 0.1 }}
-                                    className="max-w-full max-h-full object-contain image-pixelated"
-                                    style={{ imageRendering: "pixelated", cursor: "zoom-in" }}
-                                    onClick={() => setPreviewImage(experience.images[currentImageIndex])}
-                                />
-                                <div className="absolute top-2 right-2 bg-black/50 p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-                                    <Maximize2 size={16} color="white" />
-                                </div>
-
-                                {experience.images.length > 1 && (
-                                    <>
-                                        <button
-                                            onClick={prevImage}
-                                            className="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-black text-white border-2 border-white hover:bg-white hover:text-black hover:border-black transition-colors"
-                                        >
-                                            <ChevronLeft size={24} />
-                                        </button>
-                                        <button
-                                            onClick={nextImage}
-                                            className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-black text-white border-2 border-white hover:bg-white hover:text-black hover:border-black transition-colors"
-                                        >
-                                            <ChevronRight size={24} />
-                                        </button>
-
-                                        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-                                            {experience.images.map((_, idx) => (
-                                                <div
-                                                    key={idx}
-                                                    className={`w-3 h-3 border-2 border-white ${idx === currentImageIndex ? 'bg-white' : 'bg-transparent'}`}
-                                                />
-                                            ))}
-                                        </div>
-                                    </>
-                                )}
-                            </div>
-                        ) : (
-                            <div className="w-full h-[200px] bg-black flex items-center justify-center border-b-4 border-white">
-                                <div style={{ color: experience.themeColor, transform: "scale(2)" }}>
-                                    {experience.icon}
-                                </div>
-                            </div>
-                        )}
-
-                        <div className="p-8 font-mono">
-                            <div className="flex flex-col md:flex-row justify-between items-start gap-4 mb-6">
-                                <div>
-                                    <h2 className="text-2xl font-bold mb-2 uppercase" style={{ color: "#fff", textShadow: `2px 2px 0px ${experience.themeColor}`, fontFamily: '"Press Start 2P"' }}>
-                                        {experience.role}
-                                    </h2>
-                                    <h3 className="text-xl text-gray-400 font-bold uppercase">
-                                        {experience.organisation}
-                                    </h3>
-                                </div>
-                                <div className="flex flex-col items-end gap-2">
-                                    <div
-                                        className="flex items-center gap-2 px-4 py-2 border-2 bg-opacity-10"
-                                        style={{
-                                            borderColor: experience.themeColor,
-                                            backgroundColor: `${experience.themeColor}20`,
-                                            color: experience.themeColor
-                                        }}
-                                    >
-                                        <Calendar size={16} />
-                                        <span className="font-bold uppercase">{experience.startDate} - {experience.endDate}</span>
+                        {/* Image Header Area */}
+                        <div className="modal-image-container" style={{ width: "100%", height: "300px", overflow: "hidden", position: "relative", backgroundColor: "#111" }}>
+                            {hasImages ? (
+                                <>
+                                    <motion.img
+                                        key={currentImageIndex}
+                                        src={experience.images[currentImageIndex]}
+                                        alt={`${experience.role} - Image ${currentImageIndex + 1}`}
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        transition={{ duration: 0.3 }}
+                                        className="modal-media"
+                                        style={{ width: "100%", height: "100%", objectFit: "contain", cursor: "zoom-in" }}
+                                        onClick={() => setPreviewImage(experience.images[currentImageIndex])}
+                                    />
+                                    
+                                    {experience.images.length > 1 && (
+                                        <>
+                                            <button
+                                                onClick={prevImage}
+                                                className="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-black/50 text-white hover:bg-black/70 rounded-full transition-colors"
+                                                style={{ border: "none" }}
+                                            >
+                                                <ChevronLeft size={24} />
+                                            </button>
+                                            <button
+                                                onClick={nextImage}
+                                                className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-black/50 text-white hover:bg-black/70 rounded-full transition-colors"
+                                                style={{ border: "none" }}
+                                            >
+                                                <ChevronRight size={24} />
+                                            </button>
+                                            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                                                {experience.images.map((_, idx) => (
+                                                    <div
+                                                        key={idx}
+                                                        className={`w-2 h-2 rounded-full transition-colors ${idx === currentImageIndex ? 'bg-white' : 'bg-white/30'}`}
+                                                    />
+                                                ))}
+                                            </div>
+                                        </>
+                                    )}
+                                </>
+                            ) : (
+                                <div className="w-full h-full flex items-center justify-center">
+                                    <div style={{ color: experience.themeColor, transform: "scale(2)" }}>
+                                        {experience.icon}
                                     </div>
-                                    <span className="text-sm bg-gray-800 text-white px-2 py-1 uppercase tracking-wider font-bold border border-gray-600">
-                                        {experience.type}
-                                    </span>
                                 </div>
+                            )}
+                            <div style={{
+                                position: "absolute",
+                                bottom: 0,
+                                left: 0,
+                                right: 0,
+                                height: "100px",
+                                background: "linear-gradient(to top, #000, transparent)",
+                            }} />
+                        </div>
+
+                        <div className="modal-body" style={{ padding: "2rem" }}>
+                            <h2 className="modal-title" style={{ fontSize: "2rem", fontWeight: "bold", marginBottom: "0.5rem" }}>
+                                {experience.role}
+                            </h2>
+                            <h3 style={{ fontSize: "1.25rem", color: experience.themeColor, marginBottom: "1rem", fontWeight: "600" }}>
+                                {experience.organisation}
+                            </h3>
+
+                            <div className="modal-tags" style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem", marginBottom: "1.5rem" }}>
+                                <span
+                                    className="modal-tag"
+                                    style={{
+                                        padding: "0.25rem 0.75rem",
+                                        fontSize: "0.875rem",
+                                        fontWeight: "500",
+                                        backgroundColor: "rgba(255, 255, 255, 0.1)",
+                                        borderRadius: "9999px",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        gap: "0.5rem"
+                                    }}
+                                >
+                                    <Calendar size={14} />
+                                    {experience.startDate} - {experience.endDate}
+                                </span>
+                                <span
+                                    className="modal-tag"
+                                    style={{
+                                        padding: "0.25rem 0.75rem",
+                                        fontSize: "0.875rem",
+                                        fontWeight: "500",
+                                        backgroundColor: `${experience.themeColor}20`,
+                                        color: experience.themeColor,
+                                        borderRadius: "9999px",
+                                        border: `1px solid ${experience.themeColor}40`
+                                    }}
+                                >
+                                    {experience.type}
+                                </span>
                             </div>
 
-                            <div className="space-y-4">
-                                <h4 className="text-lg font-bold text-white border-b-4 border-gray-700 pb-2 uppercase" style={{ fontFamily: '"Press Start 2P"', fontSize: '0.8rem' }}>MISSION REPORT</h4>
-                                <ul className="space-y-3">
+                            <div className="modal-description">
+                                <ul style={{ color: "#d1d5db", lineHeight: "1.6", marginBottom: "2rem", listStyleType: "disc", paddingLeft: "1.5rem" }}>
                                     {experience.experiences.map((point, i) => (
-                                        <li key={i} className="flex items-start gap-3 text-gray-300 leading-relaxed group">
-                                            <span
-                                                className="mt-1.5 w-3 h-3 flex-shrink-0 border border-white group-hover:bg-white transition-colors"
-                                            ></span>
-                                            <span className="uppercase">{point}</span>
+                                        <li key={i} style={{ marginBottom: "0.5rem" }}>
+                                            {point}
                                         </li>
                                     ))}
                                 </ul>
