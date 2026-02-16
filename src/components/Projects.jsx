@@ -31,7 +31,26 @@ const staggerContainer = {
   },
 };
 
+import replotMapImg from "../assets/ProjectsPics/replotmap.png";
+
 const projectsData = [
+  {
+    title: "RePlot",
+    event: "SwampHacks 2026",
+    imageSrc: replotMapImg,
+    shortDescription: "AI-powered urban planning tool identifying underutilized land for sustainable development.",
+    fullDescription: [
+      "AI-Powered Site Discovery: Uses Google Gemini to scan cities and identify underused land.",
+      "Smart Exclusions: Automatically skips sensitive areas like schools and parks.",
+      "The RePlot Impact Engine: Combines AI pattern recognition with scientific models to validate sites.",
+      "Sustainability Analysis: Estimates carbon reduction, urban cooling, and biodiversity impact.",
+      "Interactive Mapping: Live maps with high-resolution satellite imagery and boundary highlighting."
+    ],
+    skills: ["React", "FastAPI", "Python", "Google Gemini", "Mapbox GL"],
+    demo: "https://devpost.com/software/replot",
+    source: "https://github.com/Yimo-Liu-13196/SwampHacks",
+    themeColor: "#2E7D32", 
+  },
   {
     title: "Satchel",
     imageSrc: satchelImg,
@@ -47,7 +66,8 @@ const projectsData = [
     themeColor: "#864212",
   },
   {
-    title: "ReVision - Shell Hacks 2025",
+    title: "ReVision",
+    event: "ShellHacks 2025",
     imageSrc: revisionImg,
     shortDescription: "Real-time AI tutor for whiteboard problem solving using Gemini Vision.",
     fullDescription: [
@@ -60,7 +80,8 @@ const projectsData = [
     themeColor: "#cc0007", // Dark red
   },
   {
-    title: "TACO - KnightHacks 2025",
+    title: "TACO",
+    event: "KnightHacks 2025",
     imageSrc: tacoImg,
     shortDescription: "Voice-controlled robotic arm using computer vision to organize objects.",
     fullDescription: "TACO (Technically Autonomous Coordinated Organizer) is a voice-controlled robotic arm built with LEGO Mindstorms. It uses Computer Vision (YOLOv8) to detect objects and ElevenLabs API for voice interaction, executing commands to pick and place items autonomously.",
@@ -70,7 +91,8 @@ const projectsData = [
     themeColor: "#facc15", // Yellow
   },
   {
-    title: "Freedom Finances - Shell Hacks 2024",
+    title: "Freedom Finances",
+    event: "ShellHacks 2024",
     imageSrc: freedomImg,
     shortDescription: "Debt management app analyzing bank statements for personalized recommendations.",
     fullDescription: [
@@ -82,7 +104,8 @@ const projectsData = [
     themeColor: "#001fcf", // Blue
   },
   {
-    title: "Vision - Knight Hacks VII Hackathon 2024",
+    title: "Vision",
+    event: "KnightHacks VII 2024",
     imageSrc: visionImg,
     shortDescription: "Hands-free drawing app using eye tracking and voice commands.",
     fullDescription: [
@@ -94,7 +117,7 @@ const projectsData = [
     themeColor: "#3cafd1", // Light teal-blue
   },
   {
-    title: "Jenny’s Playtime - Horror Survival Game",
+    title: "Jenny’s Playtime",
     imageSrc: jennysImg,
     shortDescription: "Story-driven horror survival game with AI bots.",
     fullDescription: "Developed Jenny’s Playtime, a story-driven horror survival game featuring AI bots, published on Itch.io.",
@@ -104,7 +127,7 @@ const projectsData = [
     themeColor: "#b30000", // Red
   },
   {
-    title: "Jumblehot - Endless Jumping Game",
+    title: "Jumblehot",
     imageSrc: jumblehotImg,
     shortDescription: "Endless jumping game published on the Amazon Appstore.",
     fullDescription: "Created and published Jumblehot, an endless jumping game released on the Amazon Appstore.",
@@ -127,7 +150,7 @@ const projectsData = [
     themeColor: "#f54a33", // Bright red-orange
   },
   {
-    title: "Humanotone - Face & Hand Controlled Instrument",
+    title: "Humanotone",
     imageSrc: humanotoneImg,
     shortDescription: "Turn facial expressions and gestures into music in your browser.",
     fullDescription: "Browser-based instrument that turns facial expressions and hand gestures into music. Built with React, TensorFlow.js, and Mediapipe, with Tone.js handling sound generation.",
@@ -137,7 +160,7 @@ const projectsData = [
     themeColor: "#07a102", // Green
   },
   {
-    title: "Exodus - NSS Space Settlement Research",
+    title: "Exodus",
     imageSrc: exodusImg,
     shortDescription: "Authored a 50-page research paper on sustainable space habitation.",
     fullDescription: [
@@ -225,6 +248,17 @@ export const Projects = () => {
 
             <div className="project-content">
               <h3 className="project-title">{project.title}</h3>
+              {project.event && (
+                <div style={{ 
+                  fontSize: "1.1rem", 
+                  opacity: 0.8, 
+                  marginBottom: "0.5rem",
+                  marginTop: "-0.25rem",
+                  fontFamily: '"VT323", monospace' // Ensure consistent font
+                }}>
+                  {project.event}
+                </div>
+              )}
               <p className="project-description-preview">{project.shortDescription}</p>
 
               <div className="project-tech">

@@ -1,5 +1,21 @@
 [
   {
+    "title": "RePlot - SwampHacks 2026",
+    "imageSrc": "projects/replotmap.png",
+    "description": "RePlot transforms urban planning by identifying underutilized land and analyzing its potential for sustainable residential development.",
+    "fullDescription": [
+      "AI-Powered Site Discovery: Uses Google Gemini to scan cities and identify underused land.",
+      "Smart Exclusions: Automatically skips sensitive areas like schools and parks.",
+      "The RePlot Impact Engine: Combines AI pattern recognition with scientific models to validate sites.",
+      "Sustainability Analysis: Estimates carbon reduction, urban cooling, and biodiversity impact.",
+      "Interactive Mapping: Live maps with high-resolution satellite imagery and boundary highlighting."
+    ],
+    "skills": ["React", "FastAPI", "Python", "Google Gemini", "Mapbox GL"],
+    "demo": "https://devpost.com/software/replot",
+    "source": "https://github.com/Yimo-Liu-13196/SwampHacks",
+    "themeColor": "#2E7D32"
+  },
+  {
     "title": "Freedom Finances - Shell Hacks 2024",
     "imageSrc": "projects/freedom-finances.png",
     "description": "Developed a debt management website aimed particularly at underrepresented communities, interpreting bank statements to offer personalized debt management suggestions. Contributed to user experience and interface (UX/UI) design.",
