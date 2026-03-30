@@ -2,14 +2,15 @@ import "./App.css";
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
 import { Projects } from "./components/Projects";
-import { Contact } from "./components/Contact";
 import { useEffect, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
 import ExperienceExpandable from "./components/ExperienceExpandable";
-import MajorAssignments from "./components/TechWrit";
 import { Achievements } from "./components/Achievements";
 import { Skills } from "./components/Skills";
+import { ParallaxBackground } from "./components/ParallaxBackground";
+import { TornPaperDivider } from "./components/TornPaperDivider";
+
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -34,25 +35,42 @@ function App() {
   }, []);
 
   return (
-    <div className={`app ${isLoaded ? "loaded" : ""}`}>
-      <Navbar />
-      <Hero />
-      <ExperienceExpandable />
-      <Projects />
-      <Skills />
-      <Achievements />
-      {/* <MajorAssignments /> */}
-      {/* <Contact /> */}
+    <div className={`app ${isLoaded ? "loaded" : ""}`} style={{ position: "relative" }}>
+      {/* Floating background icons — fixed, behind all content */}
+      <ParallaxBackground />
 
-      <motion.footer
-        className="footer"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-      >
-        <p>Made with love by Pranavsai Gandikota</p>
-      </motion.footer>
+      {/* Main content above background */}
+      <div style={{ position: "relative", zIndex: 1 }}>
+        <Navbar />
+        <Hero />
+
+        <TornPaperDivider color="#0a0a0a" accentColor="#33ff00" />
+        <ExperienceExpandable />
+
+        <TornPaperDivider flip color="#050505" accentColor="#00ffcc" />
+        <Projects />
+
+        <TornPaperDivider color="#0a0a0a" accentColor="#ff33aa" />
+        <Skills />
+
+        <TornPaperDivider flip color="#050505" accentColor="#33ff00" />
+        <Achievements />
+
+        {/* <MajorAssignments /> */}
+        {/* <Contact /> */}
+
+        <TornPaperDivider color="#000000" accentColor="#00ffcc" />
+
+        <motion.footer
+          className="footer"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <p>Made with love by Pranavsai Gandikota</p>
+        </motion.footer>
+      </div>
     </div>
   );
 }

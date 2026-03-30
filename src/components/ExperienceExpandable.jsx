@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ExperienceModal } from "./ExperienceModal";
-// Import Images
 import PropTypes from "prop-types";
+import { AnimatedTitle } from "./AnimatedTitle";
+
 import isueLab from "../assets/ExperiencesPics/ISUELAB.png";
 import isueUserStudy from "../assets/ExperiencesPics/ISUELABUSERSTUDY.jpeg";
 import isueProcGen from "../assets/ExperiencesPics/ISUEProceduralGenerationUnity.jpeg";
@@ -43,6 +44,16 @@ const staggerContainer = {
     },
   },
 };
+
+const cardScatterPatterns = [
+  { x: -180, y: 60,  rotate: -14, scale: 0.8 },
+  { x:  180, y: 80,  rotate:  14, scale: 0.8 },
+  { x: -100, y: 140, rotate: -10, scale: 0.85 },
+  { x:  100, y: 130, rotate:  10, scale: 0.85 },
+  { x: -160, y: -40, rotate:  16, scale: 0.8 },
+  { x:  160, y: -40, rotate: -16, scale: 0.8 },
+];
+const cardScatter = (i) => cardScatterPatterns[i % cardScatterPatterns.length];
 
 const experiences = [
   {
@@ -241,8 +252,9 @@ const ExperienceExpandable = () => {
       <motion.h2
         variants={fadeInUp}
         className="text-4xl md:text-5xl font-bold text-center mb-16 text-white"
+        style={{ overflow: "visible" }}
       >
-        My Experience
+        <AnimatedTitle>My Experience</AnimatedTitle>
       </motion.h2>
 
       <motion.div
@@ -253,7 +265,10 @@ const ExperienceExpandable = () => {
           <motion.div
             key={index}
             className="project-card group relative"
-            variants={fadeInUp}
+            initial={{ ...cardScatter(index), opacity: 0 }}
+            whileInView={{ x: 0, y: 0, rotate: 0, scale: 1, opacity: 1 }}
+            viewport={{ once: false, amount: 0.15 }}
+            transition={{ type: "spring", damping: 18, stiffness: 75, delay: (index % 4) * 0.09 }}
             whileHover={{ scale: 1.02 }}
             onClick={() => openModal(exp)}
             style={{

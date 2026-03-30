@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { Trophy, Star, Award } from "lucide-react";
+import { AnimatedTitle } from "./AnimatedTitle";
+
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -14,6 +16,13 @@ const staggerContainer = {
     },
   },
 };
+
+const cardScatterPatterns = [
+  { x: -180, y: 60,  rotate: -14, scale: 0.8 },
+  { x:  180, y: 80,  rotate:  14, scale: 0.8 },
+  { x:    0, y: 140, rotate:  -8, scale: 0.85 },
+];
+const cardScatter = (i) => cardScatterPatterns[i % cardScatterPatterns.length];
 
 export const Achievements = () => {
   const achievements = [
@@ -57,8 +66,9 @@ export const Achievements = () => {
       <motion.h2
         className="text-4xl md:text-5xl font-bold text-center mb-16 text-white"
         variants={fadeInUp}
+        style={{ overflow: "visible" }}
       >
-        My Achievements
+        <AnimatedTitle>My Achievements</AnimatedTitle>
       </motion.h2>
 
       <motion.div
@@ -68,8 +78,11 @@ export const Achievements = () => {
         {achievements.map((item, i) => (
           <motion.div
             key={i}
-            variants={fadeInUp}
             className="project-card group relative overflow-hidden flex flex-col"
+            initial={{ ...cardScatter(i), opacity: 0 }}
+            whileInView={{ x: 0, y: 0, rotate: 0, scale: 1, opacity: 1 }}
+            viewport={{ once: false, amount: 0.15 }}
+            transition={{ type: "spring", damping: 18, stiffness: 75, delay: i * 0.1 }}
             style={{
               "--theme-color": item.borderColor,
             }}

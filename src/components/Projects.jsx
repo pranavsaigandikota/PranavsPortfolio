@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { ProjectModal } from "./ProjectModal";
+import { AnimatedTitle } from "./AnimatedTitle";
 
 // Import images directly to ensure they work
 import revisionImg from "../assets/ProjectsPics/revisionainpage.jpg";
@@ -23,17 +24,52 @@ const fadeInUp = {
   transition: { duration: 0.6 },
 };
 
-const staggerContainer = {
-  animate: {
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
+// Directional scatter for cards
+const cardScatterPatterns = [
+  { x: -180, y: 60,  rotate: -14, scale: 0.8 },
+  { x:  180, y: 80,  rotate:  14, scale: 0.8 },
+  { x: -100, y: 140, rotate: -10, scale: 0.85 },
+  { x:  100, y: 130, rotate:  10, scale: 0.85 },
+  { x: -160, y: -40, rotate:  16, scale: 0.8 },
+  { x:  160, y: -40, rotate: -16, scale: 0.8 },
+];
+const cardScatter = (i) => cardScatterPatterns[i % cardScatterPatterns.length];
 
 import replotMapImg from "../assets/ProjectsPics/replotmap.png";
+import sentinelImg from "../assets/ProjectsPics/SentinelDemo.png";
+import uknightImg from "../assets/ProjectsPics/UknightDemo.png";
 
 const projectsData = [
+  {
+    title: "Sentinel",
+    event: "Hacklytics 2026: Golden Byte",
+    imageSrc: sentinelImg,
+    shortDescription: "Web Extension for Real-Time Misinformative Content Detection.",
+    fullDescription: [
+      "Built a Chrome extension acting as a real-time trust and safety layer for social media, automatically analyzing images and videos for AI-generation artifacts.",
+      "Injected side note badges onto X (Twitter) feeds via MutationObserver, parsing DOM and intercepting GraphQL API responses.",
+      "Implemented a backend running local ML models (CLIP, SDXL-detector, GAN-face detector) with FastAPI and Actian VectorAI DB for fast KNN similarity search.",
+      "Integrated Sphinx Reasoning SDK to provide natural language explanations of AI detection risk levels."
+    ],
+    skills: ["JavaScript", "React", "Chrome Extension", "Python", "FastAPI", "Actian VectorAI", "Hugging Face", "Sphinx AI"],
+    demo: "https://devpost.com/software/sentinel-w2ehfs",
+    source: "https://github.com/AlphaKnight1701-A/Sentinel",
+    themeColor: "#000000",
+  },
+  {
+    title: "uKnight",
+    imageSrc: uknightImg,
+    shortDescription: "College platform where you randomly match with people in your college on chat or video.",
+    fullDescription: [
+      "Created an omegle-style platform allowing college students to securely meet and socialize via randomized chat and video matching, verified through college OAuth.",
+      "Engineered real-time matching queues using Redis and handled real-time communication via WebSockets and WebRTC peer connections.",
+      "Developed a full-stack application using a Spring Boot backend and React frontend, deployed on Google Cloud Platform."
+    ],
+    skills: ["React", "Spring Boot", "WebRTC", "PostgreSQL", "Redis", "GCP", "WebSockets", "OAuth"],
+    demo: "https://u-knight.vercel.app/",
+    source: "https://github.com/uKnight-Co/uKnight",
+    themeColor: "#FFD700",
+  },
   {
     title: "RePlot",
     event: "SwampHacks 2026",
@@ -212,22 +248,22 @@ export const Projects = () => {
         initial="initial"
         whileInView="animate"
         viewport={{ once: true }}
+        style={{ textAlign: "center", fontSize: "2.5rem", marginBottom: "5rem", textShadow: "4px 4px 0px var(--primary-dark)", color: "#fff", overflow: "visible" }}
       >
-        My Projects
+        <AnimatedTitle>My Projects</AnimatedTitle>
       </motion.h2>
 
       <motion.div
         className="project-grid sm:grid-cols-1"
-        variants={staggerContainer}
-        initial="initial"
-        whileInView="animate"
-        viewport={{ once: true }}
       >
         {projectsData.map((project, index) => (
           <motion.div
             key={index}
             className="project-card"
-            variants={fadeInUp}
+            initial={{ ...cardScatter(index), opacity: 0 }}
+            whileInView={{ x: 0, y: 0, rotate: 0, scale: 1, opacity: 1 }}
+            viewport={{ once: false, amount: 0.15 }}
+            transition={{ type: "spring", damping: 18, stiffness: 75, delay: (index % 4) * 0.09 }}
             whileHover={{ scale: 1.02 }}
             onClick={() => setSelectedProject(project)}
             style={{

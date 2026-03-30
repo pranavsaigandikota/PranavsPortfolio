@@ -287,9 +287,9 @@ h1, h2, h3, h4, h5, h6 {
 /* --- Projects Section --- */
 .projects {
   padding: 6rem 5%;
-  background-color: rgba(10, 10, 10, 0.9);
-  /* Dotted pattern */
-  background-image: radial-gradient(var(--light-text) 1px, transparent 1px);
+  background-color: transparent;
+  /* Dotted pattern at 40% opacity so parallax icons show through */
+  background-image: radial-gradient(rgba(136, 204, 136, 0.4) 1px, transparent 1px);
   background-size: 20px 20px;
 }
 
@@ -318,6 +318,8 @@ h1, h2, h3, h4, h5, h6 {
   cursor: pointer;
   transition: transform 0.1s ease;
   position: relative;
+  will-change: transform;
+  contain: layout style;
 }
 
 .project-card:hover {

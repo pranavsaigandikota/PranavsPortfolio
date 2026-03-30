@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { Code, Layers, Database, Cpu, Terminal } from "lucide-react";
+import { AnimatedTitle } from "./AnimatedTitle";
+
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -14,6 +16,16 @@ const staggerContainer = {
     },
   },
 };
+
+const cardScatterPatterns = [
+  { x: -180, y: 60,  rotate: -14, scale: 0.8 },
+  { x:  180, y: 80,  rotate:  14, scale: 0.8 },
+  { x: -100, y: 140, rotate: -10, scale: 0.85 },
+  { x:  100, y: 130, rotate:  10, scale: 0.85 },
+  { x: -160, y: -40, rotate:  16, scale: 0.8 },
+  { x:  160, y: -40, rotate: -16, scale: 0.8 },
+];
+const cardScatter = (i) => cardScatterPatterns[i % cardScatterPatterns.length];
 
 const skillsData = [
   {
@@ -95,8 +107,9 @@ export const Skills = () => {
       <motion.h2
         className="text-4xl md:text-5xl font-bold text-center mb-16 text-white"
         variants={fadeInUp}
+        style={{ overflow: "visible" }}
       >
-        My Skills
+        <AnimatedTitle>My Skills</AnimatedTitle>
       </motion.h2>
 
       <motion.div
@@ -106,8 +119,11 @@ export const Skills = () => {
         {skillsData.map((skillGroup, index) => (
           <motion.div
             key={index}
-            variants={fadeInUp}
             className="project-card group relative overflow-hidden flex flex-col"
+            initial={{ ...cardScatter(index), opacity: 0 }}
+            whileInView={{ x: 0, y: 0, rotate: 0, scale: 1, opacity: 1 }}
+            viewport={{ once: false, amount: 0.15 }}
+            transition={{ type: "spring", damping: 18, stiffness: 75, delay: (index % 3) * 0.1 }}
             style={{
               "--theme-color": skillGroup.themeColor,
             }}
