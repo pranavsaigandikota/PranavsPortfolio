@@ -10,6 +10,7 @@ import { Achievements } from "./components/Achievements";
 import { Skills } from "./components/Skills";
 import { ParallaxBackground } from "./components/ParallaxBackground";
 import { TornPaperDivider } from "./components/TornPaperDivider";
+import { ResearchPapers } from "./components/ResearchPapers";
 
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -55,6 +56,9 @@ function App() {
 
         <TornPaperDivider flip color="#050505" accentColor="#33ff00" />
         <Achievements />
+
+        <TornPaperDivider color="#0a0a0a" accentColor="#facc15" />
+        <ResearchPapers />
 
         {/* <MajorAssignments /> */}
         {/* <Contact /> */}
