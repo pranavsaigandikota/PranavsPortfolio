@@ -12,7 +12,7 @@ import isueWhisper from "../assets/ExperiencesPics/ISUEWhisperAI.jpeg";
 
 import siGroup from "../assets/ExperiencesPics/SIGroup.jpeg";
 import siGroupFunny from "../assets/ExperiencesPics/SIGroupFunny.png";
-import knightHacks from "../assets/ExperiencesPics/KnightHacks.png";
+import knightHacks from "../assets/ExperiencesPics/knighhacksgroup.jpeg";
 import diwaliBackdrop from "../assets/ExperiencesPics/DiwaliBackdrop.jpeg";
 import diwaliBoard from "../assets/ExperiencesPics/DiwaliBoard.jpeg";
 import diwaliCrowd from "../assets/ExperiencesPics/DiwaliCrowd.jpeg";
