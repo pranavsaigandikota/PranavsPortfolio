@@ -243,15 +243,16 @@ export const Projects = () => {
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
     >
-      <motion.h2
-        variants={fadeInUp}
-        initial="initial"
-        whileInView="animate"
-        viewport={{ once: true }}
-        style={{ textAlign: "center", fontSize: "2.5rem", marginBottom: "5rem", textShadow: "4px 4px 0px var(--primary-dark)", color: "#fff", overflow: "visible" }}
-      >
-        <AnimatedTitle>My Projects</AnimatedTitle>
-      </motion.h2>
+      <div className="section-title-wrap">
+        <motion.h2
+          variants={fadeInUp}
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
+        >
+          <AnimatedTitle className="section-title-big">My Projects</AnimatedTitle>
+        </motion.h2>
+      </div>
 
       <motion.div
         className="project-grid sm:grid-cols-1"

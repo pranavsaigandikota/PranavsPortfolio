@@ -70,15 +70,13 @@ const TypewriterCode = () => {
       language="typescript"
       customStyle={{
         margin: 0,
-        padding: "2rem",
+        padding: "1rem",
         minHeight: "100%",
-        borderRadius: "20px",
-        background: "rgba(30, 41, 59, 0.8)",
-        backdropFilter: "blur(10px)",
+        background: "transparent",
         marginBottom: 50,
-        fontFamily: "Fira Code, monospace",
+        fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
         fontSize: "0.9rem",
-        color: "#fff",
+        color: "#fdfbf7",
       }}
       style={vscDarkPlus}
     >
@@ -115,6 +113,7 @@ export const Hero = () => {
         {/* Hero Text Content */}
         <motion.div
           className="hero-content"
+          style={{ paddingTop: '2rem' }}
           variants={staggerContainer}
           initial="initial"
           animate="animate"
@@ -133,22 +132,23 @@ export const Hero = () => {
             About Me:
           </motion.h2>
           <motion.p className="hero-description" variants={fadeInUp}>
-            I&apos;m currently pursuing a degree in Computer Science at UCF and am
-            interested in software engineering, AI, and being part of the latest
+            I&apos;m currently pursuing a degree in <span className="highlight">Computer Science at UCF</span> and am
+            interested in <span className="highlight">software engineering, AI</span>, and being part of the latest
             tech. I enjoy building fun and creative apps and games, and I look
             forward to making a positive impact wherever I can.
             <br />
             <br />
-            I have previously worked in VR research for Human Computer
-            Interaction and fine-tuning of AI models. I also have previous web
-            development experience with some of my projects found below. I have
-            had the chance to lead multiple collaborative projects, hackathons
-            and help in research teams, which I enjoy taking part in.
+            I am an incoming Software Engineering Intern at <span className="highlight">Ford Motor Company</span>. 
+            I have previously worked in VR research for <span className="highlight">Human Computer Interaction</span> and 
+            fine-tuning of <span className="highlight">AI models</span>. I also have previous full-stack web
+            development experience and have had the chance to lead multiple 
+            collaborative projects, hackathons, and help in research teams, 
+            which I deeply enjoy taking part in.
             <br />
             <br />
             Academics aside, I am also the Diwali and Banquet director at the
-            largest Indian club at UCF (Indian Student Association), and am an
-            active member of the badminton club and KnightHacks. I am always
+            largest Indian club at UCF (<span className="highlight">Indian Student Association</span>), and am an
+            active member of the badminton club and <span className="highlight">KnightHacks</span>. I am always
             eager for the next challenge and opportunity to learn.
           </motion.p>
 
@@ -197,15 +197,15 @@ export const Hero = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
         >
           <div className="retro-window">
-            <div className="flex items-center justify-between px-2 py-1 border-b-2 border-gray-500 bg-gray-800">
-             <span className="text-xs text-white font-bold" style={{ fontFamily: '"Press Start 2P"', fontSize: '0.6rem' }}>TERMINAL.EXE</span>
-             <div className="flex gap-1">
-               <div className="w-3 h-3 bg-gray-500 border border-white"></div>
-               <div className="w-3 h-3 bg-gray-500 border border-white"></div>
-               <div className="w-3 h-3 bg-red-600 border border-white"></div>
+            <div className="flex items-center px-4 py-3 border-b border-white/5 bg-white/5">
+             <div className="flex gap-2">
+               <div className="w-3 h-3 rounded-full bg-white/20"></div>
+               <div className="w-3 h-3 rounded-full bg-white/20"></div>
+               <div className="w-3 h-3 rounded-full bg-white/20"></div>
              </div>
+             
             </div>
-            <div className="p-4 bg-black">
+            <div className="p-4 bg-transparent">
               <TypewriterCode />
             </div>
           </div>

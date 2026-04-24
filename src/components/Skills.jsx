@@ -104,13 +104,11 @@ export const Skills = () => {
       whileInView="animate"
       viewport={{ once: true, amount: 0.1 }}
     >
-      <motion.h2
-        className="text-4xl md:text-5xl font-bold text-center mb-16 text-white"
-        variants={fadeInUp}
-        style={{ overflow: "visible" }}
-      >
-        <AnimatedTitle>My Skills</AnimatedTitle>
-      </motion.h2>
+      <div className="section-title-wrap">
+        <motion.h2 className="" variants={fadeInUp}>
+          <AnimatedTitle className="section-title-big">My Skills</AnimatedTitle>
+        </motion.h2>
+      </div>
 
       <motion.div
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"
@@ -129,51 +127,45 @@ export const Skills = () => {
             }}
             whileHover={{ scale: 1.02 }}
           >
-            {/* Retro Background Pattern */}
-            <div
-              className="absolute inset-0 z-0 opacity-20"
-              style={{
-                backgroundImage: "linear-gradient(rgba(51, 255, 0, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(51, 255, 0, 0.2) 1px, transparent 1px)",
-                backgroundSize: "20px 20px"
-              }}
-            />
-
-            <div className="project-content relative z-10 bg-black/40 backdrop-blur-sm flex-grow flex flex-col p-6">
+            <div className="project-content">
               <div className="flex items-center gap-3 mb-4">
                 <div
-                  className="p-2 rounded-lg border"
+                  className="p-3 rounded-full border-2"
                   style={{
                     borderColor: skillGroup.themeColor,
                     color: skillGroup.themeColor,
-                    backgroundColor: `${skillGroup.themeColor}10`
+                    backgroundColor: `${skillGroup.themeColor}15`
                   }}
                 >
                   {skillGroup.icon}
                 </div>
                 <h3
-                  className="project-title text-xl font-bold"
-                  style={{ color: "white" }}
+                  className="project-title text-2xl font-extrabold"
+                  style={{ color: "var(--secondary-color)", marginBottom: 0 }}
                 >
                   {skillGroup.category}
                 </h3>
               </div>
 
-              <p className="text-gray-300 text-sm mb-6">
+              <p className="project-description-preview font-semibold text-lg mb-6">
                 {skillGroup.description}
               </p>
 
-              <div className="flex flex-wrap gap-2 mt-auto w-full">
+              <div className="flex flex-wrap gap-3 mt-auto w-full">
                 {skillGroup.skills.map((skill, idx) => (
-                  <span
+                  <motion.span
                     key={idx}
-                    className="tech-tag transition-colors duration-300 hover:bg-white/10 whitespace-nowrap"
+                    className="tech-tag"
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 10 }}
                     style={{
-                      borderColor: `${skillGroup.themeColor}40`,
-                      color: "white"
+                      border: `2px solid ${skillGroup.themeColor}`,
+                      color: skillGroup.themeColor,
+                      background: `${skillGroup.themeColor}10`
                     }}
                   >
                     {skill}
-                  </span>
+                  </motion.span>
                 ))}
               </div>
             </div>

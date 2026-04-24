@@ -63,13 +63,11 @@ export const Achievements = () => {
       whileInView="animate"
       viewport={{ once: true, amount: 0.1 }}
     >
-      <motion.h2
-        className="text-4xl md:text-5xl font-bold text-center mb-16 text-white"
-        variants={fadeInUp}
-        style={{ overflow: "visible" }}
-      >
-        <AnimatedTitle>My Achievements</AnimatedTitle>
-      </motion.h2>
+      <div className="section-title-wrap">
+        <motion.h2 variants={fadeInUp}>
+          <AnimatedTitle className="section-title-big">My Achievements</AnimatedTitle>
+        </motion.h2>
+      </div>
 
       <motion.div
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"
@@ -88,16 +86,7 @@ export const Achievements = () => {
             }}
             whileHover={{ scale: 1.02 }}
           >
-            {/* Retro Background Pattern */}
-            <div
-              className="absolute inset-0 z-0 opacity-20"
-              style={{
-                backgroundImage: "linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)",
-                backgroundSize: "20px 20px"
-              }}
-            />
-
-            <div className="project-content relative z-10 bg-black/40 backdrop-blur-sm flex-grow flex flex-col p-6">
+            <div className="project-content flex-grow flex flex-col p-6">
               <div className="flex items-center gap-3 mb-4">
                 <div
                   className="p-2 rounded-lg border"

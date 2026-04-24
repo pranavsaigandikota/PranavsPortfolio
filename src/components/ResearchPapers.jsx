@@ -64,13 +64,11 @@ export const ResearchPapers = () => {
       whileInView="animate"
       viewport={{ once: true, amount: 0.1 }}
     >
-      <motion.h2
-        className="text-4xl md:text-5xl font-bold text-center mb-16 text-white"
-        variants={fadeInUp}
-        style={{ overflow: "visible" }}
-      >
-        <AnimatedTitle>My Research Papers</AnimatedTitle>
-      </motion.h2>
+      <div className="section-title-wrap">
+        <motion.h2 variants={fadeInUp}>
+          <AnimatedTitle className="section-title-big">My Research</AnimatedTitle>
+        </motion.h2>
+      </div>
 
       <motion.div
         className="project-grid"

@@ -266,13 +266,11 @@ const ExperienceExpandable = () => {
       whileInView="animate"
       viewport={{ once: true, amount: 0.1 }}
     >
-      <motion.h2
-        variants={fadeInUp}
-        className="text-4xl md:text-5xl font-bold text-center mb-16 text-white"
-        style={{ overflow: "visible" }}
-      >
-        <AnimatedTitle>My Experience</AnimatedTitle>
-      </motion.h2>
+      <div className="section-title-wrap">
+        <motion.h2 variants={fadeInUp}>
+          <AnimatedTitle className="section-title-big">My Experience</AnimatedTitle>
+        </motion.h2>
+      </div>
 
       <motion.div
         className="project-grid"
@@ -292,12 +290,11 @@ const ExperienceExpandable = () => {
               "--theme-color": exp.themeColor,
             }}
           >
-            {/* Image Container */}
             <div
               className="project-image-container relative overflow-hidden h-48 w-full"
               style={{
                 backgroundColor: `${exp.themeColor}10`,
-                borderBottom: `4px solid ${exp.themeColor}`
+                borderBottom: `2px solid rgba(254, 250, 224, 0.05)`
               }}
             >
               {/* Carousel Background */}
@@ -307,7 +304,7 @@ const ExperienceExpandable = () => {
                   imageFit={exp.imageFit}
                 />
               ) : (
-                <div className="w-full h-full bg-gray-800 flex items-center justify-center text-gray-500 font-mono">
+                <div className="w-full h-full flex items-center justify-center text-[var(--light-text)] text-sm">
                   [NO IMAGE]
                 </div>
               )}
@@ -315,34 +312,34 @@ const ExperienceExpandable = () => {
 
             </div>
 
-            <div className="project-content">
-              <div className="flex justify-between items-start mb-2">
+            <div className="project-content flex-grow flex flex-col p-6">
+              <div className="flex justify-between items-start mb-1">
                 <h3
-                  className="project-title text-lg"
-                  style={{ color: "white" }}
+                  className="project-title text-xl font-extrabold"
+                  style={{ color: "var(--secondary-color)" }}
                 >
                   {exp.role}
                 </h3>
               </div>
 
-              <p className="project-description-preview" style={{ color: exp.themeColor, fontWeight: "bold", textTransform: "uppercase", marginBottom: "0.5rem" }}>
+              <p className="project-description-preview" style={{ color: exp.themeColor, fontWeight: "800", marginBottom: "0.8rem", fontSize: "1rem" }}>
                 {exp.organisation}
               </p>
 
-              <ul className="list-none space-y-2 mb-4 flex-1 text-[var(--light-text)] text-sm font-mono">
+              <ul className="list-none space-y-2 mb-4 flex-1 text-[var(--light-text)] text-[0.95rem] leading-relaxed font-semibold">
                 {exp.experiences.slice(0, 2).map((point, i) => (
                   <li key={i} className="flex gap-2">
-                    <span style={{ color: exp.themeColor }}>{">"}</span>
+                    <span style={{ color: exp.themeColor, opacity: 0.8, fontWeight: "bold" }}>•</span>
                     <span className="line-clamp-2">{point}</span>
                   </li>
                 ))}
               </ul>
 
-              <div className="project-tech mt-auto">
-                <span className="tech-tag" style={{ border: `2px solid ${exp.themeColor}`, color: "#fff", background: exp.themeColor }}>
+              <div className="project-tech mt-auto pt-3">
+                <span className="tech-tag" style={{ border: `2px solid ${exp.themeColor}`, color: exp.themeColor, background: `${exp.themeColor}15` }}>
                   {exp.type}
                 </span>
-                <span className="tech-tag">
+                <span className="tech-tag border-none bg-transparent opacity-70">
                   {exp.startDate} - {exp.endDate}
                 </span>
               </div>
