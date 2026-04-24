@@ -30,6 +30,7 @@ import nssNewspaper from "../assets/ExperiencesPics/NSSonNewspaper.jpeg";
 import bnyImg from "../assets/ExperiencesPics/BNY.jpg";
 import perplexityImg from "../assets/ExperiencesPics/perplexity.png";
 import ucfCecsImg from "../assets/ExperiencesPics/UCFCECS.png";
+import fordImg from "../assets/ExperiencesPics/Ford.jpg";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -56,6 +57,21 @@ const cardScatterPatterns = [
 const cardScatter = (i) => cardScatterPatterns[i % cardScatterPatterns.length];
 
 const experiences = [
+  {
+    role: "Software Engineering Intern",
+    organisation: "Ford Motor Company",
+    startDate: "May 2026",
+    endDate: "Aug. 2026 (Incoming)",
+    type: "Internship",
+    themeColor: "#003399", // Ford Blue
+    images: [fordImg],
+    experiences: [
+      "Developing full-stack internal applications utilizing Spring Boot microservices and React.js.",
+      "Architecting scalable backend infrastructure on GCP (Cloud Run, Pub/Sub, Cloud SQL) with automated CI/CD.",
+      "Ensuring code reliability through Test-Driven Development (TDD) and cross-functional architecture reviews."
+    ],
+    imageFit: "contain",
+  },
   {
     role: "Teacher Assistant - Object Oriented Programming w/ Java",
     organisation: "CECS, UCF",
@@ -151,8 +167,9 @@ const experiences = [
     themeColor: "#8b5cf6", // Violet
     images: [nssSpeech, nssPoster, nssStandalone, nssMeeting, nssNewspaper],
     experiences: [
-      "First Place Winner for 'Exodus' space settlement design.",
-      "Presented at ISDC Conference 2022 in Arlington, Virginia.",
+      <>Authored a <strong>50</strong>-page research paper on sustainable space habitation.</>,
+      <>First Place Winner among <strong>17,000+</strong> students (<strong>3,000+</strong> entries) from <strong>22</strong> countries for 'Exodus' space settlement design.</>,
+      <>Presented the research paper to industry leaders at the International Space Development Conference <strong>2022</strong>.</>,
     ],
   },
   {

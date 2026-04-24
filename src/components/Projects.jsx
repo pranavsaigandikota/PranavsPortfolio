@@ -200,9 +200,9 @@ const projectsData = [
     imageSrc: exodusImg,
     shortDescription: "Authored a 50-page research paper on sustainable space habitation.",
     fullDescription: [
-      "Authored a 50-page research paper on sustainable space habitation.",
-      "Won 1st place among 17,000+ students (3,000+ entries) from 22 countries in NSS Space Settlement Contest.",
-      "Presented the research paper to industry leaders at the International Space Development Conference 2022."
+      <>Authored a <strong>50</strong>-page research paper on sustainable space habitation.</>,
+      <>Won <strong>1st</strong> place among <strong>17,000+</strong> students (<strong>3,000+</strong> entries) from <strong>22</strong> countries in NSS Space Settlement Contest.</>,
+      <>Presented the research paper to industry leaders at the International Space Development Conference <strong>2022</strong>.</>
     ],
     skills: ["Research", "Blender"],
     demo: "https://www.youtube.com/watch?v=GYl_ZlsiQ1c",
