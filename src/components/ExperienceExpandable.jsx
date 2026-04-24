@@ -63,7 +63,7 @@ const experiences = [
     startDate: "May 2026",
     endDate: "Aug. 2026 (Incoming)",
     type: "Internship",
-    themeColor: "#003399", // Ford Blue
+    themeColor: "#3b82f6", // Ford Blue (Brighter)
     images: [fordImg],
     experiences: [
       "Developing full-stack internal applications utilizing Spring Boot microservices and React.js.",
@@ -339,7 +339,7 @@ const ExperienceExpandable = () => {
               </ul>
 
               <div className="project-tech mt-auto">
-                <span className="tech-tag" style={{ border: `2px solid ${exp.themeColor}`, color: "#000", background: exp.themeColor }}>
+                <span className="tech-tag" style={{ border: `2px solid ${exp.themeColor}`, color: "#fff", background: exp.themeColor }}>
                   {exp.type}
                 </span>
                 <span className="tech-tag">

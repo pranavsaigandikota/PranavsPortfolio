@@ -41,6 +41,20 @@ import uknightImg from "../assets/ProjectsPics/UknightDemo.png";
 
 const projectsData = [
   {
+    title: "uKnight",
+    imageSrc: uknightImg,
+    shortDescription: "College platform where you randomly match with people in your college on chat or video.",
+    fullDescription: [
+      "Created an omegle-style platform allowing college students to securely meet and socialize via randomized chat and video matching, verified through college OAuth.",
+      "Engineered real-time matching queues using Redis and handled real-time communication via WebSockets and WebRTC peer connections.",
+      "Developed a full-stack application using a Spring Boot backend and React frontend, deployed on Google Cloud Platform."
+    ],
+    skills: ["React", "Spring Boot", "WebRTC", "PostgreSQL", "Redis", "GCP", "WebSockets", "OAuth"],
+    demo: "https://uknight.net",
+    source: "https://github.com/uKnight-Co/uKnight",
+    themeColor: "#FFD700",
+  },
+  {
     title: "Sentinel",
     event: "Hacklytics 2026: Golden Byte",
     imageSrc: sentinelImg,
@@ -55,20 +69,6 @@ const projectsData = [
     demo: "https://devpost.com/software/sentinel-w2ehfs",
     source: "https://github.com/AlphaKnight1701-A/Sentinel",
     themeColor: "#000000",
-  },
-  {
-    title: "uKnight",
-    imageSrc: uknightImg,
-    shortDescription: "College platform where you randomly match with people in your college on chat or video.",
-    fullDescription: [
-      "Created an omegle-style platform allowing college students to securely meet and socialize via randomized chat and video matching, verified through college OAuth.",
-      "Engineered real-time matching queues using Redis and handled real-time communication via WebSockets and WebRTC peer connections.",
-      "Developed a full-stack application using a Spring Boot backend and React frontend, deployed on Google Cloud Platform."
-    ],
-    skills: ["React", "Spring Boot", "WebRTC", "PostgreSQL", "Redis", "GCP", "WebSockets", "OAuth"],
-    demo: "https://u-knight.vercel.app/",
-    source: "https://github.com/uKnight-Co/uKnight",
-    themeColor: "#FFD700",
   },
   {
     title: "RePlot",
