@@ -61,7 +61,7 @@ const experiences = [
     role: "Software Engineering Intern",
     organisation: "Ford Motor Company",
     startDate: "May 2026",
-    endDate: "Aug. 2026 (Incoming)",
+    endDate: "Present",
     type: "Internship",
     themeColor: "#3b82f6", // Ford Blue (Brighter)
     images: [fordImg],
@@ -69,6 +69,24 @@ const experiences = [
       "Developing full-stack internal applications utilizing Spring Boot microservices and React.js.",
       "Architecting scalable backend infrastructure on GCP (Cloud Run, Pub/Sub, Cloud SQL) with automated CI/CD.",
       "Ensuring code reliability through Test-Driven Development (TDD) and cross-functional architecture reviews."
+    ],
+    imageFit: "contain",
+  },
+  {
+    role: "Computer Science Tech Chair",
+    organisation: "SASE (UCF)",
+    startDate: "Jun 2026",
+    endDate: "Present",
+    type: "Part-time",
+    themeColor: "#2563eb",
+    images: [],
+    experiences: [
+      "Develop and maintain the official UCF SASE website.",
+      "Leading frontend and backend developers for SASE website upgrades.",
+      "Design and facilitate technical and project based computer science workshops tailored to members' academic and professional development needs.",
+      "Cultivate partnerships with external academic and professional organizations to expand networking and collaborative event opportunities.",
+      "Implement feedback loops to evaluate workshop outcomes, utilizing member data to continuously improve future programming and deliverables.",
+      "Manage operational resources including budget allocation, materials, and committee personnel to ensure the sustainable execution of technical initiatives.",
     ],
     imageFit: "contain",
   },

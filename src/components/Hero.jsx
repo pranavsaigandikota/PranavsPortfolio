@@ -138,7 +138,7 @@ export const Hero = () => {
             forward to making a positive impact wherever I can.
             <br />
             <br />
-            I am an incoming Software Engineering Intern at <span className="highlight">Ford Motor Company</span>. 
+            I am currently working as a Software Engineering Intern at <span className="highlight">Ford Motor Company</span>. 
             I have previously worked in VR research for <span className="highlight">Human Computer Interaction</span> and 
             fine-tuning of <span className="highlight">AI models</span>. I also have previous full-stack web
             development experience and have had the chance to lead multiple 
@@ -146,8 +146,8 @@ export const Hero = () => {
             which I deeply enjoy taking part in.
             <br />
             <br />
-            Academics aside, I am also the Diwali and Banquet director at the
-            largest Indian club at UCF (<span className="highlight">Indian Student Association</span>), and am an
+            Academics aside, I have completed my role as Diwali and Banquet Director
+            with the largest Indian club at UCF (<span className="highlight">Indian Student Association</span>) as of May 2026, and am an
             active member of the badminton club and <span className="highlight">KnightHacks</span>. I am always
             eager for the next challenge and opportunity to learn.
           </motion.p>
