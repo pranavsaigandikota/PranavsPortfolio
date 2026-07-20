@@ -31,7 +31,7 @@ import bnyImg from "../assets/ExperiencesPics/BNY.jpg";
 import perplexityImg from "../assets/ExperiencesPics/perplexity.png";
 import ucfCecsImg from "../assets/ExperiencesPics/UCFCECS.png";
 import fordImg from "../assets/ExperiencesPics/Ford.jpg";
-import saseImg from "../assets/ExperiencesPics/SASE.svg";
+import saseImg from "../assets/ExperiencesPics/saselogo.png";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
