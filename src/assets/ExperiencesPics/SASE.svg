@@ -1,0 +1,10 @@
+<svg width="640" height="240" viewBox="0 0 640 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="240" rx="24" fill="#2563eb"/>
+  <circle cx="120" cy="120" r="60" fill="#ffffff" opacity="0.16"/>
+  <path d="M150 75C150 56.1929 134.807 41 116 41C97.1929 41 82 56.1929 82 75C82 93.8071 97.1929 109 116 109C134.807 109 150 93.8071 150 75Z" fill="#ffffff"/>
+  <path d="M116 183C130.807 183 143 170.807 143 156C143 141.193 130.807 129 116 129C101.193 129 89 141.193 89 156C89 170.807 101.193 183 116 183Z" fill="#ffffff"/>
+  <path d="M174 102C182.837 102 190 94.8366 190 86C190 77.1634 182.837 70 174 70C165.163 70 158 77.1634 158 86C158 94.8366 165.163 102 174 102Z" fill="#ffffff"/>
+  <path d="M218 145H178V175C178 181.627 172.627 187 166 187H146C139.373 187 134 181.627 134 175V145H94C87.3726 145 82 139.627 82 133V109C82 102.373 87.3726 97 94 97H134V67C134 60.3726 139.373 55 146 55H166C172.627 55 178 60.3726 178 67V97H218C224.627 97 230 102.373 230 109V133C230 139.627 224.627 145 218 145Z" fill="#ffffff" opacity="0.16"/>
+  <text x="280" y="140" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="88" font-weight="700">SASE</text>
+  <text x="280" y="190" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="28" opacity="0.85">Society of Asian Scientists & Engineers</text>
+</svg>

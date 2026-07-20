@@ -31,6 +31,7 @@ import bnyImg from "../assets/ExperiencesPics/BNY.jpg";
 import perplexityImg from "../assets/ExperiencesPics/perplexity.png";
 import ucfCecsImg from "../assets/ExperiencesPics/UCFCECS.png";
 import fordImg from "../assets/ExperiencesPics/Ford.jpg";
+import saseImg from "../assets/ExperiencesPics/SASE.svg";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -79,7 +80,7 @@ const experiences = [
     endDate: "Present",
     type: "Part-time",
     themeColor: "#2563eb",
-    images: [],
+    images: [saseImg],
     experiences: [
       "Develop and maintain the official UCF SASE website.",
       "Leading frontend and backend developers for SASE website upgrades.",
@@ -94,7 +95,7 @@ const experiences = [
     role: "Teacher Assistant - Object Oriented Programming w/ Java",
     organisation: "CECS, UCF",
     startDate: "Jan. 2025",
-    endDate: "Present",
+    endDate: "May 2026",
     type: "Work",
     themeColor: "#FFC904", // UCF Gold
     images: [ucfCecsImg],
@@ -153,7 +154,7 @@ const experiences = [
     role: "Diwali and Banquet Director",
     organisation: "Indian Student Association UCF",
     startDate: "Jun 2025",
-    endDate: "Present",
+    endDate: "May 2026",
     type: "Leadership",
     themeColor: "#ec4899", // Pink
     images: [diwaliBackdrop, diwaliSpeech, diwaliCrowd, diwaliBoard, diwaliFood],
