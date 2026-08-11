@@ -132,24 +132,19 @@ export const Hero = () => {
             About Me:
           </motion.h2>
           <motion.p className="hero-description" variants={fadeInUp}>
-            I&apos;m currently pursuing a degree in <span className="highlight">Computer Science at UCF</span> and am
-            interested in <span className="highlight">software engineering, AI</span>, and being part of the latest
-            tech. I enjoy building fun and creative apps and games, and I look
-            forward to making a positive impact wherever I can.
+            I&apos;m <strong>Pranav</strong>, a <strong>Computer Science student at UCF</strong>, currently a junior with a <strong>3.99 GPA</strong>. I previously completed a software engineering internship at <strong>Ford</strong> on the Order Fulfillment team within Marketing and Sales Tech. I worked on production systems there, migrating legacy batch jobs to <strong>Spring Boot on Cloud Run</strong> and cutting processing time by <strong>92%</strong>. I also built an event-driven platform for secret rotation across Google Cloud and an AI agent using <strong>GitHub Copilot</strong> to resolve compliance issues during a large repo migration.
             <br />
             <br />
-            I am currently working as a Software Engineering Intern at <span className="highlight">Ford Motor Company</span>. 
-            I have previously worked in VR research for <span className="highlight">Human Computer Interaction</span> and 
-            fine-tuning of <span className="highlight">AI models</span>. I also have previous full-stack web
-            development experience and have had the chance to lead multiple 
-            collaborative projects, hackathons, and help in research teams, 
-            which I deeply enjoy taking part in.
+            Outside of Ford, I&apos;m the <strong>CS Technical Chair for SASE at UCF</strong>, where I lead the dev team and handle industry outreach for workshops. I&apos;m also <strong>Project Director for AI at UCF</strong>, building a hackathon initiative focused on agentic AI. I previously worked as a research assistant in UCF&apos;s Interactive Systems and User Experience Lab, fine-tuning <strong>LLaMA with QLoRA</strong> for a project that co-authored a <strong>SIGGRAPH submission</strong> on a text-to-3D generation pipeline.
             <br />
             <br />
-            Academics aside, I have completed my role as Diwali and Banquet Director
-            with the largest Indian club at UCF (<span className="highlight">Indian Student Association</span>) as of May 2026, and am an
-            active member of the badminton club and <span className="highlight">KnightHacks</span>. I am always
-            eager for the next challenge and opportunity to learn.
+            My research experience also includes winning <strong>first prize in the individual category of the NSS Space Settlement competition</strong> with a 50-page research document on space habitation and requirements.
+            <br />
+            <br />
+            On the project side, I build a lot in my free time: a <strong>full-stack inventory app with Spring AI</strong>, a <strong>video chat platform on GCP</strong> that people actually used, and most recently a <strong>local multimodal assistant running a vision-language model and voice synthesis on my own GPU</strong>. I also love hackathons and trying new tech to keep expanding my skill set.
+            <br />
+            <br />
+            What ties it all together is that I like understanding how a system works end to end, not just the part I&apos;m assigned, and I care about the business value of the work I do. I&apos;m especially interested in <strong>large-scale data, business logic, and automation</strong>.
           </motion.p>
 
           <motion.div className="cta-buttons" variants={staggerContainer}>
