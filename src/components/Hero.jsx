@@ -132,7 +132,7 @@ export const Hero = () => {
             About Me:
           </motion.h2>
           <motion.p className="hero-description" variants={fadeInUp}>
-            I&apos;m <strong>Pranav</strong>, a <strong>Computer Science student at UCF</strong>, currently a junior with a <strong>3.99 GPA</strong>. I previously completed a software engineering internship at <strong>Ford</strong> on the Order Fulfillment team within Marketing and Sales Tech. I worked on production systems there, migrating legacy batch jobs to <strong>Spring Boot on Cloud Run</strong> and cutting processing time by <strong>92%</strong>. I also built an event-driven platform for secret rotation across Google Cloud and an AI agent using <strong>GitHub Copilot</strong> to resolve compliance issues during a large repo migration.
+            I&apos;m <strong>Pranav</strong>, a <strong>Computer Science student at UCF</strong>, currently a junior with a <strong>3.99 GPA</strong>. I completed a software engineering internship at <strong>Ford</strong> on the Order Fulfillment team within Marketing and Sales Tech, where I focused on cloud migration and automation. I also built an AI agent using <strong>GitHub Copilot</strong> to help resolve compliance issues during a large repository migration.
             <br />
             <br />
             Outside of Ford, I&apos;m the <strong>CS Technical Chair for SASE at UCF</strong>, where I lead the dev team and handle industry outreach for workshops. I&apos;m also <strong>Project Director for AI at UCF</strong>, building a hackathon initiative focused on agentic AI. I previously worked as a research assistant in UCF&apos;s Interactive Systems and User Experience Lab, fine-tuning <strong>LLaMA with QLoRA</strong> for a project that co-authored a <strong>SIGGRAPH submission</strong> on a text-to-3D generation pipeline.
@@ -144,7 +144,7 @@ export const Hero = () => {
             On the project side, I build a lot in my free time: a <strong>full-stack inventory app with Spring AI</strong>, a <strong>video chat platform on GCP</strong> that people actually used, and most recently a <strong>local multimodal assistant running a vision-language model and voice synthesis on my own GPU</strong>. I also love hackathons and trying new tech to keep expanding my skill set.
             <br />
             <br />
-            What ties it all together is that I like understanding how a system works end to end, not just the part I&apos;m assigned, and I care about the business value of the work I do. I&apos;m especially interested in <strong>large-scale data, business logic, and automation</strong>.
+            What ties it all together is that I like understanding how a system works end to end, not just the part I&apos;m assigned, and I care about the business value of the work I do. I love working with <strong>large datasets</strong>, <strong>cloud services</strong>, <strong>high-traffic applications</strong>, and <strong>automation</strong>.
           </motion.p>
 
           <motion.div className="cta-buttons" variants={staggerContainer}>
