@@ -132,10 +132,19 @@ export const Hero = () => {
             About Me:
           </motion.h2>
           <motion.p className="hero-description" variants={fadeInUp}>
-            I&apos;m <strong>Pranav</strong>, a <strong>Computer Science junior at UCF</strong> with a <strong>3.99 GPA</strong>. I interned at <strong>Ford</strong>, worked on cloud migration and automation, and built tooling with <strong>GitHub Copilot</strong> for repo compliance. I also lead dev and AI initiatives at UCF and have supported research in AI/UX and model fine-tuning.
+            I&apos;m <strong>Pranav</strong>, a <strong>Computer Science junior at UCF</strong> with a <strong>3.99 GPA</strong>. I completed a software engineering internship at <strong>Ford</strong> on the Order Fulfillment team within Marketing and Sales Tech, where I focused on cloud migration and automation. I moved legacy batch workloads to <strong>Spring Boot on Cloud Run</strong>, built an event-driven secret rotation platform on <strong>Google Cloud</strong>, and created an AI agent with <strong>GitHub Copilot</strong> to help resolve compliance issues during a large repo migration. That experience gave me real hands-on exposure to agentic tooling in a production environment rather than just side projects.
             <br />
             <br />
-            I love building systems end to end and solving problems with <strong>large datasets</strong>, <strong>cloud services</strong>, <strong>high-traffic applications</strong>, and <strong>automation</strong>.
+            Outside of Ford, I&apos;m the <strong>CS Technical Chair for SASE at UCF</strong>, where I lead the dev team and manage industry outreach for workshops. I&apos;m also <strong>Project Director for AI at UCF</strong>, building an agentic AI hackathon initiative to help students explore applied AI systems. I previously worked as a research assistant in UCF&apos;s Interactive Systems and User Experience Lab, fine-tuning <strong>LLaMA with QLoRA</strong> for a text-to-3D generation pipeline, which supported a <strong>SIGGRAPH submission</strong>.
+            <br />
+            <br />
+            My research background also includes winning first prize in the individual category of the <strong>NSS Space Settlement competition</strong> with a 50-page research document on space habitation and systems requirements. I enjoy combining academic rigor with practical product work.
+            <br />
+            <br />
+            On the project side, I build a lot in my free time: a <strong>full-stack inventory app with Spring AI</strong>, a <strong>video chat platform on GCP</strong> that people actually used, and most recently a <strong>local multimodal assistant running vision-language and voice synthesis on my own GPU</strong>. I also love hackathons and trying new tech to keep expanding my skill set.
+            <br />
+            <br />
+            What ties it all together is that I like understanding systems end to end, not just the part I&apos;m assigned, and I care about the business value of the work I do. I love working with <strong>large datasets</strong>, <strong>cloud services</strong>, <strong>high-traffic applications</strong>, and <strong>automation</strong>.
           </motion.p>
 
           <motion.div className="cta-buttons" variants={staggerContainer}>
