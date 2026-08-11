@@ -132,19 +132,16 @@ export const Hero = () => {
             About Me:
           </motion.h2>
           <motion.p className="hero-description" variants={fadeInUp}>
-            I&apos;m <strong>Pranav</strong>, a <strong>Computer Science junior at UCF</strong> with a <strong>3.99 GPA</strong>. I completed a software engineering internship at <strong>Ford</strong> on the Order Fulfillment team, where I contributed to cloud and automation projects and built tooling to improve engineering workflows.
+            I&apos;m <strong>Pranav</strong>, a <strong>Computer Science junior at UCF</strong>. I just finished a software engineering internship at <strong>Ford</strong> on the Order Fulfillment team, working on cloud migration and automation. I moved legacy batch workloads to <strong>Spring Boot on Cloud Run</strong>, built an event-driven secret rotation platform on <strong>Google Cloud</strong>, and shipped an AI agent that resolved compliance issues during a large repo migration.
             <br />
             <br />
-            Outside of Ford, I&apos;m the <strong>CS Technical Chair for SASE at UCF</strong>, where I lead the dev team and manage industry outreach for workshops. I&apos;m also <strong>Project Director for AI at UCF</strong>, building an agentic AI hackathon initiative to help students explore applied AI systems. I previously worked as a research assistant in UCF&apos;s Interactive Systems and User Experience Lab, fine-tuning <strong>LLaMA with QLoRA</strong> for a text-to-3D generation pipeline, which supported a <strong>SIGGRAPH submission</strong>.
+            On campus I&apos;m <strong>CS Technical Chair for SASE</strong> and <strong>Project Director for AI at UCF</strong>, where I&apos;m building an agentic AI hackathon initiative. Before that I researched at UCF&apos;s ISUE Lab, fine-tuning <strong>LLaMA with QLoRA</strong> for a text-to-3D pipeline that supported a <strong>SIGGRAPH</strong> submission.
             <br />
             <br />
-            My research background also includes winning first prize in the individual category of the <strong>NSS Space Settlement competition</strong> with a 50-page research document on space habitation and systems requirements. I enjoy combining academic rigor with practical product work.
+            Outside of that I build constantly: a <strong>full-stack inventory app with Spring AI</strong>, a <strong>video chat platform on GCP</strong>, and most recently a <strong>local multimodal assistant running vision-language and voice synthesis</strong> on my own GPU.
             <br />
             <br />
-            On the project side, I build a lot in my free time: a <strong>full-stack inventory app with Spring AI</strong>, a <strong>video chat platform on GCP</strong> that people actually used, and most recently a <strong>local multimodal assistant running vision-language and voice synthesis on my own GPU</strong>. I also love hackathons and trying new tech to keep expanding my skill set.
-            <br />
-            <br />
-            What ties it all together is that I like understanding systems end to end, not just the part I&apos;m assigned, and I care about the business value of the work I do. I love working with <strong>large datasets</strong>, <strong>cloud services</strong>, <strong>high-traffic applications</strong>, and <strong>automation</strong>.
+            What ties it together is that I like understanding systems end to end, not just the part I&apos;m assigned, and I care about why the work matters to the business. <strong>Large datasets</strong>, <strong>cloud infrastructure</strong>, and <strong>automation</strong> are where I do my best work.
           </motion.p>
 
           <motion.div className="cta-buttons" variants={staggerContainer}>
