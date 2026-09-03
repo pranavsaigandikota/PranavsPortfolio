@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion, useScroll } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 export const NetflixNavbar = () => {
   const { scrollY } = useScroll();
@@ -51,6 +52,9 @@ export const NetflixNavbar = () => {
       </div>
       
       <div className="flex items-center gap-6 text-white">
+        <Link to="/" className="text-sm font-bold hover:bg-[#f40612] transition-colors bg-[#E50914] px-4 py-1.5 rounded flex items-center">
+          Original Site
+        </Link>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="cursor-pointer hover:text-gray-300 transition-colors">
           <circle cx="11" cy="11" r="8"></circle>
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>

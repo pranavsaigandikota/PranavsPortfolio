@@ -47,15 +47,14 @@ export const Dashboard = ({ profile }) => {
   const aboutMeData = {
     title: "About Pranav",
     videoUrl: "/coding pranav animation.mp4",
-    description: "I'm Pranav, a Computer Science junior at UCF with a deep curiosity for building scalable systems and exploring new technologies.",
+    description: "I'm Pranav, a Computer Science junior at UCF who enjoys building software that connects the dots between applications, infrastructure, and AI.",
     fullDescription: [
-      "Most recently, I interned as a Software Engineer at Ford on the Order Fulfillment team, where I focused on cloud migration and automation. I modernized legacy batch workloads by migrating them to Spring Boot on Cloud Run, architected an event-driven secret rotation platform on Google Cloud, and developed an AI agent that seamlessly resolved compliance issues across a massive repo migration.",
-      "On campus, I foster a community of builders as the CS Technical Chair for SASE (leading our dev team) and as the Project Director for AI at UCF, creating platforms for students to showcase their innovations.",
-      "Previously, I researched at UCF's ISUE Lab, where I explored generative AI by fine-tuning LLaMA models with QLoRA for an innovative text-to-3D pipeline.",
-      "I'm constantly building outside the classroom to satisfy my curiosity—whether it's a full-stack inventory application powered by Spring AI, a video chat platform hosted on GCP, or sleek web applications using React and Tailwind.",
-      "Ultimately, what drives me is a desire to understand systems end-to-end and see how technology solves real business problems. I thrive when working with large datasets, cloud infrastructure, and automation, and I'm always looking for the next complex challenge to learn from."
+      "Most recently, I worked as a Software Engineering Intern on Ford's Order Fulfillment team, where I migrated legacy batch workloads to Spring Boot on Google Cloud Run, built event driven automation for cloud infrastructure, and developed an AI agent to help resolve compliance issues during a large scale repository migration.",
+      "At UCF, I'm the CS Technical Chair for SASE, where I lead the development team, and a Project Director for AI at UCF, where I help create opportunities for students to build and showcase AI projects. I previously worked as a researcher in UCF's ISUE Lab, where I fine tuned LLaMA with QLoRA for a text to 3D generation pipeline.",
+      "Outside of work and research, I'm constantly building. I've worked on a full stack inventory platform using Spring AI, a real time video chat platform deployed on GCP, and several other applications that have taken me from an idea to a working product.",
+      "What ties everything together is my curiosity about how systems work end to end. I like going beyond the part I'm assigned understanding the infrastructure behind an application, the data flowing through it, and ultimately why the system matters to the people and business using it. I'm especially drawn to cloud infrastructure, automation, AI, and systems that work with data at scale."
     ],
-    skills: ["Cloud Architecture", "System Design", "Automation", "AI/ML", "Full-Stack Development"]
+    skills: ["Cloud Architecture", "System Design", "Automation", "AI/ML", "Full Stack Development"]
   };
 
   return (
@@ -118,6 +117,13 @@ export const Dashboard = ({ profile }) => {
         <div id="skills">
           <SkillsBubbles />
         </div>
+
+        {/* Copyright Notice */}
+        <footer className="w-full text-center py-8 px-4 mt-8 border-t border-gray-800 text-[#808080] text-xs max-w-4xl mx-auto">
+          <p>
+            Everything above is owned by the respective movies and companies. I do not own any of these properties, and this was purely created for inspiration as a movie-themed portfolio site.
+          </p>
+        </footer>
       </div>
 
       <PreviewModal 

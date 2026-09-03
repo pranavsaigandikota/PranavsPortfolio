@@ -1,4 +1,4 @@
-* {
+.original-portfolio * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -18,7 +18,7 @@
   --nav-bg: rgba(25, 20, 18, 0.7); /* Translucent Espresso */
 }
 
-body {
+.original-portfolio {
   line-height: 1.6;
   color: var(--text-color);
   background: var(--background);
@@ -29,7 +29,7 @@ body {
   letter-spacing: 0.01em;
 }
 
-h1, h2, h3, h4, h5, h6 {
+.original-portfolio h1, .original-portfolio h2, .original-portfolio h3, .original-portfolio h4, .original-portfolio h5, .original-portfolio h6 {
   font-family: 'Playfair Display', serif;
   color: var(--secondary-color);
   line-height: 1.2;
@@ -37,7 +37,7 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: 0;
 }
 
-.highlight, strong {
+.original-portfolio .highlight, .original-portfolio strong {
   color: var(--primary-dark);
   font-weight: 800;
 }

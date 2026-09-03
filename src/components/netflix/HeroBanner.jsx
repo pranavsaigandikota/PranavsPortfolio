@@ -146,7 +146,7 @@ export const HeroBanner = ({ onMoreInfo, isModalOpen }) => {
           src="/coding pranav animation.mp4"
           muted
           playsInline
-          className="w-full h-full object-cover opacity-60"
+          className="w-full h-full object-cover object-right opacity-60"
         />
         {/* Gradient Overlays */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#141414] via-[#141414]/50 to-transparent w-[60%]" />
@@ -196,12 +196,17 @@ export const HeroBanner = ({ onMoreInfo, isModalOpen }) => {
           </p>
 
           <div className="flex items-center gap-4">
-            <button className="flex items-center gap-2 bg-white text-black px-6 md:px-8 py-2 md:py-3 rounded hover:bg-white/80 transition-colors font-bold text-lg">
+            <a 
+              href="https://drive.google.com/file/d/1gjZDcvajl7hJfUozTfaWkfw-m-TJXfAk/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-white text-black px-6 md:px-8 py-2 md:py-3 rounded hover:bg-white/80 transition-colors font-bold text-lg"
+            >
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M5 3l14 9-14 9V3z" />
               </svg>
               Play
-            </button>
+            </a>
             <button
               onClick={onMoreInfo}
               className="flex items-center gap-2 bg-[#6d6d6eb3] hover:bg-[#6d6d6e] text-white px-6 md:px-8 py-2 md:py-3 rounded transition-colors font-bold text-lg"
