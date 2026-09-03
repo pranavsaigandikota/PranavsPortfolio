@@ -1,18 +1,71 @@
 [
   {
-    "title": "HTML",
-    "imageSrc": "skills/html.png"
+    "genre": "Languages",
+    "items": [
+      { "title": "Java", "color": "from-red-500 to-red-700" },
+      { "title": "Python", "color": "from-blue-500 to-yellow-500" },
+      { "title": "JavaScript", "color": "from-yellow-400 to-yellow-600" },
+      { "title": "TypeScript", "color": "from-blue-600 to-blue-800" },
+      { "title": "C", "color": "from-gray-500 to-gray-700" },
+      { "title": "SQL", "color": "from-blue-400 to-cyan-600" },
+      { "title": "C#", "color": "from-purple-600 to-indigo-700" }
+    ]
   },
   {
-    "title": "CSS",
-    "imageSrc": "skills/css.png"
+    "genre": "Frameworks & Libraries",
+    "items": [
+      { "title": "Spring Boot (Security, Data, AI)", "color": "from-green-500 to-green-700" },
+      { "title": "React", "color": "from-cyan-400 to-blue-500" },
+      { "title": "Next.js", "color": "from-gray-700 to-black" },
+      { "title": "Node.js", "color": "from-green-600 to-emerald-800" },
+      { "title": "Express", "color": "from-gray-400 to-gray-600" },
+      { "title": "FastAPI", "color": "from-teal-400 to-teal-600" },
+      { "title": "React Native", "color": "from-blue-400 to-cyan-500" }
+    ]
   },
   {
-    "title": "React",
-    "imageSrc": "skills/react.png"
+    "genre": "AI & ML",
+    "items": [
+      { "title": "PyTorch", "color": "from-orange-500 to-red-600" },
+      { "title": "LLaMA & QLoRA", "color": "from-blue-500 to-indigo-600" },
+      { "title": "Hugging Face", "color": "from-yellow-500 to-orange-400" },
+      { "title": "Pandas & NumPy", "color": "from-blue-400 to-blue-700" },
+      { "title": "GPT & Gemini", "color": "from-purple-500 to-pink-500" },
+      { "title": "Computer Vision", "color": "from-cyan-500 to-blue-600" },
+      { "title": "OpenCV", "color": "from-green-400 to-blue-500" }
+    ]
   },
   {
-    "title": "Figma",
-    "imageSrc": "skills/figma.png"
+    "genre": "Cloud & DevOps",
+    "items": [
+      { "title": "GCP (Cloud Run, Pub/Sub)", "color": "from-blue-500 to-blue-700" },
+      { "title": "Docker", "color": "from-blue-400 to-cyan-600" },
+      { "title": "Terraform", "color": "from-purple-600 to-indigo-800" },
+      { "title": "CI/CD", "color": "from-red-500 to-rose-700" },
+      { "title": "Linux", "color": "from-yellow-600 to-orange-600" },
+      { "title": "Git & GitHub", "color": "from-gray-700 to-black" }
+    ]
+  },
+  {
+    "genre": "Databases & APIs",
+    "items": [
+      { "title": "PostgreSQL", "color": "from-blue-600 to-blue-800" },
+      { "title": "MySQL", "color": "from-orange-400 to-orange-600" },
+      { "title": "Supabase", "color": "from-emerald-400 to-emerald-600" },
+      { "title": "Firebase", "color": "from-yellow-500 to-orange-500" },
+      { "title": "REST APIs", "color": "from-indigo-400 to-indigo-600" },
+      { "title": "OAuth 2.0 & Auth0", "color": "from-red-400 to-red-600" }
+    ]
+  },
+  {
+    "genre": "Tools & Practices",
+    "items": [
+      { "title": "Agile / Scrum", "color": "from-blue-400 to-blue-600" },
+      { "title": "TDD", "color": "from-green-500 to-green-700" },
+      { "title": "Gitflow", "color": "from-orange-400 to-orange-600" },
+      { "title": "Jira", "color": "from-blue-500 to-blue-800" },
+      { "title": "Figma", "color": "from-pink-500 to-purple-600" },
+      { "title": "Unity", "color": "from-gray-700 to-gray-900" }
+    ]
   }
 ]
