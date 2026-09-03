@@ -1,30 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Bebas+Neue&display=swap');
-@import "tailwindcss/preflight";
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-netflix-red: #E50914;
+  --color-netflix-red-hover: #f40612;
+  --color-netflix-black: #141414;
+  --color-netflix-dark: #181818;
+  --color-netflix-gray: #808080;
+  --color-netflix-light-gray: #E5E5E5;
+  --font-sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+}
 
 :root {
-  font-family: "Nunito", sans-serif;
-  line-height: 1.6;
-  font-weight: 500;
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
   color-scheme: dark;
-  color: #fefae0; /* Warm Cream */
-  background-color: #191412; /* Espresso */
+  color: #FFFFFF;
+  background-color: #141414; /* Netflix Black */
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-body::after {
-  content: "";
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  pointer-events: none;
-  z-index: 99999;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  opacity: 0.04;
-  mix-blend-mode: color-dodge;
 }
 
 html {
@@ -37,29 +33,38 @@ body {
   min-width: 100%;
   min-height: 100vh;
   width: 100%;
+  overflow-x: hidden;
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #2a2422;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #f59e0b; /* Soft Amber */
-  border-radius: 6px;
-  border: 3px solid #2a2422; /* Adds a clean inner look */
+  background: #333;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #d97706; /* Darker amber */
+  background: #555;
 }
 
-/* Selection color */
+/* Hide scrollbar for rows but keep functionality */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 ::selection {
-  background: rgba(245, 158, 11, 0.4); /* Translucent amber */
+  background: #E50914; 
   color: white;
 }
