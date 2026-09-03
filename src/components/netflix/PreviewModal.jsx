@@ -111,14 +111,25 @@ export const PreviewModal = ({ item, isOpen, onClose, allItems = [], onSelect })
           <div className="relative h-[300px] md:h-[400px] w-full overflow-hidden">
             {item.videoUrl ? (
               <>
-                <video
-                  src={item.videoUrl}
-                  autoPlay
-                  muted={isMuted}
-                  loop
-                  playsInline
-                  className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-                ></video>
+                {item.videoUrl.includes('youtube.com') ? (
+                  <iframe
+                    src={item.videoUrl.replace('mute=1', `mute=${isMuted ? 1 : 0}`)}
+                    title={item.title || item.role}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="absolute inset-0 w-full h-full object-cover scale-[1.35] pointer-events-none"
+                  ></iframe>
+                ) : (
+                  <video
+                    src={item.videoUrl}
+                    autoPlay
+                    muted={isMuted}
+                    loop
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                  ></video>
+                )}
                 <button
                   onClick={(e) => { e.stopPropagation(); setIsMuted(!isMuted); }}
                   className="absolute bottom-8 right-8 z-50 w-10 h-10 bg-black/50 border border-gray-400 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors pointer-events-auto"

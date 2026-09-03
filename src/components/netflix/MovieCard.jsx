@@ -82,13 +82,24 @@ export const MovieCard = ({ item, isLarge = false, onSelect, index }) => {
             transition={{ duration: 0.5 }}
             className="w-full h-full"
           >
-            <video
-              src={item.videoUrl}
-              autoPlay
-              loop
-              playsInline
-              className="w-full h-full object-cover"
-            ></video>
+            {item.videoUrl.includes('youtube.com') ? (
+              <iframe
+                src={item.videoUrl}
+                title={item.title || item.role}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full object-cover scale-[1.35] pointer-events-none"
+              ></iframe>
+            ) : (
+              <video
+                src={item.videoUrl}
+                autoPlay
+                loop
+                playsInline
+                className="w-full h-full object-cover"
+              ></video>
+            )}
           </motion.div>
         ) : images.length > 0 && !imgError ? (
           <motion.img
