@@ -9,6 +9,7 @@ import { SkillsBubbles } from './SkillsBubbles';
 import projectsData from '../../data/projects.json';
 import historyData from '../../data/history.json';
 import skillsData from '../../data/skills.json';
+import animationsData from '../../data/animations.json';
 
 export const Dashboard = ({ profile }) => {
   const [selectedItem, setSelectedItem] = useState(null);
@@ -118,6 +119,13 @@ export const Dashboard = ({ profile }) => {
           <SkillsBubbles />
         </div>
 
+        <ContentRow 
+          id="animations"
+          title="My Animations" 
+          items={animationsData} 
+          onSelect={handleSelect} 
+        />
+
         {/* Copyright Notice */}
         <footer className="w-full text-center py-8 px-4 mt-8 border-t border-gray-800 text-[#808080] text-xs max-w-4xl mx-auto">
           <p>
@@ -130,7 +138,7 @@ export const Dashboard = ({ profile }) => {
         item={selectedItem} 
         isOpen={!!selectedItem} 
         onClose={closeModal} 
-        allItems={[...historyEpisodes, ...projectsData]}
+        allItems={[...historyEpisodes, ...projectsData, ...animationsData]}
         onSelect={handleSelect}
       />
     </div>

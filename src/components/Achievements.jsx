@@ -70,24 +70,26 @@ export const Achievements = () => {
       </div>
 
       <motion.div
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"
+        style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "2rem", width: "100%", maxWidth: "1400px", margin: "0 auto" }}
         variants={staggerContainer}
       >
         {achievements.map((item, i) => (
           <motion.div
             key={i}
-            className="project-card group relative overflow-hidden flex flex-col"
+            className="project-card group relative overflow-hidden flex flex-col w-full"
+            style={{ 
+              flex: "1 1 300px", 
+              maxWidth: "400px",
+              "--theme-color": item.borderColor,
+            }}
             initial={{ ...cardScatter(i), opacity: 0 }}
             whileInView={{ x: 0, y: 0, rotate: 0, scale: 1, opacity: 1 }}
             viewport={{ once: false, amount: 0.15 }}
             transition={{ type: "spring", damping: 18, stiffness: 75, delay: i * 0.1 }}
-            style={{
-              "--theme-color": item.borderColor,
-            }}
             whileHover={{ scale: 1.02 }}
           >
-            <div className="project-content flex-grow flex flex-col p-6">
-              <div className="flex items-center gap-3 mb-4">
+            <div className="project-content flex-grow flex flex-col p-6 items-center text-center">
+              <div className="flex flex-col items-center gap-3 mb-4">
                 <div
                   className="p-2 rounded-lg border"
                   style={{
@@ -114,7 +116,7 @@ export const Achievements = () => {
                 {item.description}
               </p>
 
-              <ul className="space-y-2 mt-auto list-disc pl-5 marker:text-[var(--theme-color)]">
+              <ul className="space-y-2 mt-auto list-none marker:text-[var(--theme-color)]">
                 {item.points.map((point, idx) => (
                   <li key={idx} className="text-[var(--light-text)] text-sm">
                     {point}

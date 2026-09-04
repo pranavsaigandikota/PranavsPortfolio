@@ -3,6 +3,7 @@
     "title": "uKnight",
     "event": "Hacklytics 2026: Golden Byte (uKnight-Co)",
     "imageSrc": "/posters/uKnight Movie Poster - Jurrasic Park Style.jpg",
+    "videoUrl": "/videos/uknight_trailer.mp4",
     "description": "College platform where you randomly match with people in your college on chat or video.",
     "fullDescription": [
       "Created an omegle-style platform allowing college students to securely meet and socialize via randomized chat and video matching, verified through college OAuth.",

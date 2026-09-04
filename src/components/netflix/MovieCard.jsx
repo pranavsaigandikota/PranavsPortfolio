@@ -69,7 +69,11 @@ export const MovieCard = ({ item, isLarge = false, onSelect, index }) => {
       onHoverEnd={handleHoverEnd}
       onClick={() => {
         handleHoverEnd(); // Ensure hover state resets on click
-        onSelect(item);
+        if (item.type === 'Link' && item.url) {
+          window.open(item.url, '_blank', 'noopener,noreferrer');
+        } else {
+          onSelect(item);
+        }
       }}
       whileHover={{ scale: 1.15, zIndex: 50 }}
     >
@@ -128,13 +132,15 @@ export const MovieCard = ({ item, isLarge = false, onSelect, index }) => {
       )}
       
       {/* Clean Title Overlay */}
-      <div 
-        className={`absolute bottom-0 left-0 w-full p-2 md:p-3 bg-gradient-to-t from-black/90 via-black/60 to-transparent rounded-b-md z-20 pointer-events-none transition-opacity duration-500 ${showTitle || item.type === 'Achievement' ? 'opacity-100' : 'opacity-0'}`}
-      >
-        <h3 className="text-white font-bold text-xs md:text-sm drop-shadow-md truncate text-center px-1">
-          {item.title || item.role}
-        </h3>
-      </div>
+      {item.type !== 'Animation' && (
+        <div 
+          className={`absolute bottom-0 left-0 w-full p-2 md:p-3 bg-gradient-to-t from-black/90 via-black/60 to-transparent rounded-b-md z-20 pointer-events-none transition-opacity duration-500 ${showTitle || item.type === 'Achievement' ? 'opacity-100' : 'opacity-0'}`}
+        >
+          <h3 className="text-white font-bold text-xs md:text-sm drop-shadow-md truncate text-center px-1">
+            {item.title || item.role}
+          </h3>
+        </div>
+      )}
     </motion.div>
   );
 };

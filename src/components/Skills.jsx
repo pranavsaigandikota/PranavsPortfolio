@@ -111,24 +111,26 @@ export const Skills = () => {
       </div>
 
       <motion.div
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"
+        style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "2rem", width: "100%", maxWidth: "1400px", margin: "0 auto" }}
         variants={staggerContainer}
       >
         {skillsData.map((skillGroup, index) => (
           <motion.div
             key={index}
-            className="project-card group relative overflow-hidden flex flex-col"
+            className="project-card group relative overflow-hidden flex flex-col w-full"
+            style={{ 
+              flex: "1 1 300px", 
+              maxWidth: "400px",
+              "--theme-color": skillGroup.themeColor,
+            }}
             initial={{ ...cardScatter(index), opacity: 0 }}
             whileInView={{ x: 0, y: 0, rotate: 0, scale: 1, opacity: 1 }}
             viewport={{ once: false, amount: 0.15 }}
             transition={{ type: "spring", damping: 18, stiffness: 75, delay: (index % 3) * 0.1 }}
-            style={{
-              "--theme-color": skillGroup.themeColor,
-            }}
             whileHover={{ scale: 1.02 }}
           >
-            <div className="project-content">
-              <div className="flex items-center gap-3 mb-4">
+            <div className="project-content flex flex-col items-center text-center h-full">
+              <div className="flex flex-col items-center gap-3 mb-4">
                 <div
                   className="p-3 rounded-full border-2"
                   style={{
@@ -151,7 +153,7 @@ export const Skills = () => {
                 {skillGroup.description}
               </p>
 
-              <div className="flex flex-wrap gap-3 mt-auto w-full">
+              <div className="flex flex-wrap justify-center gap-3 mt-auto w-full">
                 {skillGroup.skills.map((skill, idx) => (
                   <motion.span
                     key={idx}

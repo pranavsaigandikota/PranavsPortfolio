@@ -125,18 +125,13 @@ export const Hero = () => {
           <motion.div className="hero-badge">
             <span>Hello, I&apos;m</span>
           </motion.div>
-          <div className="flex flex-col md:flex-row md:items-center gap-8">
-            <motion.h1
-              className="glitch"
-              variants={fadeInUp}
-              whileHover={{ scale: 1.02 }}
-            >
-              Pranavsai Gandikota
-            </motion.h1>
-            <motion.div variants={fadeInUp} className="hidden lg:block -mt-10">
-              <FlixBubble />
-            </motion.div>
-          </div>
+          <motion.h1
+            className="glitch"
+            variants={fadeInUp}
+            whileHover={{ scale: 1.02 }}
+          >
+            Pranavsai Gandikota
+          </motion.h1>
           <motion.h2 className="hero-subtitle" variants={fadeInUp}>
             About Me:
           </motion.h2>
@@ -208,12 +203,14 @@ export const Hero = () => {
 
         {/* Code Section */}
         <motion.div
-          className="hero-image-container"
+          className="hero-image-container flex flex-col items-center"
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <div className="retro-window">
+          <FlixBubble />
+          
+          <div className="retro-window w-full min-h-[550px]">
             <div className="flex items-center px-4 py-3 border-b border-white/5 bg-white/5">
              <div className="flex gap-2">
                <div className="w-3 h-3 rounded-full bg-white/20"></div>

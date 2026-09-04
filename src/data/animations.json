@@ -1,0 +1,64 @@
+[
+  {
+    "id": "qaid-h0FwLg",
+    "title": "Spooky Scary Skeletons Remix Song Dance Video | Skeleton Dance Animation",
+    "description": "A spooky stop-motion skeleton dance animation for the Halloween season.",
+    "videoUrl": "/videos/skeleton_dance.mp4",
+    "imageSrc": "https://img.youtube.com/vi/qaid-h0FwLg/hqdefault.jpg",
+    "type": "Animation-Local",
+    "skills": ["Stop Motion", "Animation"]
+  },
+  {
+    "id": "ak1SDvey-mg",
+    "title": "Michael Jackson - Thriller | Jack Skellington Parody | The Nightmare Before Christmas",
+    "description": "Jack Skellington performing Thriller in this classic parody.",
+    "videoUrl": "/videos/thriller_parody.mp4",
+    "imageSrc": "https://img.youtube.com/vi/ak1SDvey-mg/hqdefault.jpg",
+    "type": "Animation-Local",
+    "skills": ["Stop Motion", "Parody"]
+  },
+  {
+    "id": "hi1gLM-suzE",
+    "title": "Knighthacks Featured Animation",
+    "description": "My latest animation work featured for Knighthacks. Produced, directed, and animated by me.",
+    "videoUrl": "/videos/knighthacks.mp4",
+    "imageSrc": "https://img.youtube.com/vi/hi1gLM-suzE/hqdefault.jpg",
+    "type": "Animation-Local",
+    "skills": ["Stop Motion", "Animation", "Editing"]
+  },
+  {
+    "id": "-e8W8NhcHF0",
+    "title": "Gwen Stacy walking upsidedown but in Lego",
+    "description": "Lego recreation of the iconic Gwen Stacy upside down walk.",
+    "videoUrl": "/videos/gwen_lego.mp4",
+    "imageSrc": "https://img.youtube.com/vi/-e8W8NhcHF0/hqdefault.jpg",
+    "type": "Animation-Local",
+    "skills": ["Lego", "Animation"]
+  },
+  {
+    "id": "W7XTPXalTzU",
+    "title": "FilmasticPG - Nightmare Before Christmas Remake",
+    "description": "Stop motion project featured on the FilmasticPG channel.",
+    "videoUrl": "/videos/nightmare_remake.mp4",
+    "imageSrc": "https://img.youtube.com/vi/W7XTPXalTzU/hqdefault.jpg",
+    "type": "Animation-Local",
+    "skills": ["Animation", "Stop Motion"]
+  },
+  {
+    "id": "MLwGDRfVzwQ",
+    "title": "otamajam",
+    "description": "Animation short for otamajam.",
+    "videoUrl": "/videos/otamajam.mp4",
+    "imageSrc": "https://img.youtube.com/vi/MLwGDRfVzwQ/hqdefault.jpg",
+    "type": "Animation-Local",
+    "skills": ["Animation"]
+  },
+  {
+    "id": "seemore",
+    "title": "See More on YouTube",
+    "description": "Explore all animations on the FilmasticPG channel.",
+    "url": "https://www.youtube.com/@earthlytomcat11",
+    "color": "from-[#111111] to-[#000000]",
+    "type": "Link"
+  }
+]

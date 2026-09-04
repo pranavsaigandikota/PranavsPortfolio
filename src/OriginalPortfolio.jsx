@@ -11,6 +11,7 @@ import { Skills } from "./components/Skills";
 import { ParallaxBackground } from "./components/ParallaxBackground";
 import { TornPaperDivider } from "./components/TornPaperDivider";
 import { ResearchPapers } from "./components/ResearchPapers";
+import { Animations } from "./components/Animations";
 
 export function OriginalPortfolio() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -59,6 +60,9 @@ export function OriginalPortfolio() {
 
         <TornPaperDivider color="#1f1917" accentColor="#d4a373" />
         <ResearchPapers />
+
+        <TornPaperDivider flip color="#1f1917" accentColor="#d4a373" />
+        <Animations />
 
         {/* <MajorAssignments /> */}
         {/* <Contact /> */}
