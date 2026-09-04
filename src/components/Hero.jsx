@@ -3,6 +3,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { FlixBubble } from "./FlixBubble";
 
 // Full code string
 const codeString = `const aboutMe: DeveloperProfile = {
@@ -124,13 +125,18 @@ export const Hero = () => {
           <motion.div className="hero-badge">
             <span>Hello, I&apos;m</span>
           </motion.div>
-          <motion.h1
-            className="glitch"
-            variants={fadeInUp}
-            whileHover={{ scale: 1.02 }}
-          >
-            Pranavsai Gandikota
-          </motion.h1>
+          <div className="flex flex-col md:flex-row md:items-center gap-8">
+            <motion.h1
+              className="glitch"
+              variants={fadeInUp}
+              whileHover={{ scale: 1.02 }}
+            >
+              Pranavsai Gandikota
+            </motion.h1>
+            <motion.div variants={fadeInUp} className="hidden lg:block -mt-10">
+              <FlixBubble />
+            </motion.div>
+          </div>
           <motion.h2 className="hero-subtitle" variants={fadeInUp}>
             About Me:
           </motion.h2>
