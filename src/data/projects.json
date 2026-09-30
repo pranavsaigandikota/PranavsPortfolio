@@ -1,5 +1,22 @@
 [
   {
+    "title": "Paradise",
+    "event": "SHELLHACKS 2026: 3rd Best Overall",
+    "featuredAward": true,
+    "imageSrc": "/projects/paradise.jpg",
+    "videoUrl": "https://www.youtube.com/embed/BVIRTrum1OM?autoplay=1&mute=1&controls=0&loop=1&playlist=BVIRTrum1OM",
+    "description": "Touch-only navigation system for blind and DeafBlind users using Joy-Con haptics, computer vision, and web technologies.",
+    "fullDescription": [
+      "Built a touch-only navigation system that uses Joy-Con controllers on each wrist to guide blind and DeafBlind users through turns, obstacles, saved destinations, and rideshare pickups.",
+      "Combined an iPhone camera, local computer vision, GPS, compass heading, speech commands, and a Node.js processing laptop to make guidance decisions and drive haptic feedback.",
+      "Won 3rd Best Overall at SHELLHACKS 2026 among more than 1,400 participants."
+    ],
+    "skills": ["JavaScript", "Node.js", "WebGPU", "WebRTC", "WebHID", "Computer Vision", "YOLO", "GPS", "Haptics"],
+    "demo": "https://www.youtube.com/watch?v=BVIRTrum1OM",
+    "source": "https://devpost.com/software/paradise-n0i7of",
+    "themeColor": "#f5c542"
+  },
+  {
     "title": "uKnight",
     "event": "Hacklytics 2026: Golden Byte (uKnight-Co)",
     "imageSrc": "/posters/uKnight Movie Poster - Jurrasic Park Style.jpg",

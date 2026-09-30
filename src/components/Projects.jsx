@@ -44,6 +44,7 @@ const projectsData = [
   {
     title: "Paradise",
     event: "SHELLHACKS 2026: 3rd Best Overall",
+    featuredAward: true,
     imageSrc: paradiseImg,
     shortDescription: "Touch-only navigation system for blind and DeafBlind users using Joy-Con haptics, computer vision, and web technologies.",
     fullDescription: [
@@ -53,8 +54,8 @@ const projectsData = [
       "Won 3rd Best Overall at SHELLHACKS 2026 among more than 1,400 participants."
     ],
     skills: ["JavaScript", "Node.js", "WebGPU", "WebRTC", "WebHID", "Computer Vision", "YOLO", "GPS", "Haptics"],
-    demo: "https://lnkd.in/eW3vHujw",
-    source: "https://lnkd.in/epCsvBTg",
+    demo: "https://www.youtube.com/watch?v=BVIRTrum1OM",
+    source: "https://devpost.com/software/paradise-n0i7of",
     themeColor: "#00a86b",
   },
   {
@@ -286,8 +287,10 @@ export const Projects = () => {
             onClick={() => setSelectedProject(project)}
             style={{
               "--theme-color": project.themeColor,
+              boxShadow: project.featuredAward ? "0 0 28px rgba(255, 207, 64, 0.75), 0 0 8px rgba(255, 255, 255, 0.35)" : undefined,
             }}
           >
+            {project.featuredAward && <div className="absolute top-3 left-3 z-10 rounded-full bg-amber-300 px-3 py-1 text-xs font-bold uppercase tracking-wider text-black shadow-lg">Best Overall</div>}
             <div className="project-image-container">
               <img
                 src={project.imageSrc}

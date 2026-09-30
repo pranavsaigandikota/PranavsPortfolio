@@ -63,7 +63,8 @@ export const MovieCard = ({ item, isLarge = false, onSelect, index }) => {
         (isHovered && item.videoUrl ? 'w-[426.67px] md:w-[597.33px] lg:w-[682.67px]' : 'w-40 md:w-56 lg:w-64')
       }`}
       style={{
-        aspectRatio: isLarge || (isHovered && item.videoUrl) ? '16/9' : '2/3'
+        aspectRatio: isLarge || (isHovered && item.videoUrl) ? '16/9' : '2/3',
+        boxShadow: item.featuredAward ? '0 0 28px rgba(255, 207, 64, 0.75), 0 0 8px rgba(255, 255, 255, 0.35)' : undefined
       }}
       onHoverStart={handleHoverStart}
       onHoverEnd={handleHoverEnd}
@@ -77,6 +78,11 @@ export const MovieCard = ({ item, isLarge = false, onSelect, index }) => {
       }}
       whileHover={{ scale: 1.15, zIndex: 50 }}
     >
+      {item.featuredAward && (
+        <div className="absolute top-2 left-2 z-30 rounded-full bg-amber-300 px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-black shadow-lg">
+          Best Overall
+        </div>
+      )}
       {/* Background Image or Video Container */}
       <div className="absolute inset-0 w-full h-full rounded-md overflow-hidden bg-[#141414] shadow-2xl">
         {isHovered && item.videoUrl ? (
