@@ -38,12 +38,13 @@ const cardScatter = (i) => cardScatterPatterns[i % cardScatterPatterns.length];
 import replotMapImg from "../assets/ProjectsPics/replotmap.png";
 import sentinelImg from "../assets/ProjectsPics/SentinelDemo.png";
 import uknightImg from "../assets/ProjectsPics/UknightDemo.png";
+import paradiseImg from "../assets/ProjectsPics/paradise.jpg";
 
 const projectsData = [
   {
     title: "Paradise",
     event: "SHELLHACKS 2026: 3rd Best Overall",
-    imageSrc: moreProjectsImg,
+    imageSrc: paradiseImg,
     shortDescription: "Touch-only navigation system for blind and DeafBlind users using Joy-Con haptics, computer vision, and web technologies.",
     fullDescription: [
       "Built a touch-only navigation system that uses Joy-Con controllers on each wrist to guide blind and DeafBlind users through turns, obstacles, saved destinations, and rideshare pickups.",
