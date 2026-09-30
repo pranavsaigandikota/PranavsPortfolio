@@ -41,6 +41,22 @@ import uknightImg from "../assets/ProjectsPics/UknightDemo.png";
 
 const projectsData = [
   {
+    title: "Paradise",
+    event: "SHELLHACKS 2026: 3rd Best Overall",
+    imageSrc: moreProjectsImg,
+    shortDescription: "Touch-only navigation system for blind and DeafBlind users using Joy-Con haptics, computer vision, and web technologies.",
+    fullDescription: [
+      "Built a touch-only navigation system that uses Joy-Con controllers on each wrist to guide blind and DeafBlind users through turns, obstacles, saved destinations, and rideshare pickups.",
+      "Combined an iPhone camera, local computer vision, GPS, compass heading, speech commands, and a Node.js processing laptop to make guidance decisions and drive haptic feedback.",
+      "Implemented safety-focused obstacle detection, route following, object discovery, car recognition, and a simple three-signal vibration language that testers could learn quickly.",
+      "Won 3rd Best Overall at SHELLHACKS 2026 among more than 1,400 participants."
+    ],
+    skills: ["JavaScript", "Node.js", "WebGPU", "WebRTC", "WebHID", "Computer Vision", "YOLO", "GPS", "Haptics"],
+    demo: "https://lnkd.in/eW3vHujw",
+    source: "https://lnkd.in/epCsvBTg",
+    themeColor: "#00a86b",
+  },
+  {
     title: "uKnight",
     imageSrc: uknightImg,
     shortDescription: "College platform where you randomly match with people in your college on chat or video.",
