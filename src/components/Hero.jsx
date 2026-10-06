@@ -2,8 +2,6 @@ import { motion } from "framer-motion";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { FlixBubble } from "./FlixBubble";
 
 // Full code string
 const codeString = `const aboutMe: DeveloperProfile = {
@@ -103,8 +101,6 @@ const staggerContainer = {
 };
 
 export const Hero = () => {
-  const navigate = useNavigate();
-
   return (
     <motion.section
       id="home"
@@ -136,22 +132,19 @@ export const Hero = () => {
             About Me:
           </motion.h2>
           <motion.p className="hero-description" variants={fadeInUp}>
-            I&apos;m Pranav, a Computer Science junior at UCF who enjoys building software that connects the dots between applications, infrastructure, and AI.
+            I&apos;m <strong>Pranav</strong>, a <strong>Computer Science junior at UCF</strong>. I just finished a software engineering internship at <strong>Ford</strong> on the Order Fulfillment team, working on cloud migration and automation. I moved legacy batch workloads to <strong>Spring Boot on Cloud Run</strong>, built an event-driven secret rotation platform on <strong>Google Cloud</strong>, and shipped an AI agent that resolved compliance issues during a large repo migration.
             <br />
             <br />
-            Most recently, I worked as a Software Engineering Intern on Ford&apos;s Order Fulfillment team, where I migrated legacy batch workloads to Spring Boot on Google Cloud Run, built event driven automation for cloud infrastructure, and developed an AI agent to help resolve compliance issues during a large scale repository migration.
+            On campus, I&apos;m the <strong>CS Technical Chair for SASE</strong> (dev team lead) and <strong>Project Director for AI at UCF</strong>, where I create opportunities for students to showcase their AI development work. Before that I researched at UCF&apos;s ISUE Lab, fine-tuning <strong>LLaMA with QLoRA</strong> for a text-to-3D pipeline.
             <br />
             <br />
-            At UCF, I&apos;m the CS Technical Chair for SASE, where I lead the development team, and a Project Director for AI at UCF, where I help create opportunities for students to build and showcase AI projects. I previously worked as a researcher in UCF&apos;s ISUE Lab, where I fine tuned LLaMA with QLoRA for a text to 3D generation pipeline.
+            Outside of that I build constantly: a <strong>full-stack inventory app with Spring AI</strong>, a <strong>video chat platform on GCP</strong>, and a recent <strong>full-stack web application built with React and Tailwind</strong>.
             <br />
             <br />
-            Outside of work and research, I&apos;m constantly building. I&apos;ve worked on a full stack inventory platform using Spring AI, a real time video chat platform deployed on GCP, and several other applications that have taken me from an idea to a working product.
-            <br />
-            <br />
-            What ties everything together is my curiosity about how systems work end to end. I like going beyond the part I&apos;m assigned understanding the infrastructure behind an application, the data flowing through it, and ultimately why the system matters to the people and business using it. I&apos;m especially drawn to cloud infrastructure, automation, AI, and systems that work with data at scale.
+            What ties it together is that I like understanding systems end to end, not just the part I&apos;m assigned, and I care about why the work matters to the business. <strong>Large datasets</strong>, <strong>cloud infrastructure</strong>, and <strong>automation</strong> are where I do my best work.
           </motion.p>
 
-          <motion.div className="cta-buttons" variants={staggerContainer} style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
+          <motion.div className="cta-buttons" variants={staggerContainer}>
             <motion.a
               href="#projects"
               className="cta-primary"
@@ -169,19 +162,6 @@ export const Hero = () => {
               rel="noopener noreferrer"
             >
               Resume
-            </motion.a>
-            <motion.a
-              href="/flix"
-              onClick={(e) => {
-                e.preventDefault();
-                navigate("/flix");
-              }}
-              className="cta-secondary"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              style={{ borderColor: '#e50914', color: '#e50914' }}
-            >
-              pranavsaig.dev/flix
             </motion.a>
           </motion.div>
 
@@ -203,14 +183,12 @@ export const Hero = () => {
 
         {/* Code Section */}
         <motion.div
-          className="hero-image-container flex flex-col items-center"
+          className="hero-image-container"
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <FlixBubble />
-          
-          <div className="retro-window w-full min-h-[550px]">
+          <div className="retro-window">
             <div className="flex items-center px-4 py-3 border-b border-white/5 bg-white/5">
              <div className="flex gap-2">
                <div className="w-3 h-3 rounded-full bg-white/20"></div>

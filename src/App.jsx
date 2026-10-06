@@ -1,14 +1,13 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { OriginalPortfolio } from './OriginalPortfolio';
+import { SamuraiPortfolio } from './SamuraiPortfolio';
 import { NetflixApp } from './NetflixApp';
 
 function App() {
   return (
     <Router>
       <Routes>
-        {/* The original portfolio is the main site at / */}
-        <Route path="/" element={<OriginalPortfolio />} />
+        {/* The samurai portfolio is the main site at / */}
+        <Route path="/" element={<SamuraiPortfolio />} />
         
         {/* The netflix-themed portfolio is at /flix */}
         <Route path="/flix" element={<NetflixApp />} />

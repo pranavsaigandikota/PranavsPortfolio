@@ -62,7 +62,7 @@ const experiences = [
     role: "Software Engineering Intern",
     organisation: "Ford Motor Company",
     startDate: "May 2026",
-    endDate: "Present",
+    endDate: "August 2026",
     type: "Internship",
     themeColor: "#3b82f6", // Ford Blue (Brighter)
     images: [fordImg],
