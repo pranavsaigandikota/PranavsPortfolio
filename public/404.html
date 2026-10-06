@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pranav's Portfolio</title>
+    <script>
+      // GitHub Pages has no server-side SPA rewrites. Bootstrap Flix via the home page.
+      if (/^\/flix\/?$/.test(window.location.pathname)) {
+        const route = window.location.pathname + window.location.search + window.location.hash;
+        window.location.replace('/?__portfolio_route=' + encodeURIComponent(route));
+      }
+    </script>
+  </head>
+  <body style="background:#09090b;color:#eee;font-family:system-ui;padding:32px">
+    <p>Looking for the portfolio? <a href="/" style="color:#ef3946">Go home</a>.</p>
+  </body>
+</html>

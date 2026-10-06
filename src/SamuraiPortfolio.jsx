@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { ArrowUpRight, ArrowDown, ArrowRight, Github, Linkedin, Mail, Menu, X, Trophy, BriefcaseBusiness, Sparkles, Download, Play, MapPin } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowUpRight, ArrowDown, Github, Linkedin, Mail, Menu, X, Trophy, BriefcaseBusiness, Sparkles, Download, Play, MapPin } from 'lucide-react';
 import projectMedia from './data/projects.json';
 import { projectsData, experiences as history, skillsData, achievements, codeString } from './data/portfolioContent';
 import { OriginalAboutCopy } from './components/OriginalAboutCopy';
@@ -172,14 +173,14 @@ export function SamuraiPortfolio() {
     <a className="sp-skip" href="#main">Skip to content</a>
     <div className="sp-embers" aria-hidden="true">{Array.from({ length: 22 }, (_, index) => <i key={index} style={{ '--x': `${(index * 47 + 13) % 100}%`, '--drift': `${(index % 2 ? 1 : -1) * (20 + index * 3)}px`, '--duration': `${12 + index % 8}s`, '--delay': `${-index * 1.7}s`, '--size': `${2 + index % 3}px` }} />)}</div>
     <header className="sp-header"><div className="sp-nav-wrap"><a className="sp-brand" href="#home" aria-label="Pranavsai Gandikota home"><span className="sp-brand-mark">P<span>G</span></span><span className="sp-full-name">Pranavsai Gandikota<span className="sp-brand-dot">.</span></span></a>
-      <nav id="sp-navigation" className={menuOpen ? 'sp-nav sp-nav-open' : 'sp-nav'} aria-label="Main navigation">{navigation.map(([id, label]) => <a key={id} href={`#${id}`} aria-current={active === id ? 'location' : undefined} onClick={() => setMenuOpen(false)}>{label}</a>)}<a className="sp-flix-link" href="/flix">Flix</a></nav>
+      <nav id="sp-navigation" className={menuOpen ? 'sp-nav sp-nav-open' : 'sp-nav'} aria-label="Main navigation">{navigation.map(([id, label]) => <a key={id} href={`#${id}`} aria-current={active === id ? 'location' : undefined} onClick={() => setMenuOpen(false)}>{label}</a>)}<Link className="sp-flix-link" to="/flix">Flix</Link></nav>
       <a className="sp-nav-resume" href="/Pranav latest resume.pdf" target="_blank" rel="noreferrer">Resume <ArrowUpRight size={14} /></a>
       <button className="sp-menu-toggle" aria-label={menuOpen ? 'Close menu' : 'Open menu'} aria-expanded={menuOpen} aria-controls="sp-navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X /> : <Menu />}</button>
     </div></header>
     <main id="main">
       <section id="home" className="sp-hero sp-container">
         <div className="sp-hero-content"><span className="sp-eyebrow"><span className="sp-status-dot" /> SOFTWARE ENGINEER · APPLIED AI</span><p className="sp-hero-intro">Hello, I’m</p><h1>Pranavsai<br /><span>Gandikota<span className="sp-period">.</span></span></h1><p className="sp-hero-description">Building software solutions powered by AI, shaped around real problems.</p>
-          <div className="sp-hero-actions"><a href="#projects" className="sp-button">View My Work <ArrowUpRight size={18} /></a><a href="mailto:pranavsaigandikota@gmail.com" className="sp-button sp-button-outline">Let’s connect <ArrowRight size={18} /></a></div>
+          <div className="sp-hero-actions"><a href="#projects" className="sp-button">View My Work <ArrowUpRight size={18} /></a><a href="/Pranav latest resume.pdf" target="_blank" rel="noreferrer" className="sp-button sp-button-outline">Resume <Download size={18} /></a></div>
           <div className="sp-hero-socials"><a href="https://github.com/pranavsaigandikota" target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={19} /></a><a href="https://www.linkedin.com/in/pranavsaig" target="_blank" rel="noreferrer" aria-label="LinkedIn"><Linkedin size={19} /></a><a href="https://pranavsaigandikota.wixsite.com/filmasticpg" target="_blank" rel="noreferrer" aria-label="FilmasticPG creative portfolio"><Sparkles size={19} /></a><a href="mailto:pranavsaigandikota@gmail.com" aria-label="Email Pranav"><Mail size={19} /></a><span /><p><MapPin size={13} /> Orlando, Florida · UCF</p></div>
         </div><div className="sp-hero-art" aria-hidden="true"><span className="sp-art-caption">THE WAY OF THE BUILDER</span><img src="/samurai.svg" alt="" /><div className="sp-art-seal">創<br />造</div><p>Purpose. Precision. Persistence.</p></div>
         <a href="#about" className="sp-scroll"><ArrowDown size={15} /><span>SCROLL TO EXPLORE</span></a><span className="sp-hero-index">PORTFOLIO / 2026</span>

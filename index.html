@@ -20,6 +20,13 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      // Restore a direct Flix visit after GitHub Pages serves our 404 fallback.
+      const portfolioRoute = new URLSearchParams(window.location.search).get('__portfolio_route');
+      if (portfolioRoute && /^\/flix\/?(?:[?#]|$)/.test(portfolioRoute)) {
+        window.history.replaceState(null, '', portfolioRoute);
+      }
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
