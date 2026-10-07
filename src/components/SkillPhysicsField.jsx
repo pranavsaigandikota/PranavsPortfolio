@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { RotateCcw, LayoutGrid, Flag, Shuffle, Volume2, VolumeX } from 'lucide-react';
+import { RotateCcw, LayoutGrid, Flag, Shuffle, Volume2, VolumeX, Maximize2, Minimize2 } from 'lucide-react';
 import skillLogos from '../data/skillLogos.json';
 import { generateCourse, createGolfBall, golfMoving, slingGolf, stepGolf } from './golfPhysics';
 import { createGolfRenderer } from './golfRenderer';
@@ -19,6 +19,8 @@ ScoreTicker.propTypes={value:PropTypes.number.isRequired};
 export function SkillPhysicsField({ groups, children }) {
   const [saved]=useState(()=>{try{return loadGolfProgress(window.localStorage,new Set(groups.flatMap(group=>group.items.map(item=>item.title))));}catch{return null;}});
   const progressRef=useRef(saved),historyRef=useRef(saved?.history||[]);
+  const fullscreenRef=useRef(null);
+  const [fullscreen,setFullscreen]=useState(false);
   const hostRef=useRef(null),apiRef=useRef(null),earnedRef=useRef(new Set(saved?.collected||[])),audioRef=useRef(null),heatRef=useRef({value:0,time:0}),soundRef=useRef(golfSoundEnabled()),scoreRef=useRef(saved?.score||0),levelRef=useRef(saved?.level||0);
   const [desktop,setDesktop]=useState(false),[cards,setCards]=useState(false),[failed,setFailed]=useState(false);
   const [collected,setCollected]=useState(saved?.collected||[]),[info,setInfo]=useState(null),[power,setPower]=useState(0),[moving,setMoving]=useState(false),[sound,setSound]=useState(soundRef.current),[heat,setHeat]=useState(0);
@@ -125,11 +127,36 @@ export function SkillPhysicsField({ groups, children }) {
     const onLeave=()=>{if(dirty||golfMoving(ball)) persist();};window.addEventListener('pagehide',onLeave);
     return()=>{onLeave();cancelAnimationFrame(frame);observer.disconnect();resizeObserver.disconnect();events.forEach(([name,handler])=>canvas.removeEventListener(name,handler));window.removeEventListener('pagehide',onLeave);canvas.remove();audioRef.current?.destroy();audioRef.current=null;apiRef.current=null;};
   },[enabled,groups]);
+  useEffect(()=>{
+    const update=()=>setFullscreen(document.fullscreenElement===fullscreenRef.current);
+    document.addEventListener('fullscreenchange',update);
+    return()=>document.removeEventListener('fullscreenchange',update);
+  },[]);
+  useEffect(()=>{
+    if(!fullscreen) return;
+    const previous=document.body.style.overflow;
+    document.body.style.overflow='hidden';
+    const escape=event=>{if(event.key==='Escape'&&!document.fullscreenElement) setFullscreen(false);};
+    document.addEventListener('keydown',escape);
+    return()=>{document.body.style.overflow=previous;document.removeEventListener('keydown',escape);};
+  },[fullscreen]);
+  const toggleFullscreen=async()=>{
+    if(fullscreen){
+      if(document.fullscreenElement) await document.exitFullscreen().catch(()=>{});
+      setFullscreen(false);
+    }else{
+      try{
+        if(!fullscreenRef.current.requestFullscreen) throw new Error('Unavailable');
+        await fullscreenRef.current.requestFullscreen();
+        setFullscreen(true);
+      }catch{setFullscreen(true);}
+    }
+  };
   const total=groups.reduce((sum,group)=>sum+group.items.length,0);
   const toggleSound=()=>{soundRef.current=!soundRef.current;setSound(soundRef.current);audioRef.current?.setEnabled(soundRef.current);try{window.localStorage.setItem(GOLF_MUTE_KEY,String(!soundRef.current));}catch{/* The switch still works without storage. */}};
   const wakeAudio=event=>{if(!event.target.closest('[data-golf-mute]')) audioRef.current?.activate();};
-  return <div className="sp-skills-interactive" onPointerDownCapture={wakeAudio} onKeyDownCapture={wakeAudio}>
-    {desktop&&!failed&&<div className="sp-physics-toolbar"><div><p className={!cards?'sp-golf-vibe':''}>{cards?'Your toolkit, organized by discipline.':'Others just list their skills, but I turned mine into a golf game. Have fun!'.split(' ').map((word,index)=><span key={index} style={{'--word-delay':`${index*-.07}s`}}>{word}{' '}</span>)}</p>{!cards&&<span className="sp-pool-meta">Pull back to putt · ← → aim · ↑ ↓ power · Space shoots</span>}</div><div>{!cards&&<><button onClick={()=>apiRef.current?.reroll()}><Shuffle size={14}/> New course</button><button onClick={()=>apiRef.current?.reset()}><RotateCcw size={14}/> Reset ball</button><button onClick={()=>apiRef.current?.retry()} aria-label="Retry current hole"><RotateCcw size={14}/> Retry</button><button data-golf-mute onClick={toggleSound} aria-label={sound?'Mute music and sound effects':'Unmute music and sound effects'} aria-pressed={sound}>{sound?<Volume2 size={14}/>:<VolumeX size={14}/>} {sound?'Mute':'Unmute'}</button></>}<button onClick={()=>setCards(!cards)}><LayoutGrid size={14}/>{cards?'Play golf':'Skill cards'}</button></div></div>}
+  return <div ref={fullscreenRef} className={`sp-skills-interactive ${fullscreen?'sp-golf-fullscreen':''}`} onPointerDownCapture={wakeAudio} onKeyDownCapture={wakeAudio}>
+    {desktop&&!failed&&<div className="sp-physics-toolbar"><div><p className={!cards?'sp-golf-vibe':''}>{cards?'Your toolkit, organized by discipline.':'Others just list their skills, but I turned mine into a golf game. Have fun!'.split(' ').map((word,index)=><span key={index} style={{'--word-delay':`${index*-.07}s`}}>{word}{' '}</span>)}</p>{!cards&&<span className="sp-pool-meta">Pull back to putt · ← → aim · ↑ ↓ power · Space shoots</span>}</div><div>{!cards&&<><button onClick={()=>apiRef.current?.reroll()}><Shuffle size={14}/> New course</button><button onClick={()=>apiRef.current?.reset()}><RotateCcw size={14}/> Reset ball</button><button onClick={()=>apiRef.current?.retry()} aria-label="Retry current hole"><RotateCcw size={14}/> Retry</button><button data-golf-mute onClick={toggleSound} aria-label={sound?'Mute music and sound effects':'Unmute music and sound effects'} aria-pressed={sound}>{sound?<Volume2 size={14}/>:<VolumeX size={14}/>} {sound?'Mute':'Unmute'}</button><button onClick={toggleFullscreen} aria-label={fullscreen?'Exit fullscreen game':'Enter fullscreen game'} aria-pressed={fullscreen}>{fullscreen?<Minimize2 size={14}/>:<Maximize2 size={14}/>} {fullscreen?'Exit fullscreen':'Fullscreen'}</button></>}<button onClick={()=>{if(fullscreen) toggleFullscreen();setCards(!cards);}}><LayoutGrid size={14}/>{cards?'Play golf':'Skill cards'}</button></div></div>}
     {enabled?<>
       <div className={`sp-golf-layout ${shake?(shake%2?'sp-golf-jolt-a':'sp-golf-jolt-b'):''}`}><div className="sp-golf-main">
       <SkillAudience groups={groups} event={crowdEvent} complete={info?.complete}/>

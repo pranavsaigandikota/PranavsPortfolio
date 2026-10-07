@@ -79,18 +79,29 @@ import saseImg from "../assets/ExperiencesPics/saselogo.png";
 
 export const projectsData = [
   {
+    title: "UCF SASE Official Website",
+    imageSrc: saseImg,
+    imageFit: "contain",
+    shortDescription: "A QR check-in system replacing manual attendance tracking for over 200 UCF SASE members.",
+    fullDescription: [
+      "Led the web team as CS Tech Chair to build the official UCF SASE website and replace manual attendance tracking with a Next.js and Supabase QR check-in system.",
+      "Implemented row-level security policies and duplicate-check-in protection for over 200 members. Development began in July 2026 and continues today."
+    ],
+    skills: ["Next.js", "TypeScript", "Supabase", "PostgreSQL", "Vercel"],
+    themeColor: "#2563eb",
+  },
+  {
     title: "Paradise",
     event: "SHELLHACKS 2026: 3rd Best Overall",
     featuredAward: true,
     imageSrc: paradiseImg,
-    shortDescription: "Touch-only navigation system for blind and DeafBlind users using Joy-Con haptics, computer vision, and web technologies.",
+    shortDescription: "Touch-only navigation for DeafBlind users, translating live video and location cues into Joy-Con haptics.",
     fullDescription: [
-      "Built a touch-only navigation system that uses Joy-Con controllers on each wrist to guide blind and DeafBlind users through turns, obstacles, saved destinations, and rideshare pickups.",
-      "Combined an iPhone camera, local computer vision, GPS, compass heading, speech commands, and a Node.js processing laptop to make guidance decisions and drive haptic feedback.",
-      "Implemented safety-focused obstacle detection, route following, object discovery, car recognition, and a simple three-signal vibration language that testers could learn quickly.",
-      "Won 3rd Best Overall at SHELLHACKS 2026 among more than 1,400 participants."
+      'Won 3rd Best Overall at ShellHacks 2026 among over 290 projects and 1,400 hackers.',
+      'Built touch-only navigation for DeafBlind users by streaming phone video over WebRTC to a laptop perception pipeline and converting object, obstacle, GPS, and compass cues into Joy-Con haptics.',
+      'Kept obstacle guidance responsive by running Depth Anything V2 separately from slower object detection, estimating approximate metric distances at 80 ms per frame with a RANSAC floor-plane fit.',
     ],
-    skills: ["JavaScript", "Node.js", "WebGPU", "WebRTC", "WebHID", "Computer Vision", "YOLO", "GPS", "Haptics"],
+    skills: ["JavaScript", "Node.js", "WebGPU", "WebRTC", "WebHID", "Computer Vision", "YOLO", "GPS", "Haptics", "ONNX Runtime", "Depth Anything V2"],
     demo: "https://www.youtube.com/watch?v=BVIRTrum1OM",
     source: "https://devpost.com/software/paradise-n0i7of",
     themeColor: "#00a86b",
@@ -98,13 +109,12 @@ export const projectsData = [
   {
     title: "uKnight",
     imageSrc: uknightImg,
-    shortDescription: "College platform where you randomly match with people in your college on chat or video.",
+    shortDescription: "Anonymous university video chat, built by a six-member team and used by 72 verified students in its first three weeks.",
     fullDescription: [
-      "Created an omegle-style platform allowing college students to securely meet and socialize via randomized chat and video matching, verified through college OAuth.",
-      "Engineered real-time matching queues using Redis and handled real-time communication via WebSockets and WebRTC peer connections.",
-      "Developed a full-stack application using a Spring Boot backend and React frontend, deployed on Google Cloud Platform."
+      'Led a six-member team building an anonymous university video-chat platform; deployed the Spring Boot and WebSocket backend on GCP Cloud Run for WebRTC signaling, reaching 72 verified users in three weeks.',
+      'Moved matchmaking and session state to a distributed Redis sorted set, using an atomic Lua operation to prevent double-matches and stale-session pruning to support multiple backend instances.',
     ],
-    skills: ["React", "Spring Boot", "WebRTC", "PostgreSQL", "Redis", "GCP", "WebSockets", "OAuth"],
+    skills: ["React", "Spring Boot", "WebRTC", "PostgreSQL", "Redis", "GCP", "WebSockets", "OAuth", "Next.js", "Docker", "Lua"],
     demo: "https://uknight.net",
     source: "https://github.com/uKnight-Co/uKnight",
     themeColor: "#FFD700",
@@ -296,9 +306,10 @@ export const experiences = [
     themeColor: "#3b82f6", // Ford Blue (Brighter)
     images: [fordImg],
     experiences: [
-      "Developing full-stack internal applications utilizing Spring Boot microservices and React.js.",
-      "Architecting scalable backend infrastructure on GCP (Cloud Run, Pub/Sub, Cloud SQL) with automated CI/CD.",
-      "Ensuring code reliability through Test-Driven Development (TDD) and cross-functional architecture reviews."
+      'Cut processing time by 92% (45 to 3.5 minutes) by migrating six Java Struts batch jobs to Java 21 and Spring Boot on GCP Cloud Run, moving data-heavy work into PostgreSQL stored procedures.',
+      'Automated scheduled fixed-width file generation and SFTP delivery to GECHUB for QAD processing; validated over 200,000 records against legacy outputs without disrupting downstream processes.',
+      'Added 143 automated tests with over 90% coverage and resolved 31 critical SonarQube findings, including SQL injection and credential-logging risks, before release through Tekton CI/CD.',
+      'Built automated secret refresh using Secret Manager, Pub/Sub, Cloud Functions, and Spring Actuator, reloading affected GOaLS services in under two minutes without restarts; provisioned infrastructure with Terraform.',
     ],
     imageFit: "contain",
   },
@@ -324,25 +335,21 @@ export const experiences = [
     themeColor: "#2563eb",
     images: [saseImg],
     experiences: [
-      "Develop and maintain the official UCF SASE website.",
-      "Leading frontend and backend developers for SASE website upgrades.",
-      "Design and facilitate technical and project based computer science workshops tailored to members' academic and professional development needs.",
-      "Cultivate partnerships with external academic and professional organizations to expand networking and collaborative event opportunities.",
-      "Implement feedback loops to evaluate workshop outcomes, utilizing member data to continuously improve future programming and deliverables.",
-      "Manage operational resources including budget allocation, materials, and committee personnel to ensure the sustainable execution of technical initiatives.",
+      'Led the web team as CS Tech Chair to replace manual attendance tracking with a Next.js and Supabase QR check-in system for over 200 members, with row-level security policies and duplicate-check-in protection.',
+      'Lead frontend and backend developers maintaining the official UCF SASE website and facilitate technical, project-based computer science workshops for members.',
     ],
     imageFit: "contain",
   },
   {
-    role: "Teacher Assistant - Object Oriented Programming w/ Java",
+    role: "Teaching Assistant - Object-Oriented Programming with Java",
     organisation: "CECS, UCF",
-    startDate: "Jan. 2025",
+    startDate: "Jan. 2026",
     endDate: "May 2026",
     type: "Work",
     themeColor: "#FFC904", // UCF Gold
     images: [ucfCecsImg],
     experiences: [
-      "Assisting the professor, Dr. Arup Guha, with course administration and grading while holding weekly office hours for 240+ students.",
+      'Graded assignments and exams for correctness and algorithmic efficiency, and held weekly office hours supporting 166 students on Java OOP design, programming, and debugging.',
     ],
     imageFit: "contain",
   },
@@ -371,10 +378,9 @@ export const experiences = [
     themeColor: "#8b5cf6", // Purple
     images: [isueLab, isueUserStudy, isueProcGen, isueRoomGen, isueWhisper],
     experiences: [
-      "Contributed in streamlining a user-driven text-to-3D generation pipeline.",
-      "Co-authored related works in SIGGRAPH paper submission for 3D Scene Generation from natural language.",
-      "Implemented QLORA fine-tuning of Llama and weighted use of models for optimization of survey LLM.",
-      "Conducted user studies for the VR Sensor Awareness project.",
+      'Fine-tuned three Llama 3.1 8B adapters on 1,820 NASA-TLX and SUS examples using PyTorch, CUDA, Hugging Face Transformers, and QLoRA with 4-bit quantization.',
+      'Built a Python text-to-3D workflow spanning scene extraction, Stable Diffusion 3.5, human review, and TRELLIS; processed 135 images across 30 scene directories and metadata for 48 objects.',
+      'Orchestrated long-running GPU jobs with subprocesses, thread-safe queues, watchdog timers, and isolated Conda environments while keeping the review interface responsive.',
     ],
   },
   {
@@ -533,6 +539,14 @@ export const skillsData = [
 
 export const achievements = [
     {
+      title: "Dean’s List",
+      subtitle: "2026 · University of Central Florida",
+      points: ["B.S. Computer Science · GPA: 3.99 / 4.0"],
+      icon: <Award size={32} />,
+      borderColor: "#FFC904",
+      description: "Recognized for academic achievement at UCF."
+    },
+    {
       title: "NSS Space Settlement Contest",
       subtitle: "First Prize (Dec 2022 – Feb 2023)",
       points: [
@@ -564,7 +578,8 @@ export const achievements = [
 export const codeString = `const pranav = {
   role: "Software Engineer · Applied AI",
   basedIn: "Orlando, FL",
-  education: "Computer Science @ UCF",
+  education: "B.S. CS @ UCF · May 2028",
+  gpa: "3.99 / 4.0",
   build: ["Full-stack", "Cloud", "AI"],
   stack: ["React", "Spring Boot", "Python"],
   focus: "Software solutions powered by AI",
