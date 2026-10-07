@@ -1,33 +1,33 @@
 import { Code, Layers, Database, Cpu, Terminal, Trophy, Star, Award } from 'lucide-react';
 import revisionImg from "../assets/ProjectsPics/revisionainpage.jpg";
 
-import freedomImg from "../assets/ProjectsPics/freedomlanding.png";
+import freedomImg from "../assets/optimized/freedomlanding.webp";
 
 import visionImg from "../assets/ProjectsPics/visionmain.jpg";
 
-import satchelImg from "../assets/ProjectsPics/SatchyCover.png";
+import satchelImg from "../assets/optimized/SatchyCover.webp";
 
 import tacoImg from "../assets/ProjectsPics/Taco.jpg"; // Assuming this is for Jumblehot or similar if not specified, but user said "Taco project pics". I'll use it for Jumblehot for now or add a new one if needed. Actually, user said "I put freedom finances revision and taco project pics". I will use tacoImg for "Jumblehot" as a placeholder or maybe "Taco" is a new project? I'll stick to the existing list but update images.
 
-import jennysImg from "../assets/ProjectsPics/jennys-playtime.png";
+import jennysImg from "../assets/optimized/jennys-playtime.webp";
 
-import jumblehotImg from "../assets/ProjectsPics/jumblehot.png";
+import jumblehotImg from "../assets/optimized/jumblehot.webp";
 
-import humanotoneImg from "../assets/ProjectsPics/humanotone.png";
+import humanotoneImg from "../assets/optimized/humanotone.webp";
 
-import exodusImg from "../assets/ProjectsPics/exodus.png";
+import exodusImg from "../assets/optimized/exodus.webp";
 
-import roboticsImg from "../assets/ProjectsPics/robotic-animatronics.png";
+import roboticsImg from "../assets/optimized/robotic-animatronics.webp";
 
-import moreProjectsImg from "../assets/ProjectsPics/more-projects.png";
+import moreProjectsImg from "../assets/optimized/more-projects.webp";
 
-import replotMapImg from "../assets/ProjectsPics/replotmap.png";
+import replotMapImg from "../assets/optimized/replotmap.webp";
 
-import sentinelImg from "../assets/ProjectsPics/SentinelDemo.png";
+import sentinelImg from "../assets/optimized/SentinelDemo.webp";
 
-import uknightImg from "../assets/ProjectsPics/UknightDemo.png";
+import uknightImg from "../assets/optimized/UknightDemo.webp";
 
-import paradiseImg from "../assets/ProjectsPics/paradise.jpg";
+import paradiseImg from "../assets/optimized/paradise.webp";
 
 import isueLab from "../assets/ExperiencesPics/ISUELAB.png";
 
@@ -37,13 +37,13 @@ import isueProcGen from "../assets/ExperiencesPics/ISUEProceduralGenerationUnity
 
 import isueRoomGen from "../assets/ExperiencesPics/ISUERoomgeneration.jpeg";
 
-import isueWhisper from "../assets/ExperiencesPics/ISUEWhisperAI.jpeg";
+import isueWhisper from "../assets/optimized/ISUEWhisperAI.webp";
 
 import siGroup from "../assets/ExperiencesPics/SIGroup.jpeg";
 
-import siGroupFunny from "../assets/ExperiencesPics/SIGroupFunny.png";
+import siGroupFunny from "../assets/optimized/SIGroupFunny.webp";
 
-import knightHacks from "../assets/ExperiencesPics/knighhacksgroup.jpeg";
+import knightHacks from "../assets/optimized/knighhacksgroup.webp";
 
 import diwaliBackdrop from "../assets/ExperiencesPics/DiwaliBackdrop.jpeg";
 
@@ -55,7 +55,7 @@ import diwaliFood from "../assets/ExperiencesPics/DiwaliFood.jpeg";
 
 import diwaliSpeech from "../assets/ExperiencesPics/DiwaliSpeechTalking.jpeg";
 
-import culturalSec from "../assets/ExperiencesPics/CulturalSecretary.png";
+import culturalSec from "../assets/optimized/CulturalSecretary.webp";
 
 import nssMeeting from "../assets/ExperiencesPics/NSSMeeting.jpeg";
 
@@ -63,7 +63,7 @@ import nssPoster from "../assets/ExperiencesPics/NSSPresentationPoster.jpeg";
 
 import nssSpeech from "../assets/ExperiencesPics/NSSSpaceSettlementSpeech.jpeg";
 
-import nssStandalone from "../assets/ExperiencesPics/NSSSpaceStandalone.jpeg";
+import nssStandalone from "../assets/optimized/NSSSpaceStandalone.webp";
 
 import nssNewspaper from "../assets/ExperiencesPics/NSSonNewspaper.jpeg";
 
@@ -73,7 +73,7 @@ import perplexityImg from "../assets/ExperiencesPics/perplexity.png";
 
 import ucfCecsImg from "../assets/ExperiencesPics/UCFCECS.png";
 
-import fordImg from "../assets/ExperiencesPics/Ford.jpg";
+import fordImg from "../assets/optimized/Ford.webp";
 
 import saseImg from "../assets/ExperiencesPics/saselogo.png";
 

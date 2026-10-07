@@ -1,7 +1,8 @@
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 import skillLogos from '../data/skillLogos.json';
 
-export default function SkillAudience({groups,event,complete}) {
+function SkillAudience({groups,event,complete}) {
   const toolkit=groups.flatMap(group=>group.items.map(item=>({...item,color:group.themeColor})));
   // A stable shuffle mixes disciplines without rearranging the crowd on every score.
   const skills=toolkit.map((_,index)=>toolkit[(index*17)%toolkit.length]);
@@ -24,3 +25,5 @@ export default function SkillAudience({groups,event,complete}) {
   </div>;
 }
 SkillAudience.propTypes={groups:PropTypes.array.isRequired,event:PropTypes.object.isRequired,complete:PropTypes.bool};
+
+export default memo(SkillAudience);

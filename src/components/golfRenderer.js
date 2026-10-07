@@ -19,7 +19,7 @@ export function createGolfRenderer(canvas) {
     round(x-width/2,y-.17,width,.34,.1);context.fillStyle='#0d171de6';context.fill();label(title,x,y,'#fff',Math.min(.21,.21*(width-.16)/measured));
   };
   return {
-    resize(width,height){canvas.width=Math.round(width*Math.min(devicePixelRatio,2));canvas.height=Math.round(height*Math.min(devicePixelRatio,2));},
+    resize(width,height){canvas.width=Math.round(width*Math.min(devicePixelRatio,navigator.hardwareConcurrency<=4?1:1.5));canvas.height=Math.round(height*Math.min(devicePixelRatio,navigator.hardwareConcurrency<=4?1:1.5));},
     draw({course,ball,skill,pickups,pull,dragging,time,particles,trail,flash,sinkTime,camera,ghosts=[]}) {
       context.setTransform(canvas.width/GOLF.width,0,0,canvas.height/GOLF.height,0,0);
       context.clearRect(0,0,22,11);context.fillStyle='#13221f';context.fillRect(0,0,22,11);context.save();

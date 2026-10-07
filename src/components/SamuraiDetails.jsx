@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { ArrowUpRight } from 'lucide-react';
+import { usePageVisible } from './sitePerformance';
 
 export function CardArrow() {
   return <span className="sp-card-arrow" aria-hidden="true"><ArrowUpRight className="sp-arrow-default" size={19} /><svg className="sp-ninja-star" viewBox="0 0 32 32" fill="currentColor"><path fillRule="evenodd" d="m16 1 4.7 10.3L31 8l-4.3 12.7L31 31l-14.8-4.5L4 31l4-14.2L1 5l12.2 3.8L16 1Zm0 11a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z" /></svg></span>;
@@ -16,16 +17,20 @@ export function SamuraiAccent({ kind = 'torii' }) {
 SamuraiAccent.propTypes = { kind: PropTypes.oneOf(['torii', 'bonsai', 'crane']) };
 
 export function CompactCode({ text }) {
+  const hostRef=useRef(null),pageVisible=usePageVisible();
+  const [visible,setVisible]=useState(false);
   const [count, setCount] = useState(0);
+  useEffect(()=>{const observer=new IntersectionObserver(([entry])=>setVisible(entry.isIntersecting));observer.observe(hostRef.current);return()=>observer.disconnect();},[]);
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { setCount(text.length); return; }
+    if(!visible||!pageVisible) return;
     const timer = setInterval(() => setCount(previous => {
-      const next = Math.min(previous + 5, text.length);
+      const next = Math.min(previous + 8, text.length);
       if (next === text.length) clearInterval(timer);
       return next;
-    }), 18);
+    }), 32);
     return () => clearInterval(timer);
-  }, [text]);
-  return <pre className="sp-compact-code"><code>{text.slice(0, count)}<span className="sp-code-cursor" aria-hidden="true">▍</span></code></pre>;
+  }, [text,visible,pageVisible]);
+  return <pre ref={hostRef} className="sp-compact-code"><code>{text.slice(0, count)}<span className="sp-code-cursor" aria-hidden="true">▍</span></code></pre>;
 }
 CompactCode.propTypes = { text: PropTypes.string.isRequired };
