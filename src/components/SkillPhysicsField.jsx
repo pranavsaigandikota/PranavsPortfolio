@@ -1,182 +1,141 @@
 import { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { RotateCcw, LayoutGrid, Crosshair } from 'lucide-react';
+import { RotateCcw, LayoutGrid, Flag, Shuffle, Volume2, VolumeX } from 'lucide-react';
 import skillLogos from '../data/skillLogos.json';
-import { POOL, pockets, createPoolBalls, ballsMoving, shootCue, stepPool } from './poolPhysics';
+import { generateCourse, createGolfBall, golfMoving, slingGolf, stepGolf } from './golfPhysics';
+import { createGolfRenderer } from './golfRenderer';
+import { loadGolfProgress, saveGolfProgress } from './golfProgress';
 
+const randomSeed=()=>crypto.getRandomValues(new Uint32Array(1))[0];
+const shuffled=items=>{const result=[...items];for(let i=result.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[result[i],result[j]]=[result[j],result[i]];}return result;};
+function ScoreTicker({value}) {
+  const current=useRef(0),[display,setDisplay]=useState(0);
+  useEffect(()=>{let frame;const from=current.current,start=performance.now();const tick=time=>{const progress=Math.min(1,(time-start)/450);current.current=Math.round(from+(value-from)*(1-(1-progress)**3));setDisplay(current.current);if(progress<1) frame=requestAnimationFrame(tick);};frame=requestAnimationFrame(tick);return()=>cancelAnimationFrame(frame);},[value]);
+  return <span>{display.toLocaleString()}</span>;
+}
+ScoreTicker.propTypes={value:PropTypes.number.isRequired};
 export function SkillPhysicsField({ groups, children }) {
-  const hostRef = useRef(null), apiRef = useRef(null);
-  const [desktop,setDesktop] = useState(false), [cards,setCards] = useState(false);
-  const [ready,setReady] = useState(false), [failed,setFailed] = useState(false);
-  const [collected,setCollected] = useState([]), [shots,setShots] = useState(0);
-  const [power,setPower] = useState(0), [message,setMessage] = useState('Every pocket sorts the skill into its category.');
-  const [moving,setMoving] = useState(false);
-  useEffect(() => {
+  const [saved]=useState(()=>{try{return loadGolfProgress(window.localStorage,new Set(groups.flatMap(group=>group.items.map(item=>item.title))));}catch{return null;}});
+  const progressRef=useRef(saved),historyRef=useRef(saved?.history||[]);
+  const hostRef=useRef(null),apiRef=useRef(null),earnedRef=useRef(new Set(saved?.collected||[])),soundRef=useRef(false),scoreRef=useRef(saved?.score||0),levelRef=useRef(saved?.level||0);
+  const [desktop,setDesktop]=useState(false),[cards,setCards]=useState(false),[failed,setFailed]=useState(false);
+  const [collected,setCollected]=useState(saved?.collected||[]),[info,setInfo]=useState(null),[power,setPower]=useState(0),[moving,setMoving]=useState(false),[sound,setSound]=useState(false);
+  const [message,setMessage]=useState('Pull back from your skill ball, then release to putt.');
+  const [score,setScore]=useState(saved?.score||0),[scoreEvent,setScoreEvent]=useState({id:0,points:0,label:saved?'Welcome back. Your run is saved.':'Your first trick shot starts here.'}),[combo,setCombo]=useState(0),[history,setHistory]=useState(saved?.history||[]),[fx,setFx]=useState({speed:0,cinematic:false}),[shake,setShake]=useState(0),[saveStatus,setSaveStatus]=useState('Progress saves in this browser');
+  useEffect(()=>{
     const query=window.matchMedia('(min-width: 801px) and (pointer: fine) and (prefers-reduced-motion: no-preference)');
-    const update=()=>setDesktop(query.matches); update();
-    query.addEventListener('change',update); return()=>query.removeEventListener('change',update);
+    const update=()=>setDesktop(query.matches);update();query.addEventListener('change',update);return()=>query.removeEventListener('change',update);
   },[]);
-  const enabled=desktop && !cards && !failed;
-  useEffect(() => {
+  const enabled=desktop&&!cards&&!failed;
+  useEffect(()=>{
     if(!enabled) return;
-    const host=hostRef.current;
-    let cancelled=false, inView=false, started=false, dispose=null;
-    setReady(false); setCollected([]); setShots(0); setPower(0); setMoving(false); setMessage('Drag from the white cue ball to shoot. Arrow keys aim · Space shoots.');
-    const initialize=async()=>{
-      let renderer;
-      const resources=[];
-      try {
-        const THREE=await import('three');
-        await Promise.race([document.fonts.load('600 64px "Space Grotesk"').catch(()=>{}),new Promise(resolve=>setTimeout(resolve,1500))]);
-        if(cancelled) return;
-        renderer=new THREE.WebGLRenderer({alpha:true,antialias:true,powerPreference:'low-power'});
-        renderer.setPixelRatio(Math.min(devicePixelRatio,1.75));
-        renderer.domElement.setAttribute('role','img');
-        renderer.domElement.setAttribute('aria-label','Skill pool table. Drag back from the white cue ball and release to shoot. Arrow keys aim and Space shoots.');
-        renderer.domElement.tabIndex=0; host.appendChild(renderer.domElement);
-        const scene=new THREE.Scene(), camera=new THREE.OrthographicCamera(-POOL.width/2,POOL.width/2,POOL.height/2,-POOL.height/2,.1,100);
-        camera.position.z=20;
-        scene.add(new THREE.HemisphereLight(0xffffff,0x20232b,1.6));
-        const light=new THREE.DirectionalLight(0xfff4e7,2); light.position.set(-5,8,10); scene.add(light);
-        const own=resource=>{resources.push(resource);return resource;};
-        const plane=own(new THREE.PlaneGeometry(22,11));
-        const rail=new THREE.Mesh(plane,own(new THREE.MeshBasicMaterial({color:0x24191e}))); rail.position.z=-1; scene.add(rail);
-        const fabric=document.createElement('canvas');fabric.width=1024;fabric.height=512;
-        const fabricContext=fabric.getContext('2d'),wash=fabricContext.createRadialGradient(450,200,20,512,256,620);
-        wash.addColorStop(0,'#203333');wash.addColorStop(1,'#111e21');fabricContext.fillStyle=wash;fabricContext.fillRect(0,0,1024,512);
-        // A deterministic, fine weave adds depth without a busy pattern.
-        fabricContext.fillStyle='#ffffff';fabricContext.globalAlpha=.018;
-        for(let y=0;y<512;y+=3) for(let x=y%2;x<1024;x+=3) fabricContext.fillRect(x,y,1,1);
-        const fabricTexture=own(new THREE.CanvasTexture(fabric));fabricTexture.colorSpace=THREE.SRGBColorSpace;
-        const felt=new THREE.Mesh(own(new THREE.PlaneGeometry(20.2,9.2)),own(new THREE.MeshBasicMaterial({map:fabricTexture}))); felt.position.z=-.9; scene.add(felt);
-        const cushionMaterial=own(new THREE.MeshBasicMaterial({color:0x47272f}));
-        [[0,4.74,20.5,.3],[0,-4.74,20.5,.3],[-10.24,0,.3,9.5],[10.24,0,.3,9.5]].forEach(([x,y,w,h])=>{
-          const cushion=new THREE.Mesh(own(new THREE.PlaneGeometry(w,h)),cushionMaterial);cushion.position.set(x,y,-.88);scene.add(cushion);
-        });
-        const trimMaterial=own(new THREE.MeshBasicMaterial({color:0x64434b}));
-        [[0,4.98,20.8,.08],[0,-4.98,20.8,.08],[-10.49,0,.08,9.95],[10.49,0,.08,9.95]].forEach(([x,y,w,h])=>{
-          const trim=new THREE.Mesh(own(new THREE.PlaneGeometry(w,h)),trimMaterial); trim.position.set(x,y,-.85); scene.add(trim);
-        });
-        const holeGeometry=own(new THREE.CircleGeometry(.67,40)), holeMaterial=own(new THREE.MeshBasicMaterial({color:0x050609}));
-        const rimGeometry=own(new THREE.RingGeometry(.67,.71,40)), rimMaterial=own(new THREE.MeshBasicMaterial({color:0x5f444b}));
-        pockets.forEach(([x,y])=>{
-          const hole=new THREE.Mesh(holeGeometry,holeMaterial); hole.position.set(x,y,-.5); scene.add(hole);
-          const rim=new THREE.Mesh(rimGeometry,rimMaterial); rim.position.set(x,y,-.51); scene.add(rim);
-        });
-        // Quiet rail diamonds and a crimson center mark keep the theme restrained.
-        const diamondGeometry=own(new THREE.CircleGeometry(.055,4)), diamondMaterial=own(new THREE.MeshBasicMaterial({color:0xb69b94}));
-        [-7,-3.5,3.5,7].forEach(x=>[-5.17,5.17].forEach(y=>{const mark=new THREE.Mesh(diamondGeometry,diamondMaterial);mark.position.set(x,y,-.4);scene.add(mark);}));
-        const centerMark=new THREE.Mesh(own(new THREE.RingGeometry(.25,.28,4)),own(new THREE.MeshBasicMaterial({color:0x783442,transparent:true,opacity:.45}))); centerMark.position.set(-3,0,-.7); scene.add(centerMark);
-        let balls=createPoolBalls(groups);
-        const geometry=own(new THREE.SphereGeometry(.4,32,24)), plateGeometry=own(new THREE.CircleGeometry(.155,32));
-        const shadowGeometry=own(new THREE.CircleGeometry(.42,32)),shadowMaterial=own(new THREE.MeshBasicMaterial({color:0x020608,transparent:true,opacity:.35}));
-        const plateMaterial=own(new THREE.MeshBasicMaterial({color:0xfffaf2})), textureLoader=new THREE.TextureLoader(), textures=new Map();
-        const spriteFromCanvas=(canvas,width,height)=>{
-          const texture=own(new THREE.CanvasTexture(canvas)); texture.colorSpace=THREE.SRGBColorSpace;
-          const sprite=new THREE.Sprite(own(new THREE.SpriteMaterial({map:texture,depthTest:false})));
-          sprite.scale.set(width,height,1); sprite.renderOrder=3; scene.add(sprite); return sprite;
-        };
-        const visuals=balls.map(ball=>{
-          const color=new THREE.Color(ball.cue ? '#f8f4ec' : ball.color);
-          if(!ball.cue) color.lerp(new THREE.Color('#4d5966'),.22);
-          const material=own(new THREE.MeshPhysicalMaterial({color,roughness:.36,metalness:0,clearcoat:.45,clearcoatRoughness:.3}));
-          const mesh=new THREE.Mesh(geometry,material); scene.add(mesh);
-          const shadow=new THREE.Mesh(shadowGeometry,shadowMaterial);scene.add(shadow);
-          if(ball.cue) return {mesh,shadow};
-          const plate=new THREE.Mesh(plateGeometry,plateMaterial); scene.add(plate);
-          let logo;
-          const logoPath=ball.title==='SQL' ? null : skillLogos[ball.title];
-          if(logoPath){
-            if(!textures.has(logoPath)){
-              const texture=own(textureLoader.load(logoPath)); texture.colorSpace=THREE.SRGBColorSpace; textures.set(logoPath,texture);
-            }
-            logo=new THREE.Sprite(own(new THREE.SpriteMaterial({map:textures.get(logoPath),depthTest:false})));
-            logo.scale.set(.24,.24,1); logo.renderOrder=4; scene.add(logo);
-          }
-          const canvas=document.createElement('canvas');canvas.width=512;canvas.height=256;
-          const context=canvas.getContext('2d');context.textAlign='center';context.textBaseline='middle';
-          const lines=[''];ball.title.split(' ').forEach(word=>{const last=lines.length-1;if((lines[last]+' '+word).trim().length>12&&lines[last]) lines.push(word);else lines[last]=(lines[last]+' '+word).trim();});
-          context.fillStyle='#0b1118';context.globalAlpha=.8;context.beginPath();context.roundRect(12,12,488,232,52);context.fill();context.globalAlpha=1;
-          context.fillStyle='#ffffff';
-          lines.forEach((line,row)=>{context.font='700 110px "Space Grotesk",sans-serif';const size=Math.min(110,110*490/Math.max(1,context.measureText(line).width));context.font=`700 ${size}px "Space Grotesk",sans-serif`;context.fillText(line,256,128+(row-(lines.length-1)/2)*95);});
-          const label=spriteFromCanvas(canvas,.73,.365);
-          if(!logo){scene.remove(plate);}
-          return {mesh,shadow,plate,logo,label};
-        });
-        const aim=new THREE.Line(own(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(),new THREE.Vector3()])),own(new THREE.LineDashedMaterial({color:0xf3c2b1,dashSize:.13,gapSize:.13,transparent:true,opacity:.8})));
-        aim.visible=false;scene.add(aim);
-        const cueStick=new THREE.Line(own(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(),new THREE.Vector3()])),own(new THREE.LineBasicMaterial({color:0xc79875}))); cueStick.visible=false;scene.add(cueStick);
-        const raycaster=new THREE.Raycaster(), pointer=new THREE.Vector2(), point=new THREE.Vector3(), dragPlane=new THREE.Plane(new THREE.Vector3(0,0,1),0);
-        let dragging=false,pull={x:0,y:0},keyboardAngle=0;
-        const getPoint=event=>{
-          const rect=renderer.domElement.getBoundingClientRect();pointer.set((event.clientX-rect.left)/rect.width*2-1,-(event.clientY-rect.top)/rect.height*2+1);
-          raycaster.setFromCamera(pointer,camera);raycaster.ray.intersectPlane(dragPlane,point);return point;
-        };
-        const launch=vector=>{
-          if(ballsMoving(balls)||balls[0].pocketed) return;
-          if(shootCue(balls[0],vector)){setShots(value=>value+1);setMoving(true);setMessage('Shot in play. Skills collect automatically when pocketed.');host.dataset.shots=String(Number(host.dataset.shots||0)+1);}
-        };
-        const down=event=>{
-          if(event.button!==0 || ballsMoving(balls) || balls[0].pocketed) return;
-          getPoint(event);
-          if(Math.hypot(point.x-balls[0].x,point.y-balls[0].y)>.65){setMessage('Start your shot on the white cue ball.');return;}
-          dragging=true;pull={x:0,y:0};renderer.domElement.focus();renderer.domElement.setPointerCapture(event.pointerId);host.style.cursor='grabbing';
-        };
-        const move=event=>{if(!dragging) return;getPoint(event);pull={x:point.x-balls[0].x,y:point.y-balls[0].y};setPower(Math.round(Math.min(Math.hypot(pull.x,pull.y)/4,1)*100));};
-        const finish=event=>{
-          if(!dragging) return;dragging=false;if(event.type==='pointerup') launch(pull);setPower(0);host.style.cursor='crosshair';
-          if(renderer.domElement.hasPointerCapture(event.pointerId)) renderer.domElement.releasePointerCapture(event.pointerId);
-        };
-        const keyboard=event=>{
-          if(event.key==='ArrowLeft'||event.key==='ArrowRight'){event.preventDefault();keyboardAngle+=(event.key==='ArrowLeft'?1:-1)*Math.PI/18;setMessage(`Aim: ${Math.round(keyboardAngle*180/Math.PI)}°. Press Space to shoot.`);}
-          if(event.code==='Space'){event.preventDefault();launch({x:-Math.cos(keyboardAngle)*3,y:-Math.sin(keyboardAngle)*3});}
-        };
-        const events=[['pointerdown',down],['pointermove',move],['pointerup',finish],['pointercancel',finish],['lostpointercapture',finish],['keydown',keyboard]];
-        events.forEach(([name,listener])=>renderer.domElement.addEventListener(name,listener));
-        const resize=()=>renderer.setSize(host.clientWidth,host.clientHeight);
-        const resizeObserver=new ResizeObserver(resize);resizeObserver.observe(host);resize();
-        apiRef.current={break:()=>launch({x:-4,y:0}),reset:()=>{balls=createPoolBalls(groups);dragging=false;setCollected([]);setShots(0);setPower(0);setMoving(false);setMessage('Fresh rack. Drag back from the white cue ball to shoot.');host.dataset.pocketCount='0';host.dataset.shots='0';}};
-        let previous=0,accumulator=0,frame=0,wasMoving=false;
-        const animate=time=>{
-          frame=requestAnimationFrame(animate);const dt=previous?Math.min((time-previous)/1000,.05):0;previous=time;
-          if(!inView||document.hidden) return;
-          accumulator+=dt;const pocketed=[],cueWasPocketed=balls[0].pocketed;
-          while(accumulator>=1/120){stepPool(balls,1/120,ball=>pocketed.push(ball));accumulator-=1/120;}
-          if(pocketed.length){
-            const skills=pocketed.filter(ball=>!ball.cue);if(skills.length){setCollected(old=>[...old,...skills.map(ball=>ball.title)]);setMessage(`${skills.at(-1).title} collected in ${skills.at(-1).category}.`);host.dataset.lastPocket=skills.at(-1).title;}
-            else setMessage('Cue ball pocketed. It returns when the table settles.');
-          }
-          if(cueWasPocketed&&!balls[0].pocketed) setMessage('Cue ball returned. Ready for your next shot.');
-          balls.forEach((ball,index)=>{
-            const visual=visuals[index];Object.values(visual).filter(Boolean).forEach(item=>{item.visible=!ball.pocketed;});
-            visual.mesh.position.set(ball.x,ball.y,0);
-            visual.shadow.position.set(ball.x+.065,ball.y-.07,-.65);
-            // Logos are separate camera-facing sprites: motion never spins them away.
-            visual.plate?.position.set(ball.x,ball.y+.17,.41);visual.logo?.position.set(ball.x,ball.y+.17,.45);visual.label?.position.set(ball.x,ball.y-(visual.logo ? .18 : 0),.46);
-          });
-          host.dataset.pocketCount=String(balls.filter(ball=>!ball.cue&&ball.pocketed).length);const isMoving=ballsMoving(balls);host.dataset.moving=String(isMoving);if(wasMoving!==isMoving){wasMoving=isMoving;setMoving(isMoving);}
-          aim.visible=cueStick.visible=dragging&&Math.hypot(pull.x,pull.y)>.1;
-          if(aim.visible){
-            const length=Math.hypot(pull.x,pull.y),x=pull.x/length,y=pull.y/length,cue=balls[0];
-            aim.geometry.attributes.position.setXYZ(0,cue.x,cue.y,.45);aim.geometry.attributes.position.setXYZ(1,cue.x-x*4,cue.y-y*4,.45);aim.geometry.attributes.position.needsUpdate=true;aim.computeLineDistances();
-            cueStick.geometry.attributes.position.setXYZ(0,cue.x+x*.5,cue.y+y*.5,.45);cueStick.geometry.attributes.position.setXYZ(1,cue.x+x*(1.6+Math.min(length,3)),cue.y+y*(1.6+Math.min(length,3)),.45);cueStick.geometry.attributes.position.needsUpdate=true;
-          }
-          renderer.render(scene,camera);
-        };
-        host.dataset.mode='pool';host.dataset.ballCount=String(balls.length-1);host.dataset.logoCount=String(balls.filter(ball=>skillLogos[ball.title]&&ball.title!=='SQL').length);host.dataset.ready='true';
-        frame=requestAnimationFrame(animate);setReady(true);
-        const contextLost=event=>{event.preventDefault();setFailed(true);};renderer.domElement.addEventListener('webglcontextlost',contextLost);
-        dispose=()=>{cancelAnimationFrame(frame);resizeObserver.disconnect();events.forEach(([name,listener])=>renderer.domElement.removeEventListener(name,listener));renderer.domElement.removeEventListener('webglcontextlost',contextLost);resources.forEach(resource=>resource.dispose());renderer.dispose();renderer.forceContextLoss();renderer.domElement.remove();apiRef.current=null;};
-      } catch { resources.forEach(resource=>resource.dispose());renderer?.dispose();renderer?.domElement.remove();if(!cancelled) setFailed(true); }
+    const host=hostRef.current,canvas=document.createElement('canvas');let renderer;
+    try {renderer=createGolfRenderer(canvas);}catch{setFailed(true);return;}
+    canvas.tabIndex=0;canvas.setAttribute('role','application');canvas.setAttribute('aria-label','Skill mini golf. Drag backward from the skill ball and release to putt. Arrow keys aim and adjust power. Space shoots.');host.appendChild(canvas);
+    const skills=groups.flatMap(group=>group.items.map(item=>({...item,color:group.themeColor,category:group.genre})));
+    let course,ball,skill,pickups,level=levelRef.current,strokes=0,dragging=false,pull={x:0,y:0},angle=0,keyPower=1.3,particles=[],trail=[],flash=0,sinkTime=0,audio,chain=0,levelScore=0,lastFx=0,lastSave=0;
+    const camera={zoom:1,x:11,y:5.5};
+    let inView=false,frame=0,previous=0,accumulator=0,wasMoving=false,dirty=false;
+    const persist=()=>{
+      if(!course||!ball) return;
+      const checkpoint={level,seed:course.seed,skill:skill.title,pickups:pickups.map(item=>item.title),ball:{...ball,stats:{...ball.stats}},strokes,score:scoreRef.current,levelScore,combo:chain,collected:[...earnedRef.current],history:[...historyRef.current],walls:course.walls.map(wall=>!!wall.broken),tokens:course.tokens.map(token=>!!token.collected)};
+      progressRef.current=checkpoint;
+      dirty=false;
+      try {setSaveStatus(saveGolfProgress(window.localStorage,checkpoint)?'Progress saved in this browser':'Browser storage unavailable · progress lasts this visit');}catch{setSaveStatus('Progress lasts this visit');}
     };
-    const observer=new IntersectionObserver(([entry])=>{inView=entry.isIntersecting;if(inView&&!started){started=true;initialize();}},{rootMargin:'150px'});
-    observer.observe(host);return()=>{cancelled=true;observer.disconnect();dispose?.();};
+    const collect=reward=>{if(earnedRef.current.has(reward.title)) return false;earnedRef.current.add(reward.title);setCollected([...earnedRef.current]);return true;};
+    const award=(points,label,chainHit=false)=>{
+      if(chainHit){chain=Math.min(chain+1,10);setCombo(chain);}
+      const earned=Math.round(points*(1+Math.max(0,chain-1)*.15));scoreRef.current+=earned;levelScore+=earned;setScore(scoreRef.current);setScoreEvent(old=>({id:old.id+1,points:earned,label}));
+    };
+    const tone=(frequency,duration=.12)=>{
+      if(!soundRef.current) return;
+      try {audio??=new (window.AudioContext||window.webkitAudioContext)();audio.resume();const oscillator=audio.createOscillator(),gain=audio.createGain();oscillator.connect(gain);gain.connect(audio.destination);oscillator.type='sine';oscillator.frequency.setValueAtTime(frequency,audio.currentTime);oscillator.frequency.exponentialRampToValueAtTime(frequency*1.5,audio.currentTime+duration);gain.gain.setValueAtTime(.045,audio.currentTime);gain.gain.exponentialRampToValueAtTime(.001,audio.currentTime+duration);oscillator.start();oscillator.stop(audio.currentTime+duration);}catch{/* Sound remains optional when audio is unavailable. */}
+    };
+    const burst=(x,y,color,text,count=15)=>{
+      for(let i=0;i<count;i++){const direction=Math.random()*Math.PI*2,speed=1+Math.random()*3;particles.push({x,y,vx:Math.cos(direction)*speed,vy:Math.sin(direction)*speed,life:.5+Math.random()*.4,maxLife:.9,size:.035+Math.random()*.045,color});}
+      if(text) particles.push({x,y:y-.65,vx:0,vy:-.6,life:1.25,maxLife:1.25,color,text});
+    };
+    const publish=()=>setInfo({level,strokes,par:course.par,skill,complete:ball.sunk,seed:course.seed,trick:ball.stats.banks+ball.stats.boosts+ball.stats.warps+ball.stats.breaks>0});
+    const load=(retry=false,advance=false)=>{
+      if(!retry){level=level===0?1:advance?level+1:level;levelRef.current=level;const available=skills.filter(item=>!earnedRef.current.has(item.title));const deck=shuffled(available.length?available:skills);skill=deck[0];course=generateCourse(randomSeed(),level);pickups=course.tokens.map((_,index)=>deck[(index+1)%deck.length]);}
+      else course=generateCourse(course.seed,level);
+      ball=createGolfBall(course);strokes=0;dragging=false;pull={x:0,y:0};particles=[];trail=[];sinkTime=0;flash=0;angle=Math.atan2(course.route[1].y-ball.y,course.route[1].x-ball.x);wasMoving=false;accumulator=0;chain=0;levelScore=0;camera.zoom=1;camera.x=11;camera.y=5.5;setCombo(0);setFx({speed:0,cinematic:false});
+      setPower(0);setMoving(false);setMessage(level===1?'Start simple: a short pull makes a soft putt. Aim for the flag.':'Pull back to putt. Each new hole raises the intensity.');publish();
+      host.dataset.seed=String(course.seed);host.dataset.level=String(level);host.dataset.strokes='0';host.dataset.complete='false';host.dataset.moving='false';
+      persist();
+    };
+    const launch=vector=>{if(slingGolf(ball,vector)){dirty=true;strokes++;chain=0;setCombo(0);setMoving(true);publish();tone(260,.09);setMessage('Bank it. Boost it. Smash through. Chase the flag.');host.dataset.strokes=String(strokes);trail=[];}};
+    const getPoint=event=>{const rect=canvas.getBoundingClientRect();return {x:((event.clientX-rect.left)/rect.width*22-11)/camera.zoom+camera.x,y:((event.clientY-rect.top)/rect.height*11-5.5)/camera.zoom+camera.y};};
+    const down=event=>{
+      if(event.button!==0||golfMoving(ball)||ball.sunk) return;const point=getPoint(event);
+      if(Math.hypot(point.x-ball.x,point.y-ball.y)>.8){setMessage('Start your drag on the skill ball. Pull backward to build power.');return;}
+      dragging=true;pull={x:0,y:0};canvas.focus();canvas.setPointerCapture(event.pointerId);host.style.cursor='grabbing';
+    };
+    const move=event=>{if(!dragging) return;const point=getPoint(event);pull={x:point.x-ball.x,y:point.y-ball.y};setPower(Math.round(Math.min(1,Math.hypot(pull.x,pull.y)/3.25)*100));};
+    const finish=event=>{if(!dragging) return;dragging=false;if(event.type==='pointerup') launch(pull);pull={x:0,y:0};setPower(0);host.style.cursor='crosshair';if(canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId);};
+    const keyboard=event=>{
+      if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown',' '].includes(event.key)) return;event.preventDefault();if(golfMoving(ball)||ball.sunk) return;
+      if(event.key==='ArrowLeft') angle-=Math.PI/36;if(event.key==='ArrowRight') angle+=Math.PI/36;
+      if(event.key==='ArrowUp') keyPower=Math.min(3.25,keyPower+.25);if(event.key==='ArrowDown') keyPower=Math.max(.25,keyPower-.25);
+      if(event.code==='Space'){dragging=false;launch({x:-Math.cos(angle)*keyPower,y:-Math.sin(angle)*keyPower});setPower(0);}
+      else {dragging=true;pull={x:-Math.cos(angle)*keyPower,y:-Math.sin(angle)*keyPower};setPower(Math.round(keyPower/3.25*100));setMessage('← → aim · ↑ ↓ power · Space putts');}
+    };
+    const events=[['pointerdown',down],['pointermove',move],['pointerup',finish],['pointercancel',finish],['lostpointercapture',finish],['keydown',keyboard]];
+    events.forEach(([name,handler])=>canvas.addEventListener(name,handler));
+    const resizeObserver=new ResizeObserver(()=>renderer.resize(host.clientWidth,host.clientHeight));resizeObserver.observe(host);renderer.resize(host.clientWidth,host.clientHeight);
+    const observer=new IntersectionObserver(([entry])=>{inView=entry.isIntersecting;previous=0;},{rootMargin:'100px'});observer.observe(host);
+    const onEvent=event=>{
+      dirty=true;
+      const {type,x,y}=event;host.dataset.lastEvent=type;
+      if(type==='wall'){burst(x,y,'#d9c5a0',null,4);tone(150,.05);award(10,'Bank shot',true);}
+      if(type==='boost'){burst(x,y,'#ffd27d','OVERDRIVE');flash=1;tone(580);award(50,'Boost hit',true);setMessage('Overdrive! High speed can smash interior walls.');}
+      if(type==='bumper'){burst(x,y,'#f98da2','BOING');flash=1;tone(380);award(25,'Ninja rebound',true);setMessage('Bumper bounce! Use the rebound to your advantage.');}
+      if(type==='portal'){burst(x,y,'#bd9afc','WARP');flash=.5;tone(720,.2);award(75,'Portal trick',true);setMessage('Portal jump. Momentum carries through.');trail=[];}
+      if(type==='shatter'){burst(x,y,'#f19a83','WALL SMASH!',35);particles.slice(-36).forEach(p=>{if(!p.text){p.shard=true;p.size*=2;p.vx*=1.6;p.vy*=1.6;}});flash=2;tone(110,.2);award(150,'Wall smash',true);setShake(value=>value+1);setMessage('Wall smashed! The outer rails always keep you in bounds.');}
+      if(type==='skill'){const reward=pickups[event.index];if(collect(reward)) award(150,`${reward.title} pickup`);burst(x,y,reward.color,`+ ${reward.title}`);tone(880);setMessage(`${reward.title} added to ${reward.category}.`);}
+      if(type==='hole'){
+        collect(skill);const trick=ball.stats.banks+ball.stats.boosts+ball.stats.warps+ball.stats.breaks>0;award(1000+Math.max(0,course.par-strokes)*250+(trick?300:0),trick?'Trick-shot finish':'Hole complete');burst(x,y,'#ffcf8b',strokes===1?'HOLE IN ONE!':trick?'TRICK SHOT!':'NICE PUTT!',65);tone(1040,.35);flash=2;setShake(value=>value+1);sinkTime=0;publish();historyRef.current=[{level,strokes,score:levelScore,skill:skill.title},...historyRef.current].slice(0,5);setHistory(historyRef.current);host.dataset.complete='true';setMessage(`${skill.title} collected. Ready for a new course?`);persist();
+      }
+    };
+    const animate=time=>{
+      frame=requestAnimationFrame(animate);const dt=previous?Math.min((time-previous)/1000,.04):0;previous=time;if(!inView||document.hidden) return;
+      const speed=Math.hypot(ball.vx,ball.vy),nearCup=Math.hypot(ball.x-course.hole.x,ball.y-course.hole.y)<2.2;
+      const cinematic=!ball.sunk&&nearCup&&speed>.05&&speed<7;
+      accumulator+=dt*(cinematic?.32:1);while(accumulator>=1/120){stepGolf(ball,course,1/120,onEvent);accumulator-=1/120;}
+      const targetZoom=cinematic||ball.sunk&&sinkTime<.8?1.35:1;camera.zoom+=(targetZoom-camera.zoom)*Math.min(1,dt*5);
+      const halfWidth=11/camera.zoom,halfHeight=5.5/camera.zoom;camera.x=Math.max(halfWidth,Math.min(22-halfWidth,course.hole.x));camera.y=Math.max(halfHeight,Math.min(11-halfHeight,course.hole.y));
+      if(time-lastFx>100){lastFx=time;setFx({speed:Math.round(speed),cinematic});host.dataset.cinematic=String(cinematic);host.dataset.speed=String(Math.round(speed));host.dataset.score=String(scoreRef.current);}
+      const isMoving=golfMoving(ball);if(isMoving!==wasMoving){wasMoving=isMoving;setMoving(isMoving);if(!isMoving&&!ball.sunk) setMessage('Ball settled. Pull back for your next putt.');if(!isMoving) persist();}
+      if(isMoving&&time-lastSave>1000){lastSave=time;persist();}
+      if(isMoving){trail.push({x:ball.x,y:ball.y});if(trail.length>30) trail.shift();}else if(trail.length) trail.shift();
+      particles.forEach(p=>{p.x+=p.vx*dt;p.y+=p.vy*dt;p.life-=dt;});particles=particles.filter(p=>p.life>0);flash=Math.max(0,flash-dt*3);if(ball.sunk) sinkTime+=dt;
+      host.dataset.moving=String(isMoving);host.dataset.collected=String(earnedRef.current.size);
+      renderer.draw({course,ball,skill,pickups,pull,dragging,time:time/1000,particles,trail,flash,sinkTime,camera});
+    };
+    const resume=progressRef.current;
+    if(resume){
+      course=generateCourse(resume.seed,resume.level);level=resume.level;skill=skills.find(item=>item.title===resume.skill);pickups=course.tokens.map((_,index)=>skills.find(item=>item.title===resume.pickups[index])||skills[index%skills.length]);
+      ball={...createGolfBall(course),...resume.ball};strokes=resume.strokes;chain=resume.combo;levelScore=resume.levelScore;course.walls.forEach((wall,index)=>wall.broken=!!resume.walls[index]);course.tokens.forEach((token,index)=>token.collected=!!resume.tokens[index]);angle=Math.atan2(course.hole.y-ball.y,course.hole.x-ball.x);setCombo(chain);setMoving(golfMoving(ball));setMessage('Welcome back. Your course, score, and skills are restored.');publish();host.dataset.seed=String(course.seed);host.dataset.level=String(level);host.dataset.strokes=String(strokes);host.dataset.complete=String(ball.sunk);persist();
+    }else load();
+    host.dataset.mode='golf';host.dataset.ready='true';apiRef.current={next:()=>load(false,true),reroll:()=>load(),retry:()=>load(true)};frame=requestAnimationFrame(animate);
+    const onLeave=()=>{if(dirty||golfMoving(ball)) persist();};window.addEventListener('pagehide',onLeave);
+    return()=>{onLeave();cancelAnimationFrame(frame);observer.disconnect();resizeObserver.disconnect();events.forEach(([name,handler])=>canvas.removeEventListener(name,handler));window.removeEventListener('pagehide',onLeave);canvas.remove();audio?.close();apiRef.current=null;};
   },[enabled,groups]);
   const total=groups.reduce((sum,group)=>sum+group.items.length,0);
+  const toggleSound=()=>{soundRef.current=!soundRef.current;setSound(soundRef.current);};
   return <div className="sp-skills-interactive">
-    {enabled&&<div className="sp-pool-category-key" aria-label="Skill ball colors">{groups.map(group=><span key={group.genre} style={{'--skill-color':group.themeColor}}><i/>{group.genre}</span>)}</div>}
-    {desktop&&!failed&&<div className="sp-physics-toolbar"><div><p>{cards?'Your toolkit, organized by discipline.':'Pull back. Aim. Release.'}</p>{!cards&&<span className="sp-pool-meta">{collected.length} / {total} collected · {shots} {shots===1?'shot':'shots'}</span>}</div><div>{!cards&&<><button disabled={!ready||moving} onClick={()=>apiRef.current?.break()}><Crosshair size={14}/> Break rack</button><button onClick={()=>apiRef.current?.reset()}><RotateCcw size={14}/> Reset</button></>}<button onClick={()=>setCards(!cards)}><LayoutGrid size={14}/>{cards?'Pool table':'Skill cards'}</button></div></div>}
-    {enabled?<><div ref={hostRef} className="sp-physics-field sp-pool-table">{!ready&&<span className="sp-physics-loading">Preparing the skill table…</span>}</div><div className="sp-pool-status"><p aria-live="polite">{collected.length===total?'Table cleared. Your full toolkit, collected.':message}</p><span>POWER <meter min="0" max="100" value={power} aria-label="Shot power"/></span></div><div className="sp-pool-collections">{groups.map(group=><article key={group.genre} style={{'--skill-color':group.themeColor}}><h3><i/>{group.genre}<span>{group.items.filter(item=>collected.includes(item.title)).length}/{group.items.length}</span></h3><div>{group.items.filter(item=>collected.includes(item.title)).map(item=><div key={item.title} className="sp-collected-skill"><span className="sp-collected-ball">{skillLogos[item.title]&&item.title!=='SQL'&&<img src={skillLogos[item.title]} alt=""/>}</span><span>{item.title}</span></div>)}{!group.items.some(item=>collected.includes(item.title))&&<p className="sp-pool-empty">Your collected skills appear here.</p>}</div></article>)}</div></>:children}
+    {desktop&&!failed&&<div className="sp-physics-toolbar"><div><p>{cards?'Your toolkit, organized by discipline.':'Skill golf. Turn up the intensity.'}</p>{!cards&&<span className="sp-pool-meta">Pull back to putt · ← → aim · ↑ ↓ power · Space shoots</span>}</div><div>{!cards&&<><button onClick={()=>apiRef.current?.reroll()}><Shuffle size={14}/> New course</button><button onClick={()=>apiRef.current?.retry()} aria-label="Retry current hole"><RotateCcw size={14}/> Retry</button><button onClick={toggleSound} aria-label={sound?'Mute game sounds':'Enable game sounds'} aria-pressed={sound}>{sound?<Volume2 size={14}/>:<VolumeX size={14}/>}</button></>}<button onClick={()=>setCards(!cards)}><LayoutGrid size={14}/>{cards?'Play golf':'Skill cards'}</button></div></div>}
+    {enabled?<>
+      <div className={`sp-golf-layout ${shake?(shake%2?'sp-golf-jolt-a':'sp-golf-jolt-b'):''}`}><div className="sp-golf-main">
+      <div className="sp-golf-scoreboard"><div className="sp-golf-active">{info&&skillLogos[info.skill.title]&&<img src={skillLogos[info.skill.title]} alt=""/>}<div><span>YOUR SKILL BALL</span><strong style={{color:info?.skill.color}}>{info?.skill.title||'Loading…'}</strong></div></div><div className="sp-golf-score"><span>LEVEL <strong>{info?.level||1}</strong></span><span>PAR <strong>{info?.par||3}</strong></span><span>STROKES <strong>{info?.strokes||0}</strong></span><span>SKILLS <strong>{collected.length}<small> / {total}</small></strong></span></div></div>
+      <div ref={hostRef} className="sp-physics-field sp-pool-table sp-golf-course">{!info?.complete&&(fx.cinematic||fx.speed>12)&&<div className={`sp-golf-cinematic ${fx.cinematic?'':'is-fast'}`}>{fx.cinematic?'CUP CAM · SLOW MOTION':'OVERDRIVE'}</div>}{info?.complete&&<div className="sp-golf-finish"><span><Flag size={18}/> {info.strokes===1?'Hole in one':info.trick?'Trick-shot finish':info.strokes<info.par?'Under par':'Hole complete'}</span><h3>{info.skill.title} unlocked.</h3><p>{info.strokes} {info.strokes===1?'stroke':'strokes'} · Par {info.par}</p><button onClick={()=>apiRef.current?.next()}>Next level <Flag size={14}/></button></div>}</div>
+      <div className="sp-pool-status"><p aria-live="polite">{message}</p><span>{moving?'IN PLAY':'POWER'} <meter min="0" max="100" value={power} aria-label="Shot power"/></span></div>
+      <div className="sp-golf-legend"><span><i className="boost"/> Boost pad</span>{info?.level>=2&&<span><i className="bumper"/> Ninja bumper</span>}{info?.level>=3&&<span><i className="portal"/> Portal pair</span>}{info?.level>=4&&<span><i className="sand"/> Slow sand</span>}<span><i className="pickup"/> Skill pickup</span></div>
+      <p className="sp-golf-save-note">{saveStatus} · {info?.level===1?'Warm-up':info?.level<4?'Trick shots':info?.level<7?'Overdrive':'Extreme'} difficulty</p>
+      </div><aside className="sp-golf-liveboard" aria-label="Live golf scoreboard"><div className="sp-golf-board-heading"><span className={moving?'is-playing':''}/><h3>Live scoreboard</h3></div><span className="sp-golf-score-caption">TOTAL POINTS</span><div className="sp-golf-total"><ScoreTicker value={score}/></div><div key={scoreEvent.id} className="sp-golf-score-event" aria-live="polite">{scoreEvent.points>0&&<strong>+{scoreEvent.points}</strong>}<span>{scoreEvent.label}</span></div><div className={`sp-golf-combo ${combo>1?'is-active':''}`}><span>TRICK CHAIN</span><strong key={combo}>{combo>1?`${combo}×`:'—'}</strong><p>Bank · boost · warp · smash</p></div><div className="sp-golf-speed"><span>BALL SPEED <strong>{fx.speed}</strong></span><meter min="0" max="30" value={fx.speed} aria-label="Ball speed"/><small>{fx.cinematic?'Slow motion at the cup':fx.speed>12?'Wall-breaking speed':moving?'Shot in play':'Ready to slingshot'}</small></div><div className="sp-golf-recent"><h4>Recent holes</h4>{history.length?history.map((result,index)=><div key={`${result.level}-${index}`}><span><b>#{result.level}</b> {result.strokes} {result.strokes===1?'stroke':'strokes'}</span><strong>+{result.score.toLocaleString()}</strong></div>):<p>Sink a skill ball to post your first result.</p>}</div></aside></div>
+      <div className="sp-pool-collections">{groups.map(group=><article key={group.genre} style={{'--skill-color':group.themeColor}}><h3><i/>{group.genre}<span>{group.items.filter(item=>collected.includes(item.title)).length}/{group.items.length}</span></h3><div>{group.items.filter(item=>collected.includes(item.title)).map(item=><div key={item.title} className="sp-collected-skill"><span className="sp-collected-ball">{skillLogos[item.title]&&<img src={skillLogos[item.title]} alt=""/>}</span><span>{item.title}</span></div>)}{!group.items.some(item=>collected.includes(item.title))&&<p className="sp-pool-empty">Pick up skills or sink your skill ball.</p>}</div></article>)}</div>
+    </>:children}
   </div>;
 }
 SkillPhysicsField.propTypes={groups:PropTypes.array.isRequired,children:PropTypes.node.isRequired};
