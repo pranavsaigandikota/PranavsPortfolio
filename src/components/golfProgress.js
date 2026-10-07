@@ -12,6 +12,8 @@ export function loadGolfProgress(storage,titles) {
     if(saved.score>1e15||saved.combo>10) return null;
     const stats={};['banks','boosts','warps','breaks','maxSpeed'].forEach(key=>stats[key]=Number.isFinite(b.stats?.[key])?Math.max(0,Math.min(1e5,b.stats[key])):0);
     saved.ball={x:b.x,y:b.y,vx:b.vx,vy:b.vy,sunk:b.sunk===true,shotTime:Number.isFinite(b.shotTime)?Math.max(0,Math.min(16.1,b.shotTime)):0,stats};
+    saved.ball.usedEcho=b.usedEcho===true;
+    saved.ball.usedBoosts=Array.isArray(b.usedBoosts)?b.usedBoosts.filter(index=>Number.isInteger(index)&&index>=0&&index<10):[];
     ['boostCooldown','portalCooldown','bumperCooldown'].forEach(key=>saved.ball[key]=Number.isFinite(b[key])?Math.max(0,Math.min(2,b[key])):0);
     saved.collected=[...new Set(saved.collected)];return saved;
   }catch{return null;}

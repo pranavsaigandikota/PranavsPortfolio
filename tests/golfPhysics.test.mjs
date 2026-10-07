@@ -30,9 +30,9 @@ test('sand slows the ball, bumpers kick it outward, and skill pickups only fire 
   course.bumpers=[{x:3,y:5,r:.5}];b.x=2.4;b.y=5;b.vx=2;const events=[];stepGolf(b,course,1/120,e=>events.push(e.type));assert.ok(b.vx<=-7);assert.ok(events.includes('bumper'));
   course.bumpers=[];course.tokens=[{x:b.x,y:b.y}];stepGolf(b,course,1/120,e=>events.push(e.type));stepGolf(b,course,1/120,e=>events.push(e.type));assert.equal(events.filter(e=>e==='skill').length,1);
 });
-test('a controlled putt sinks once, while a fast ball can overshoot',()=>{
+test('touching the cup sinks once, including a fast trick shot',()=>{
   const course=empty(),ball=createGolfBall(course);ball.x=course.hole.x-.3;ball.y=course.hole.y;ball.vx=1;const events=[];stepGolf(ball,course,1/120,e=>events.push(e.type));assert.equal(ball.sunk,true);stepGolf(ball,course,1/120,e=>events.push(e.type));assert.equal(events.filter(e=>e==='hole').length,1);
-  const fast=createGolfBall(course);fast.x=course.hole.x-.3;fast.y=course.hole.y;fast.vx=12;stepGolf(fast,course,1/120);assert.equal(fast.sunk,false);
+  const fast=createGolfBall(course);fast.x=course.hole.x-.3;fast.y=course.hole.y;fast.vx=12;stepGolf(fast,course,1/120);assert.equal(fast.sunk,true);
 });
 test('generated courses keep high-power shots finite and inside the boundary',()=>{
   for(let seed=0;seed<40;seed++){const course=generateCourse(seed,1+seed%12),ball=createGolfBall(course);slingGolf(ball,{x:-3,y:(seed%7-3)/2});for(let tick=0;tick<2400;tick++){stepGolf(ball,course,1/120);assert.ok(Number.isFinite(ball.x+ball.y+ball.vx+ball.vy));assert.ok(ball.x>=1.3&&ball.x<=20.7&&ball.y>=1.3&&ball.y<=9.7);}assert.equal(typeof golfMoving(ball),'boolean');}
@@ -49,10 +49,23 @@ test('difficulty begins open and introduces more obstacles and narrower gaps',()
   const beginner=generateCourse(123,1),mid=generateCourse(123,4),extreme=generateCourse(123,10);
   assert.equal(beginner.walls.length,0);assert.equal(beginner.bumpers.length,0);assert.equal(beginner.portals.length,0);assert.ok(mid.walls.length>0);assert.ok(extreme.walls.length>mid.walls.length);assert.ok(extreme.bumpers.length>mid.bumpers.length);assert.ok(extreme.sand.length>mid.sand.length);
 });
+test('cup rejects the ball until every course pickup is collected',()=>{
+  const course=empty();course.tokens=[{x:8,y:3,collected:false},{x:9,y:3,collected:true}];const ball=createGolfBall(course);ball.x=course.hole.x-.5;ball.y=course.hole.y;ball.vx=10;const events=[];stepGolf(ball,course,1/120,e=>events.push(e.type));assert.equal(ball.sunk,false);assert.ok(ball.vx<0);assert.ok(events.includes('locked'));
+  course.tokens[0].collected=true;ball.x=course.hole.x-.5;ball.vx=10;stepGolf(ball,course,1/120);assert.equal(ball.sunk,true);
+});
+test('boost pads aim through the next opening or at the cup and fire only once per shot',()=>{
+  for(let level=1;level<=10;level++){const course=generateCourse(123,level);for(const boost of course.boosts){const ball=createGolfBall(course);ball.x=boost.x+boost.w/2;ball.y=boost.y+boost.h/2;ball.vx=1;const target=course.route.find(point=>point.x>boost.x+boost.w+ball.r)||course.hole;let hits=0;stepGolf(ball,course,1/120,e=>{if(e.type==='boost') hits++;});assert.ok(ball.vx>0);assert.ok(Math.abs(Math.atan2(ball.vy,ball.vx)-Math.atan2(target.y-ball.y,target.x-ball.x))<.01);assert.equal(hits,1);ball.x=boost.x+.5;ball.y=boost.y+.5;ball.vx=-1;ball.vy=0;ball.boostCooldown=0;stepGolf(ball,course,1/120,e=>{if(e.type==='boost') hits++;});assert.equal(hits,1);}}
+});
 test('progress round-trips course, ball, score and rewards; corrupt or unavailable storage is safe',()=>{
   const map=new Map(),storage={getItem:key=>map.get(key),setItem:(key,value)=>map.set(key,value)},titles=new Set(['React','Python']);
   const course=generateCourse(42,3),snapshot={level:3,seed:42,skill:'React',pickups:['Python','React','Python'],ball:createGolfBall(course),score:1450,levelScore:400,strokes:2,combo:3,collected:['Python'],history:[],walls:course.walls.map(()=>false),tokens:course.tokens.map(()=>false)};
   assert.equal(saveGolfProgress(storage,snapshot),true);const loaded=loadGolfProgress(storage,titles);assert.equal(loaded.level,3);assert.equal(loaded.seed,42);assert.equal(loaded.score,1450);assert.equal(loaded.ball.x,snapshot.ball.x);assert.deepEqual(loaded.collected,['Python']);
   storage.setItem(GOLF_SAVE_KEY,'invalid json');assert.equal(loadGolfProgress(storage,titles),null);saveGolfProgress(storage,{...snapshot,ball:{...snapshot.ball,x:100}});assert.equal(loadGolfProgress(storage,titles),null);
   assert.equal(saveGolfProgress({setItem:()=>{throw new Error('quota');}},snapshot),false);assert.equal(loadGolfProgress({getItem:()=>{throw new Error('blocked');}},titles),null);
+});
+test('regular boosts are common and gentler; echo splitting triggers once per shot',()=>{
+  let ordinary=0,extreme=0;for(let seed=0;seed<200;seed++){generateCourse(seed,6).boosts.forEach(boost=>boost.kind==='boost'?ordinary++:extreme++);}assert.ok(ordinary>extreme*2);assert.ok(extreme>0);
+  const course=empty();course.boosts=[{x:2,y:4,w:2,h:2,angle:0,kind:'boost'}];const ball=createGolfBall(course);ball.x=2.5;ball.vx=10;stepGolf(ball,course,1/120);assert.ok(ball.vx>10&&ball.vx<13);
+  course.boosts[0].kind='overdrive';ball.usedBoosts=[];ball.boostCooldown=0;ball.vx=10;stepGolf(ball,course,1/120);assert.ok(ball.vx>=16);
+  course.boosts=[];course.echoes=[{x:3,y:5}];ball.x=3;ball.y=5;ball.vx=1;let splits=0;stepGolf(ball,course,1/120,event=>{if(event.type==='echo') splits++;});stepGolf(ball,course,1/120,event=>{if(event.type==='echo') splits++;});assert.equal(splits,1);ball.vx=ball.vy=0;slingGolf(ball,{x:-.5,y:0});stepGolf(ball,course,1/120,event=>{if(event.type==='echo') splits++;});assert.equal(splits,2);
 });
