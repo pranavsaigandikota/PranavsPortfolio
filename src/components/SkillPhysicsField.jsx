@@ -21,7 +21,7 @@ export function SkillPhysicsField({ groups, children }) {
     if(!enabled) return;
     const host=hostRef.current;
     let cancelled=false, inView=false, started=false, dispose=null;
-    setReady(false); setCollected([]); setShots(0); setPower(0); setMoving(false);
+    setReady(false); setCollected([]); setShots(0); setPower(0); setMoving(false); setMessage('Drag from the white cue ball to shoot. Arrow keys aim · Space shoots.');
     const initialize=async()=>{
       let renderer;
       const resources=[];
@@ -36,18 +36,29 @@ export function SkillPhysicsField({ groups, children }) {
         renderer.domElement.tabIndex=0; host.appendChild(renderer.domElement);
         const scene=new THREE.Scene(), camera=new THREE.OrthographicCamera(-POOL.width/2,POOL.width/2,POOL.height/2,-POOL.height/2,.1,100);
         camera.position.z=20;
-        scene.add(new THREE.HemisphereLight(0xffffff,0x111118,2.2));
-        const light=new THREE.DirectionalLight(0xffffff,3); light.position.set(-5,8,10); scene.add(light);
+        scene.add(new THREE.HemisphereLight(0xffffff,0x20232b,1.6));
+        const light=new THREE.DirectionalLight(0xfff4e7,2); light.position.set(-5,8,10); scene.add(light);
         const own=resource=>{resources.push(resource);return resource;};
         const plane=own(new THREE.PlaneGeometry(22,11));
-        const rail=new THREE.Mesh(plane,own(new THREE.MeshBasicMaterial({color:0x281117}))); rail.position.z=-1; scene.add(rail);
-        const felt=new THREE.Mesh(own(new THREE.PlaneGeometry(20.2,9.2)),own(new THREE.MeshBasicMaterial({color:0x152125}))); felt.position.z=-.9; scene.add(felt);
-        const trimMaterial=own(new THREE.MeshBasicMaterial({color:0x8b3545}));
+        const rail=new THREE.Mesh(plane,own(new THREE.MeshBasicMaterial({color:0x24191e}))); rail.position.z=-1; scene.add(rail);
+        const fabric=document.createElement('canvas');fabric.width=1024;fabric.height=512;
+        const fabricContext=fabric.getContext('2d'),wash=fabricContext.createRadialGradient(450,200,20,512,256,620);
+        wash.addColorStop(0,'#203333');wash.addColorStop(1,'#111e21');fabricContext.fillStyle=wash;fabricContext.fillRect(0,0,1024,512);
+        // A deterministic, fine weave adds depth without a busy pattern.
+        fabricContext.fillStyle='#ffffff';fabricContext.globalAlpha=.018;
+        for(let y=0;y<512;y+=3) for(let x=y%2;x<1024;x+=3) fabricContext.fillRect(x,y,1,1);
+        const fabricTexture=own(new THREE.CanvasTexture(fabric));fabricTexture.colorSpace=THREE.SRGBColorSpace;
+        const felt=new THREE.Mesh(own(new THREE.PlaneGeometry(20.2,9.2)),own(new THREE.MeshBasicMaterial({map:fabricTexture}))); felt.position.z=-.9; scene.add(felt);
+        const cushionMaterial=own(new THREE.MeshBasicMaterial({color:0x47272f}));
+        [[0,4.74,20.5,.3],[0,-4.74,20.5,.3],[-10.24,0,.3,9.5],[10.24,0,.3,9.5]].forEach(([x,y,w,h])=>{
+          const cushion=new THREE.Mesh(own(new THREE.PlaneGeometry(w,h)),cushionMaterial);cushion.position.set(x,y,-.88);scene.add(cushion);
+        });
+        const trimMaterial=own(new THREE.MeshBasicMaterial({color:0x64434b}));
         [[0,4.98,20.8,.08],[0,-4.98,20.8,.08],[-10.49,0,.08,9.95],[10.49,0,.08,9.95]].forEach(([x,y,w,h])=>{
           const trim=new THREE.Mesh(own(new THREE.PlaneGeometry(w,h)),trimMaterial); trim.position.set(x,y,-.85); scene.add(trim);
         });
         const holeGeometry=own(new THREE.CircleGeometry(.67,40)), holeMaterial=own(new THREE.MeshBasicMaterial({color:0x050609}));
-        const rimGeometry=own(new THREE.RingGeometry(.67,.76,40)), rimMaterial=own(new THREE.MeshBasicMaterial({color:0x845365}));
+        const rimGeometry=own(new THREE.RingGeometry(.67,.71,40)), rimMaterial=own(new THREE.MeshBasicMaterial({color:0x5f444b}));
         pockets.forEach(([x,y])=>{
           const hole=new THREE.Mesh(holeGeometry,holeMaterial); hole.position.set(x,y,-.5); scene.add(hole);
           const rim=new THREE.Mesh(rimGeometry,rimMaterial); rim.position.set(x,y,-.51); scene.add(rim);
@@ -57,7 +68,8 @@ export function SkillPhysicsField({ groups, children }) {
         [-7,-3.5,3.5,7].forEach(x=>[-5.17,5.17].forEach(y=>{const mark=new THREE.Mesh(diamondGeometry,diamondMaterial);mark.position.set(x,y,-.4);scene.add(mark);}));
         const centerMark=new THREE.Mesh(own(new THREE.RingGeometry(.25,.28,4)),own(new THREE.MeshBasicMaterial({color:0x783442,transparent:true,opacity:.45}))); centerMark.position.set(-3,0,-.7); scene.add(centerMark);
         let balls=createPoolBalls(groups);
-        const geometry=own(new THREE.SphereGeometry(.4,24,16)), plateGeometry=own(new THREE.CircleGeometry(.17,32));
+        const geometry=own(new THREE.SphereGeometry(.4,32,24)), plateGeometry=own(new THREE.CircleGeometry(.155,32));
+        const shadowGeometry=own(new THREE.CircleGeometry(.42,32)),shadowMaterial=own(new THREE.MeshBasicMaterial({color:0x020608,transparent:true,opacity:.35}));
         const plateMaterial=own(new THREE.MeshBasicMaterial({color:0xfffaf2})), textureLoader=new THREE.TextureLoader(), textures=new Map();
         const spriteFromCanvas=(canvas,width,height)=>{
           const texture=own(new THREE.CanvasTexture(canvas)); texture.colorSpace=THREE.SRGBColorSpace;
@@ -65,9 +77,12 @@ export function SkillPhysicsField({ groups, children }) {
           sprite.scale.set(width,height,1); sprite.renderOrder=3; scene.add(sprite); return sprite;
         };
         const visuals=balls.map(ball=>{
-          const material=own(new THREE.MeshPhysicalMaterial({color:ball.cue ? '#f8f4ec' : ball.color,roughness:.2,metalness:.05,clearcoat:1}));
+          const color=new THREE.Color(ball.cue ? '#f8f4ec' : ball.color);
+          if(!ball.cue) color.lerp(new THREE.Color('#4d5966'),.22);
+          const material=own(new THREE.MeshPhysicalMaterial({color,roughness:.36,metalness:0,clearcoat:.45,clearcoatRoughness:.3}));
           const mesh=new THREE.Mesh(geometry,material); scene.add(mesh);
-          if(ball.cue) return {mesh};
+          const shadow=new THREE.Mesh(shadowGeometry,shadowMaterial);scene.add(shadow);
+          if(ball.cue) return {mesh,shadow};
           const plate=new THREE.Mesh(plateGeometry,plateMaterial); scene.add(plate);
           let logo;
           const logoPath=ball.title==='SQL' ? null : skillLogos[ball.title];
@@ -76,16 +91,17 @@ export function SkillPhysicsField({ groups, children }) {
               const texture=own(textureLoader.load(logoPath)); texture.colorSpace=THREE.SRGBColorSpace; textures.set(logoPath,texture);
             }
             logo=new THREE.Sprite(own(new THREE.SpriteMaterial({map:textures.get(logoPath),depthTest:false})));
-            logo.scale.set(.27,.27,1); logo.renderOrder=4; scene.add(logo);
+            logo.scale.set(.24,.24,1); logo.renderOrder=4; scene.add(logo);
           }
           const canvas=document.createElement('canvas');canvas.width=512;canvas.height=256;
           const context=canvas.getContext('2d');context.textAlign='center';context.textBaseline='middle';
           const lines=[''];ball.title.split(' ').forEach(word=>{const last=lines.length-1;if((lines[last]+' '+word).trim().length>12&&lines[last]) lines.push(word);else lines[last]=(lines[last]+' '+word).trim();});
-          context.fillStyle='#fffaf4';context.shadowColor='#08090c';context.shadowBlur=12;context.shadowOffsetY=3;
+          context.fillStyle='#0b1118';context.globalAlpha=.8;context.beginPath();context.roundRect(12,12,488,232,52);context.fill();context.globalAlpha=1;
+          context.fillStyle='#ffffff';
           lines.forEach((line,row)=>{context.font='700 110px "Space Grotesk",sans-serif';const size=Math.min(110,110*490/Math.max(1,context.measureText(line).width));context.font=`700 ${size}px "Space Grotesk",sans-serif`;context.fillText(line,256,128+(row-(lines.length-1)/2)*95);});
-          const label=spriteFromCanvas(canvas,.92,.46);
+          const label=spriteFromCanvas(canvas,.73,.365);
           if(!logo){scene.remove(plate);}
-          return {mesh,plate,logo,label};
+          return {mesh,shadow,plate,logo,label};
         });
         const aim=new THREE.Line(own(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(),new THREE.Vector3()])),own(new THREE.LineDashedMaterial({color:0xf3c2b1,dashSize:.13,gapSize:.13,transparent:true,opacity:.8})));
         aim.visible=false;scene.add(aim);
@@ -134,8 +150,9 @@ export function SkillPhysicsField({ groups, children }) {
           balls.forEach((ball,index)=>{
             const visual=visuals[index];Object.values(visual).filter(Boolean).forEach(item=>{item.visible=!ball.pocketed;});
             visual.mesh.position.set(ball.x,ball.y,0);
+            visual.shadow.position.set(ball.x+.065,ball.y-.07,-.65);
             // Logos are separate camera-facing sprites: motion never spins them away.
-            visual.plate?.position.set(ball.x,ball.y+.15,.41);visual.logo?.position.set(ball.x,ball.y+.15,.45);visual.label?.position.set(ball.x,ball.y-(visual.logo ? .14 : 0),.46);
+            visual.plate?.position.set(ball.x,ball.y+.17,.41);visual.logo?.position.set(ball.x,ball.y+.17,.45);visual.label?.position.set(ball.x,ball.y-(visual.logo ? .18 : 0),.46);
           });
           host.dataset.pocketCount=String(balls.filter(ball=>!ball.cue&&ball.pocketed).length);const isMoving=ballsMoving(balls);host.dataset.moving=String(isMoving);if(wasMoving!==isMoving){wasMoving=isMoving;setMoving(isMoving);}
           aim.visible=cueStick.visible=dragging&&Math.hypot(pull.x,pull.y)>.1;
@@ -157,8 +174,9 @@ export function SkillPhysicsField({ groups, children }) {
   },[enabled,groups]);
   const total=groups.reduce((sum,group)=>sum+group.items.length,0);
   return <div className="sp-skills-interactive">
-    {desktop&&!failed&&<div className="sp-physics-toolbar"><div><p>{cards?'Your toolkit, organized by discipline.':'Drag back from the white cue ball. Release to shoot.'}</p>{!cards&&<span className="sp-pool-meta">{collected.length} / {total} collected · {shots} {shots===1?'shot':'shots'} · Arrow keys aim, Space shoots</span>}</div><div>{!cards&&<><button disabled={!ready||moving} onClick={()=>apiRef.current?.break()}><Crosshair size={14}/> Break</button><button onClick={()=>apiRef.current?.reset()}><RotateCcw size={14}/> Reset</button></>}<button onClick={()=>setCards(!cards)}><LayoutGrid size={14}/>{cards?'Pool table':'Skill cards'}</button></div></div>}
-    {enabled?<><div ref={hostRef} className="sp-physics-field sp-pool-table">{!ready&&<span className="sp-physics-loading">Preparing the skill table…</span>}</div><div className="sp-pool-status"><p aria-live="polite">{collected.length===total?'Table cleared. Your full toolkit, collected.':message}</p><span>POWER <meter min="0" max="100" value={power} aria-label="Shot power"/></span></div><div className="sp-pool-collections">{groups.map(group=><article key={group.genre} style={{'--skill-color':group.themeColor}}><h3><i/>{group.genre}<span>{group.items.filter(item=>collected.includes(item.title)).length}/{group.items.length}</span></h3><div>{group.items.filter(item=>collected.includes(item.title)).map(item=><div key={item.title} className="sp-collected-skill"><span className="sp-collected-ball">{skillLogos[item.title]&&item.title!=='SQL'&&<img src={skillLogos[item.title]} alt=""/>}</span><span>{item.title}</span></div>)}{!group.items.some(item=>collected.includes(item.title))&&<p className="sp-pool-empty">Pocket a ball to collect its skill.</p>}</div></article>)}</div></>:children}
+    {enabled&&<div className="sp-pool-category-key" aria-label="Skill ball colors">{groups.map(group=><span key={group.genre} style={{'--skill-color':group.themeColor}}><i/>{group.genre}</span>)}</div>}
+    {desktop&&!failed&&<div className="sp-physics-toolbar"><div><p>{cards?'Your toolkit, organized by discipline.':'Pull back. Aim. Release.'}</p>{!cards&&<span className="sp-pool-meta">{collected.length} / {total} collected · {shots} {shots===1?'shot':'shots'}</span>}</div><div>{!cards&&<><button disabled={!ready||moving} onClick={()=>apiRef.current?.break()}><Crosshair size={14}/> Break rack</button><button onClick={()=>apiRef.current?.reset()}><RotateCcw size={14}/> Reset</button></>}<button onClick={()=>setCards(!cards)}><LayoutGrid size={14}/>{cards?'Pool table':'Skill cards'}</button></div></div>}
+    {enabled?<><div ref={hostRef} className="sp-physics-field sp-pool-table">{!ready&&<span className="sp-physics-loading">Preparing the skill table…</span>}</div><div className="sp-pool-status"><p aria-live="polite">{collected.length===total?'Table cleared. Your full toolkit, collected.':message}</p><span>POWER <meter min="0" max="100" value={power} aria-label="Shot power"/></span></div><div className="sp-pool-collections">{groups.map(group=><article key={group.genre} style={{'--skill-color':group.themeColor}}><h3><i/>{group.genre}<span>{group.items.filter(item=>collected.includes(item.title)).length}/{group.items.length}</span></h3><div>{group.items.filter(item=>collected.includes(item.title)).map(item=><div key={item.title} className="sp-collected-skill"><span className="sp-collected-ball">{skillLogos[item.title]&&item.title!=='SQL'&&<img src={skillLogos[item.title]} alt=""/>}</span><span>{item.title}</span></div>)}{!group.items.some(item=>collected.includes(item.title))&&<p className="sp-pool-empty">Your collected skills appear here.</p>}</div></article>)}</div></>:children}
   </div>;
 }
 SkillPhysicsField.propTypes={groups:PropTypes.array.isRequired,children:PropTypes.node.isRequired};

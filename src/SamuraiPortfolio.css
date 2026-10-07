@@ -41,22 +41,26 @@
 .sp-experience-card{display:grid;grid-template-columns:140px minmax(0,1fr) 30px;gap:20px;align-items:center;min-height:220px}
 .sp-experience-card .sp-experience-images{width:140px;height:150px;padding:8px;background:#09090c;border:1px solid #ffffff0b}
 .sp-experience-card>div{min-width:0}.sp-experience-card .sp-company-heading{font-size:15px}
-.sp-pool-table{height:auto!important;aspect-ratio:2/1;background:#171017;border:1px solid #6b3543;border-radius:18px;box-shadow:0 20px 55px #0005;cursor:crosshair}
+.sp-pool-table{height:auto!important;aspect-ratio:2/1;background:#24191e;border:1px solid #655058;border-radius:16px;box-shadow:0 24px 55px #0004,0 0 0 5px #151216,inset 0 1px 0 #ffffff10;cursor:crosshair}
 .sp-pool-table::before{display:none}.sp-pool-table canvas:focus-visible{outline:2px solid #e75e6e;outline-offset:-4px;border-radius:18px}
-.sp-pool-meta{display:block;font-size:10px;color:#8d8490;margin-top:5px}
+.sp-pool-meta{display:block;font-size:11px;color:#908c97;margin-top:5px;font-variant-numeric:tabular-nums}
+.sp-pool-category-key{display:flex;flex-wrap:wrap;gap:10px 22px;margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid #ffffff0b}.sp-pool-category-key span{display:flex;align-items:center;gap:8px;font-size:11px;color:#b1acb6}.sp-pool-category-key i{width:7px;height:7px;background:var(--skill-color);border-radius:50%;opacity:.85}
+.sp-skills-interactive .sp-physics-toolbar{margin-bottom:20px}.sp-skills-interactive .sp-physics-toolbar p{font-family:'Space Grotesk',sans-serif;color:#ede7ec;font-size:14px;font-weight:500;margin:0}.sp-skills-interactive .sp-physics-toolbar button{border-color:#ffffff12;border-radius:7px;background:#151419;color:#bcb6c2;font-size:11px;padding:10px 13px;transition:background .2s,border-color .2s,color .2s}.sp-skills-interactive .sp-physics-toolbar button:first-child{background:#3c2028;color:#ffe4e9;border-color:#80505c66}.sp-skills-interactive .sp-physics-toolbar button:hover{color:#fff;border-color:#a66e7c;background:#37232c}.sp-skills-interactive .sp-physics-toolbar button:focus-visible{outline:2px solid #e75e6e;outline-offset:3px}
 .sp-physics-toolbar>div:first-child{display:block}
 .sp-pool-status{display:flex;justify-content:space-between;align-items:center;gap:20px;margin:15px 0 24px;font-size:11px;color:#b0a6ac;min-height:22px}
 .sp-pool-status>span{display:flex;align-items:center;gap:10px;font-size:8px;letter-spacing:1.5px;flex-shrink:0}.sp-pool-status meter{width:85px;height:8px;accent-color:#ed5265}
-.sp-pool-collections{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.sp-pool-collections article{padding:18px;border:1px solid #ffffff10;background:#111114;border-radius:7px}
-.sp-pool-collections h3{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;margin-bottom:15px}.sp-pool-collections h3 i{width:7px;height:7px;border-radius:50%;background:var(--skill-color)}.sp-pool-collections h3>span{margin-left:auto;color:#8e8390;font-size:10px}
+.sp-pool-collections{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.sp-pool-collections article{padding:17px 14px;min-height:150px;border:1px solid #ffffff0c;background:linear-gradient(150deg,#17161b,#101013);border-radius:10px;border-top:2px solid color-mix(in srgb,var(--skill-color) 45%,#202026)}
+.sp-pool-collections h3{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:600;margin:0 0 17px;color:#dbd6df;line-height:1.5}.sp-pool-collections h3 i{width:6px;height:6px;flex-shrink:0;border-radius:50%;background:var(--skill-color)}.sp-pool-collections h3>span{margin-left:auto;color:#8e8390;font-size:10px;font-variant-numeric:tabular-nums;white-space:nowrap}
 .sp-pool-collections article>div{display:flex;gap:6px;flex-wrap:wrap}.sp-pool-collections article>div>span{display:flex;align-items:center;gap:5px;font-size:10px;padding:5px 7px;color:#8e8793;background:#19191e;border:1px solid #ffffff09;border-radius:4px;transition:background .25s,color .25s,border-color .25s}
 .sp-pool-collections img{width:14px;height:14px;object-fit:contain;background:#f5f2ea;border-radius:3px;padding:1px;opacity:.5}
 .sp-pool-collections .is-collected{color:#f5eee7!important;border-color:color-mix(in srgb,var(--skill-color) 55%,transparent)!important;background:color-mix(in srgb,var(--skill-color) 14%,#111114)!important}.sp-pool-collections .is-collected img{opacity:1}
 .sp-physics-toolbar button:disabled{opacity:.5;cursor:wait}
-.sp-pool-collections .sp-collected-skill{display:flex;flex-direction:column;align-items:center;text-align:center;gap:7px;width:90px;padding:6px 0;color:#d7cfd5;font-size:11px;line-height:1.4}
+.sp-pool-collections .sp-collected-skill{display:flex;flex-direction:column;align-items:center;text-align:center;gap:9px;width:74px;padding:6px 0;color:#d7cfd5;font-size:11px;line-height:1.4;animation:sp-skill-arrive .3s ease-out}
 .sp-pool-collections .sp-collected-ball{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:radial-gradient(circle at 30% 25%,color-mix(in srgb,var(--skill-color) 55%,white),var(--skill-color) 48%,color-mix(in srgb,var(--skill-color) 35%,black));box-shadow:inset -3px -4px 6px #0006,0 3px 8px #0005}
-.sp-pool-collections .sp-collected-ball img{width:23px;height:23px;padding:3px;border-radius:50%;opacity:1;background:#fffaf2}.sp-pool-empty{font-size:11px;line-height:1.7;color:#827888;margin:0}
+.sp-pool-collections .sp-collected-ball img{width:23px;height:23px;padding:3px;border-radius:50%;opacity:1;background:#fffaf2}.sp-pool-empty{font-size:10px;line-height:1.7;color:#716c7c;margin:0;max-width:125px}
+@keyframes sp-skill-arrive{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:1100px){.sp-pool-collections{grid-template-columns:repeat(3,minmax(0,1fr))}.sp-pool-category-key{gap:10px 16px}}
 @media(max-width:1100px){.sp-experience-card{grid-template-columns:110px minmax(0,1fr) 27px;gap:13px;padding:18px}.sp-experience-card .sp-experience-images{width:110px;height:130px}.sp-physics-toolbar{gap:12px}.sp-pool-meta{font-size:9px}}
 @media(max-width:560px){.sp-experience-card{grid-template-columns:102px minmax(0,1fr) 24px;gap:10px;padding:15px;min-height:205px}.sp-experience-card .sp-experience-images{width:102px;height:130px;padding:5px}.sp-experience-card .sp-company-heading{font-size:13px}.sp-experience-card>.sp-card-arrow{width:24px;height:24px}.sp-experience-card .sp-experience-description{font-size:10px!important}}
 @media(max-width:360px){.sp-experience-card{grid-template-columns:90px minmax(0,1fr);gap:11px}.sp-experience-card .sp-experience-images{width:90px;height:125px}.sp-experience-card>.sp-card-arrow{display:none}}
