@@ -79,26 +79,6 @@ function ExperienceImages({ item }) {
 }
 ExperienceImages.propTypes = { item: PropTypes.object.isRequired };
 
-function CompanyLogo({ organisation }) {
-  const logos = {
-    'Ford Motor Company': '/history/Ford.jpg',
-    'NextGen Federal': '/history/nextgenlogo.jpg',
-    'SASE (UCF)': '/history/saselogo.png',
-    'CECS, UCF': '/history/ucf.png',
-    'Student Academic Resource Center (SARC), UCF': '/history/ucf.png',
-    'ISUE Lab (AI/ML - VR and Human Computer Interaction), UCF': '/history/ucf.png',
-    'KnightHacks, UCF': '/history/KnightHacks.png',
-    'Indian Student Association UCF': '/history/ucf.png',
-    'Ithaka International School': '/history/ithaka.png',
-    'National Space Society': '/history/nss.png',
-    BNY: '/company-logos/bny.png', Perplexity: '/history/perplexity.png',
-  };
-  const logo = logos[organisation];
-  if (!logo) return null;
-  return <span className={`sp-company-logo ${organisation === 'KnightHacks, UCF' ? 'sp-knighthacks-logo' : organisation === 'Ford Motor Company' ? 'sp-ford-logo' : ''}`}><img src={logo} alt={`${organisation} logo`} loading="lazy" /></span>;
-}
-CompanyLogo.propTypes = { organisation: PropTypes.string.isRequired };
-
 function DetailDialog({ item, onClose }) {
   const dialogRef = useRef(null);
   const experience = Boolean(item.organisation);
@@ -191,8 +171,8 @@ export function SamuraiPortfolio() {
           <div className="sp-about-notes sp-about-code"><span className="sp-eyebrow">ABOUT ME / DeveloperProfile</span><CompactCode text={codeString} /></div></div>
       </section>
       <section id="experience" className="sp-section sp-container"><SectionHeading number="02" eyebrow="WHERE I’VE MADE AN IMPACT" title="My Experience" />
-        <article className="sp-feature sp-ford-feature"><div className="sp-feature-image"><ExperienceImages item={ford} /><span className="sp-image-label"><BriefcaseBusiness size={14} /> FORD MOTOR COMPANY</span></div><div className="sp-feature-copy"><Tag color={ford.themeColor}>Internship · Ford Motor Company</Tag><h3 className="sp-company-heading"><CompanyLogo organisation={ford.organisation} />Ford Motor Company</h3><p className="sp-feature-subtitle">Software Engineering Intern</p><span className="sp-date">{ford.startDate} — {ford.endDate}</span><p>{ford.experiences[0]}</p><div className="sp-tech">{['Spring Boot', 'React', 'Google Cloud', 'CI/CD'].map((skill) => <span key={skill}>{skill}</span>)}</div><button className="sp-text-link" onClick={() => setSelected(ford)}>Inside the experience <ArrowUpRight size={18} /></button></div></article>
-        <div className="sp-experience-grid">{remainingExperience.slice(0, allExperience ? remainingExperience.length : 4).map((item) => <button className="sp-experience-card" key={`${item.organisation}-${item.role}`} onClick={() => setSelected(item)} style={{ '--card-accent': item.themeColor }}><ExperienceImages item={item} /><div><Tag color={item.themeColor}>{item.type}</Tag><h3 className="sp-company-heading"><CompanyLogo organisation={item.organisation} />{item.organisation}</h3><p>{item.role}</p><p className="sp-experience-description">{item.experiences[0]}</p><span className="sp-date">{item.startDate} — {item.endDate}</span></div><CardArrow /></button>)}</div>
+        <article className="sp-feature sp-ford-feature"><div className="sp-feature-image"><ExperienceImages item={ford} /><span className="sp-image-label"><BriefcaseBusiness size={14} /> FORD MOTOR COMPANY</span></div><div className="sp-feature-copy"><Tag color={ford.themeColor}>Internship · Ford Motor Company</Tag><h3 className="sp-company-heading">Ford Motor Company</h3><p className="sp-feature-subtitle">Software Engineering Intern</p><span className="sp-date">{ford.startDate} — {ford.endDate}</span><p>{ford.experiences[0]}</p><div className="sp-tech">{['Spring Boot', 'React', 'Google Cloud', 'CI/CD'].map((skill) => <span key={skill}>{skill}</span>)}</div><button className="sp-text-link" onClick={() => setSelected(ford)}>Inside the experience <ArrowUpRight size={18} /></button></div></article>
+        <div className="sp-experience-grid">{remainingExperience.slice(0, allExperience ? remainingExperience.length : 4).map((item) => <button className="sp-experience-card" key={`${item.organisation}-${item.role}`} onClick={() => setSelected(item)} style={{ '--card-accent': item.themeColor }}><ExperienceImages item={item} /><div><Tag color={item.themeColor}>{item.type}</Tag><h3 className="sp-company-heading">{item.organisation}</h3><p>{item.role}</p><p className="sp-experience-description">{item.experiences[0]}</p><span className="sp-date">{item.startDate} — {item.endDate}</span></div><CardArrow /></button>)}</div>
         <div className="sp-show-more"><button className="sp-button sp-button-outline" onClick={() => setAllExperience(!allExperience)}>{allExperience ? 'Show fewer experiences' : `Explore all ${history.length} experiences`} <ArrowDown size={16} /></button></div>
       </section>
       <section id="projects" className="sp-section sp-container"><SectionHeading number="03" eyebrow="IDEAS TURNED INTO REALITY" title="My Projects" />
