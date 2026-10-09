@@ -30,7 +30,10 @@
       }
       const portfolioSection = /^#(about|experience|projects|skills|research|animations|films|awards|achievements)$/.exec(window.location.hash);
       if (!portfolioRoute && window.location.pathname === '/' && portfolioSection) {
-        window.history.replaceState(null, '', '/' + (portfolioSection[1] === 'achievements' ? 'awards' : portfolioSection[1]));
+        window.history.replaceState(null, '', '/' + (portfolioSection[1] === 'achievements' ? 'awards' : portfolioSection[1] === 'films' ? 'animations' : portfolioSection[1]));
+      }
+      if (/^\/films\/?$/.test(window.location.pathname)) {
+        window.history.replaceState(null, '', '/animations' + window.location.search + window.location.hash);
       }
     </script>
     <script type="module" src="/src/main.jsx"></script>

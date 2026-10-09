@@ -44,9 +44,15 @@ test('each editorial page survives a fallback and preserves query strings',()=>{
 });
 
 test('old section bookmarks resolve to their new pages',()=>{
-  for(const [hash,route] of [['#experience','/experience'],['#skills','/skills'],['#achievements','/awards']]){
+  for(const [hash,route] of [['#experience','/experience'],['#skills','/skills'],['#achievements','/awards'],['#films','/animations']]){
     let restored;
     runInNewContext(restore,{URLSearchParams,window:{location:{pathname:'/',search:'',hash},history:{replaceState:(_state,_title,value)=>{restored=value;}}}});
     assert.equal(restored,route);
   }
+});
+
+test('the former film page resolves to the single video collage',()=>{
+  let restored;
+  runInNewContext(restore,{URLSearchParams,window:{location:{pathname:'/films/',search:'?from=bookmark',hash:'#main'},history:{replaceState:(_state,_title,value)=>{restored=value;}}}});
+  assert.equal(restored,'/animations?from=bookmark#main');
 });

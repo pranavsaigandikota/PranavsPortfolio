@@ -5,8 +5,7 @@ export const editorialPages = [
   {id:'projects',path:'/projects',label:'Projects',title:'My Projects'},
   {id:'skills',path:'/skills',label:'Skills',title:'My Skills'},
   {id:'research',path:'/research',label:'Research',title:'My Research'},
-  {id:'animations',path:'/animations',label:'Animation',title:'Motion'},
-  {id:'films',path:'/films',label:'Movies',title:'Film'},
+  {id:'animations',path:'/animations',label:'Videos',title:'Film & Animation'},
   {id:'awards',path:'/awards',label:'Awards',title:'Recognition'},
 ];
 export const portfolioRoutePattern = /^\/(?:about|experience|projects|skills|research|animations|films|awards|flix)\/?(?:[?#]|$)/;

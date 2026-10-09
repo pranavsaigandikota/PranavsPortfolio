@@ -47,11 +47,13 @@ test('pre-rendered media and document URLs point to shipped files',()=>{
   }
 });
 
-test('creative pages present a six-video collage without individual printed titles',()=>{
-  for(const id of ['animations','films']){
-    const page=pages.find(item=>item.id===id).html;
+test('one creative page presents all six videos without individual printed titles',()=>{
+    assert.equal(editorialPages.filter(item=>['animations','films'].includes(item.id)).length,1);
+    assert.ok(!html.includes('href="/films"'));
+    const page=pages.find(item=>item.id==='animations').html;
     assert.equal((page.match(/class="ed-collage-tile /g)||[]).length,6);
     assert.ok(!page.includes('<h3'));
     assert.equal((page.match(/aria-label="Watch /g)||[]).length,6);
-  }
+    const alias=readFileSync(new URL('../dist/films/index.html',import.meta.url),'utf8');
+    assert.equal(alias,page);
 });

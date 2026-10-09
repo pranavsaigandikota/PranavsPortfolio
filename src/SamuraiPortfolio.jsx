@@ -46,23 +46,22 @@ function SectionHeading({ number, eyebrow, title, description }) {
 SectionHeading.propTypes = { number: PropTypes.string, eyebrow: PropTypes.string, title: PropTypes.string, description: PropTypes.string };
 
 function ContentsIssue() {
-  const teasers = ['Meet the engineer behind the work.','Cloud systems. Real results.','From an idea to a working product.','Play through the stack.','A closer look at the research.','Frame by frame, brought to life.','A collage of creative work.','The work, recognized.'];
+  const teasers = ['Meet the engineer behind the work.','Cloud systems. Real results.','From an idea to a working product.','Play through the stack.','A closer look at the research.','A collage of film and animation.','The work, recognized.'];
   return <section className="ed-contents sp-container" aria-labelledby="ed-contents-title"><div className="ed-contents-heading"><span className="sp-eyebrow">INSIDE THIS ISSUE</span><h2 id="ed-contents-title">A few sides<br />of the same mind<span>.</span></h2></div><div className="ed-contents-grid">{editorialPages.slice(1).map((item,index)=><Link key={item.id} className={`ed-contents-entry ed-contents-${item.id}`} to={item.path}><span className="ed-page-number">0{index+1}</span><div><h3>{item.label}</h3><p>{teasers[index]}</p></div><ArrowUpRight size={21}/></Link>)}</div></section>;
 }
 
-function CreativeIssue({page,playing,onSelect,onTogglePlaying}) {
-  const films = page === 'films';
+function CreativeIssue({playing,onSelect,onTogglePlaying}) {
   const works = animations.filter(item=>item.type!=='Link');
-  const lead = works.find(item=>item.id===(films?'W7XTPXalTzU':'hi1gLM-suzE'));
+  const lead = works.find(item=>item.id==='W7XTPXalTzU');
   const tiles = [lead,...works.filter(item=>item!==lead)];
-  return <section id={page} className={`ed-creative-issue sp-container ${films?'ed-film-issue':'ed-motion-issue'}`} aria-labelledby="ed-creative-title">
+  return <section id="animations" className="ed-creative-issue sp-container ed-film-issue" aria-labelledby="ed-creative-title">
     <div className="ed-creative-topline"><span>FILMASTICPG / THE CREATIVE ISSUE</span><span>CODE MEETS CREATIVITY</span></div>
-    <header className="ed-creative-masthead"><span className="ed-creative-kicker">THE ART OF</span><h1 id="ed-creative-title">{films?'FILM':'MOTION'}</h1><span className="ed-creative-side">{films?'A DIFFERENT LENS':'FRAME BY FRAME'}</span></header>
-    <div className="ed-video-collage">{tiles.map((video,index)=><button className={`ed-collage-tile ed-collage-tile-${index+1}`} key={video.id} onClick={()=>onSelect({...video,type:films?'Film-Local':video.type})} aria-label={`Watch ${video.title}`}><MemoMediaPreview item={video} playing={playing}/><span className="ed-collage-play" aria-hidden="true"><Play size={20}/></span></button>)}<span className="ed-collage-word" aria-hidden="true" data-parallax>{films?'PICTURE THIS.':'MAKE IT MOVE.'}</span></div>
+    <header className="ed-creative-masthead"><span className="ed-creative-kicker">FILM & ANIMATION</span><h1 id="ed-creative-title">FILM</h1><span className="ed-creative-side">A DIFFERENT LENS</span></header>
+    <div className="ed-video-collage">{tiles.map((video,index)=><button className={`ed-collage-tile ed-collage-tile-${index+1}`} key={video.id} onClick={()=>onSelect(video)} aria-label={`Watch ${video.title}`}><MemoMediaPreview item={video} playing={playing}/><span className="ed-collage-play" aria-hidden="true"><Play size={20}/></span></button>)}<span className="ed-collage-word" aria-hidden="true" data-parallax>PICTURE THIS.</span></div>
     <div className="ed-creative-bottomline"><span>IMAGINED. DIRECTED. CREATED.</span><button onClick={onTogglePlaying} aria-pressed={playing}>{playing?'Pause previews':'Play previews'}</button><a href="https://www.youtube.com/@earthlytomcat11" target="_blank" rel="noreferrer" className="sp-text-link">The complete archive <ArrowUpRight size={16}/></a></div>
   </section>;
 }
-CreativeIssue.propTypes={page:PropTypes.string.isRequired,playing:PropTypes.bool.isRequired,onSelect:PropTypes.func.isRequired,onTogglePlaying:PropTypes.func.isRequired};
+CreativeIssue.propTypes={playing:PropTypes.bool.isRequired,onSelect:PropTypes.func.isRequired,onTogglePlaying:PropTypes.func.isRequired};
 
 function AwardsIssue() {
   return <section id="awards" className="ed-awards-issue sp-container" aria-labelledby="ed-awards-title">
@@ -199,7 +198,7 @@ export function SamuraiPortfolio({ page = 'home' }) {
   return <div ref={rootRef} data-theme={theme} className={`samurai-portfolio editorial-portfolio ed-page-${page} ${lowPower?'sp-low-power':''} ${!pageVisible?'sp-page-hidden':''}`}>
     <a className="sp-skip" href="#main">Skip to content</a>
     <header className="sp-header"><div className="sp-nav-wrap"><Link className="sp-brand" to="/" aria-label="Pranavsai Gandikota home"><span className="sp-brand-mark">P<span>G</span></span><span className="sp-full-name">PRANAVSAI GANDIKOTA</span></Link>
-      <nav id="sp-navigation" className={menuOpen ? 'sp-nav sp-nav-open' : 'sp-nav'} aria-label="Main navigation">{navigation.map(({id, path, label}) => <Link key={id} to={path} aria-current={page === id ? 'page' : undefined} onClick={() => setMenuOpen(false)}>{label}</Link>)}<Link className="sp-flix-link" to="/flix">Flix</Link></nav>
+      <nav id="sp-navigation" className={menuOpen ? 'sp-nav sp-nav-open' : 'sp-nav'} aria-label="Main navigation">{navigation.map(({id, path, label}) => <Link key={id} to={path} aria-current={page === id ? 'page' : undefined} onClick={() => setMenuOpen(false)}>{label}</Link>)}<Link className="sp-flix-link" to="/flix">Flix</Link><a className="ed-mobile-resume" href="/PranavNovemberResume.pdf" target="_blank" rel="noreferrer" onClick={()=>setMenuOpen(false)}>Resume <ArrowUpRight size={16}/></a></nav>
       <a className="sp-nav-resume" href="/PranavNovemberResume.pdf" target="_blank" rel="noreferrer">Resume <ArrowUpRight size={14} /></a>
       <button className="ed-theme-toggle" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`} title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}>{theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}</button>
       <button className="sp-menu-toggle" aria-label={menuOpen ? 'Close menu' : 'Open menu'} aria-expanded={menuOpen} aria-controls="sp-navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X /> : <Menu />}</button>
@@ -234,7 +233,7 @@ export function SamuraiPortfolio({ page = 'home' }) {
       </section>)}
       {page === 'skills' && (<section id="skills" className="sp-section sp-container"><SectionHeading number="04" eyebrow="TOOLS OF THE TRADE" title="My Skills" /><SkillPhysicsField groups={skills}><div className="sp-skills-grid">{skills.map((group, index) => <article className="sp-skill-card" key={group.genre}><span className="sp-skill-number">0{index + 1}</span><span className="sp-original-icon" style={{ color: group.themeColor }}>{group.icon}</span><h3>{group.genre}</h3><p>{group.description}</p><div className="sp-tech">{group.items.map((skill) => <span key={skill.title}>{skill.title}</span>)}</div></article>)}</div></SkillPhysicsField></section>)}
       {page === 'research' && (<section id="research" className="sp-section sp-container"><SectionHeading number="05" eyebrow="BEYOND THE BUILD" title="My Research" /><div className="sp-card-grid">{paperData.map((paper) => <a className="sp-card" key={paper.title} href={paper.link} target="_blank" rel="noreferrer" style={{ '--card-accent': paper.color }}><div className="sp-card-image"><img src={paper.imageSrc} alt={paper.title} loading="lazy" decoding="async" /><Tag color={paper.color}>{paper.label}</Tag><CardArrow /></div><div className="sp-card-body"><h3>{paper.title}</h3><p>{paper.description}</p><span className="sp-text-link">Read the paper <ArrowUpRight size={16} /></span></div></a>)}</div></section>)}
-      {(page === 'animations' || page === 'films') && <CreativeIssue page={page} playing={playing && !selected} onSelect={setSelected} onTogglePlaying={() => setPlaying(!playing)} />}
+      {page === 'animations' && <CreativeIssue playing={playing && !selected} onSelect={setSelected} onTogglePlaying={() => setPlaying(!playing)} />}
       {page === 'awards' && <AwardsIssue />}
 
     </main>
