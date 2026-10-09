@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, ArrowDown, Github, Linkedin, Mail, Menu, X, Trophy, BriefcaseBusiness, Sparkles, Download, Play, MapPin, Sun, Moon } from 'lucide-react';
 import projectMedia from './data/projects.json';
-import { projectsData, experiences as history, skillsData, achievements, codeString } from './data/portfolioContent';
+import { projectsData, experiences as originalHistory, skillsData, achievements, codeString } from './data/portfolioContent';
+import { selectEditorialPhotos } from './data/editorialPhotos';
 import { OriginalAboutCopy } from './components/OriginalAboutCopy';
 import animations from './data/animations.json';
 import videoPreviews from './data/videoPreviews.json';
@@ -18,6 +19,7 @@ import './EditorialPortfolio.css';
 import { editorialPages } from './data/editorialPages';
 
 const navigation = editorialPages;
+const history = selectEditorialPhotos(originalHistory);
 // The existing site is the source of truth; media comes from its video archive.
 const projects = projectsData.map(project => ({ ...project, description: project.shortDescription, videoUrl: project.title === 'Paradise' ? '/videos/paradise.mp4' : projectMedia.find(media => media.title === project.title || (project.title === 'Exodus' && media.title === 'Exodus Space Settlement'))?.videoUrl }));
 const skills = skillsData.map(group => ({ genre: group.category, items: group.skills.map(title => ({ title })), themeColor: group.themeColor, description: group.description, icon: group.icon }));
@@ -29,20 +31,21 @@ const projectCategory = (project) => {
   if (['Paradise', 'Sentinel', 'RePlot', 'ReVision', 'Vision', 'Humanotone'].includes(project.title)) return 'AI & ML';
   return 'Full stack';
 };
+const nssPosterForResearch = originalHistory.find(item => item.organisation === 'National Space Society').images[1];
 const paperData = [
-  { title: 'Exodus Paper', description: 'Winning research paper on sustainable space settlement design and logistics.', imageSrc: '/projects/exodus.png', label: 'First Prize (NSS Space Settlement)', color: '#facc15', link: exodusPdf },
+  { title: 'Exodus Paper', description: 'Winning research paper on sustainable space settlement design and logistics.', imageSrc: nssPosterForResearch, label: 'First Prize (NSS Space Settlement)', color: '#facc15', link: exodusPdf },
   { title: 'Stylus Paper', description: 'Academic paper chosen by professor for submission to the UCF Stylus.', imageSrc: '/history/ucf.jpg', label: 'UCF Stylus Submission', color: '#a855f7', link: stylusPdf },
   { title: 'Cyber Sec Paper', description: 'Analysis of cyber security vulnerabilities, attack vectors, and mitigation.', imageSrc: '/projects/SentinelDemo.png', label: 'MOVEit Attack Analysis', color: '#3b82f6', link: cyberPdf },
 ];
-const nssExperience = history.find(item=>item.organisation==='National Space Society');
+const nssExperience = originalHistory.find(item=>item.organisation==='National Space Society');
 const candidPhotos = [
-  {image:history.find(item=>item.organisation.startsWith('Student Academic')).images[1],title:'GOOD COMPANY.',caption:'The people behind the progress. Supplemental Instruction at UCF.',alt:'The UCF Supplemental Instruction team in a playful group photo'},
-  {image:history.find(item=>item.organisation==='KnightHacks, UCF').images[0],title:'THE DESIGN SIDE.',caption:'Building the look, the motion, and the experience. KnightHacks design team.',alt:'The KnightHacks design team together by the lake'},
-  {image:history.find(item=>item.organisation==='Indian Student Association UCF').images[3],title:'AFTER HOURS.',caption:'A different kind of production. The UCF Indian Student Association Diwali team.',alt:'The UCF Indian Student Association team on the Diwali stage'},
+  {image:'/editorial/photos/research-in-action.webp',title:'IN THE FIELD.',caption:'Testing ideas with real people. A VR demonstration at UCF’s ISUE Lab.',alt:'Pranav assisting a VR demonstration at the ISUE Lab',position:'64% center'},
+  {image:nssExperience.images[1],title:'IDEAS IN MOTION.',caption:'Explaining the thinking behind Exodus at the International Space Development Conference.',alt:'Pranav explaining his Exodus research poster to a conference attendee',position:'60% center'},
+  {image:'/editorial/photos/diwali-on-stage.webp',title:'TAKING THE STAGE.',caption:'Bringing the event to life. Hosting Diwali with the UCF Indian Student Association.',alt:'Pranav and a co-host presenting on stage at UCF Diwali',position:'65% center'},
 ];
 
 function CandidGallery() {
-  return <div className="ed-candid-gallery" aria-labelledby="ed-candid-heading"><header><span className="sp-eyebrow">THE CONTACT SHEET / OFF THE CLOCK</span><h2 id="ed-candid-heading">Life between<br /><em>the lines.</em></h2></header><div className="ed-candid-grid">{candidPhotos.map((photo,index)=><figure className="ed-candid-frame" key={photo.title}><a href={photo.image} target="_blank" rel="noreferrer" aria-label={`View full photo: ${photo.title}`}><img src={photo.image} alt={photo.alt} loading="lazy" decoding="async"/></a><figcaption><span className="ed-photo-index">FRAME 0{index+1}</span><h3>{photo.title}</h3><p>{photo.caption}</p></figcaption></figure>)}</div></div>;
+  return <div className="ed-candid-gallery" aria-labelledby="ed-candid-heading"><header><span className="sp-eyebrow">THE CONTACT SHEET / OFF THE CLOCK</span><h2 id="ed-candid-heading">Life between<br /><em>the lines.</em></h2></header><div className="ed-candid-grid">{candidPhotos.map((photo,index)=><figure className="ed-candid-frame" key={photo.title}><a href={photo.image} target="_blank" rel="noreferrer" aria-label={`View full photo: ${photo.title}`}><img src={photo.image} alt={photo.alt} style={{objectPosition:photo.position}} loading="lazy" decoding="async"/></a><figcaption><span className="ed-photo-index">FRAME 0{index+1}</span><h3>{photo.title}</h3><p>{photo.caption}</p></figcaption></figure>)}</div></div>;
 }
 
 function Tag({ children, color = '#e96758' }) {
@@ -76,7 +79,7 @@ CreativeIssue.propTypes={playing:PropTypes.bool.isRequired,onSelect:PropTypes.fu
 function AwardsIssue() {
   return <section id="awards" className="ed-awards-issue sp-container" aria-labelledby="ed-awards-title">
     <div className="ed-awards-heading"><span className="sp-eyebrow">THE HONORS EDITION / RECOGNITION</span><h1 id="ed-awards-title">The work.<br /><em>The recognition.</em></h1><span className="ed-awards-outline" aria-hidden="true" data-parallax>HONORS</span></div>
-    <article className="ed-nss-feature" aria-labelledby="ed-nss-title"><div className="ed-nss-portrait"><img src={nssExperience.images[2]} alt="Pranav beside the Exodus space settlement presentation at ISDC" loading="lazy" decoding="async"/><div className="ed-first-seal" aria-hidden="true"><span>1<sup>st</sup></span><Trophy size={25}/><small>FIRST PRIZE / NSS</small></div><span className="ed-nss-photo-note">EXODUS / THE SPACE SETTLEMENT ISSUE</span></div><div className="ed-nss-copy"><span className="sp-eyebrow">NSS SPACE SETTLEMENT CONTEST</span><h2 id="ed-nss-title">First place.<br /><em>Beyond Earth.</em></h2><p>Exodus: a 50-page research proposal for sustainable space habitation. First-prize space settlement design, presented through oral and poster presentations at ISDC.</p><div className="ed-nss-facts"><span><strong>50</strong>pages of research</span><span><strong>22</strong>countries represented</span></div><a className="sp-text-link" href={exodusPdf} target="_blank" rel="noreferrer">Read the winning paper <ArrowUpRight size={17}/></a></div></article>
+    <article className="ed-nss-feature" aria-labelledby="ed-nss-title"><div className="ed-nss-portrait"><img src="/history/NSSAwardrecieval.jpeg" alt="Pranav holding his NSS conference certificate alongside two conference representatives" loading="lazy" decoding="async"/><div className="ed-first-seal" aria-hidden="true"><span>1<sup>st</sup></span><Trophy size={25}/><small>FIRST PRIZE / NSS</small></div><span className="ed-nss-photo-note">EXODUS / AT THE INTERNATIONAL SPACE DEVELOPMENT CONFERENCE</span></div><div className="ed-nss-copy"><span className="sp-eyebrow">NSS SPACE SETTLEMENT CONTEST</span><h2 id="ed-nss-title">First place.<br /><em>Beyond Earth.</em></h2><p>Exodus: a 50-page research proposal for sustainable space habitation. First-prize space settlement design, presented through oral and poster presentations at ISDC.</p><div className="ed-nss-facts"><span><strong>50</strong>pages of research</span><span><strong>22</strong>countries represented</span></div><a className="sp-text-link" href={exodusPdf} target="_blank" rel="noreferrer">Read the winning paper <ArrowUpRight size={17}/></a></div></article>
     <div className="ed-award-lead"><div className="ed-award-medal" aria-hidden="true" data-parallax><span>3<sup>rd</sup></span><Trophy size={48}/><span className="ed-medal-ring">SHELLHACKS / 2026</span></div><div className="ed-award-lead-copy"><span className="sp-eyebrow">PARADISE · SHELLHACKS 2026</span><h2>Best Overall.</h2><p>Third place among over 290 projects and 1,400 hackers. A touch-only navigation system built for DeafBlind users.</p><Link className="sp-text-link" to="/projects">Explore the work <ArrowUpRight size={17}/></Link></div></div>
     <div className="ed-awards-grid">{achievements.map((award,index)=><article className="ed-award-ticket" key={award.title}><span className="ed-award-index">0{index+1}</span><span className="ed-award-icon" aria-hidden="true">{award.icon}</span><div><span className="ed-award-date">{award.subtitle}</span><h2>{award.title}</h2><p>{award.description}</p>{award.points.map(point=><p key={point}>{point}</p>)}</div></article>)}</div>
     <div className="ed-award-moments"><header><span className="sp-eyebrow">FIELD NOTES / FROM THE CONFERENCE</span><h2>Ideas, <em>out loud.</em></h2></header><div className="ed-award-moments-grid"><figure><img src={nssExperience.images[0]} alt="Pranav delivering his Exodus research presentation at the ISDC podium" loading="lazy" decoding="async"/><figcaption><span className="ed-photo-index">01 / THE PODIUM</span><h3>FROM PAPER<br />TO PODIUM.</h3><p>Sharing the thinking behind a world beyond our own.</p></figcaption></figure><figure><img src={nssExperience.images[1]} alt="Pranav discussing the Exodus space settlement poster with a conference attendee" loading="lazy" decoding="async"/><figcaption><span className="ed-photo-index">02 / THE CONVERSATION</span><h3>BIG IDEAS.<br />REAL CONVERSATIONS.</h3><p>Taking the research off the page and into the room.</p></figcaption></figure></div></div>
@@ -113,16 +116,7 @@ function MediaPreview({ item, playing, controls = false }) {
 MediaPreview.propTypes = { item: PropTypes.object.isRequired, playing: PropTypes.bool.isRequired, controls: PropTypes.bool };
 
 function ExperienceImages({ item }) {
-  const frameRef=useRef(null),pageVisible=usePageVisible();
-  const [visible,setVisible]=useState(false);
-  useEffect(()=>{const observer=new IntersectionObserver(([entry])=>setVisible(entry.isIntersecting));if(frameRef.current) observer.observe(frameRef.current);return()=>observer.disconnect();},[]);
-  const [index, setIndex] = useState(0);
-  useEffect(() => {
-    if (item.images.length < 2||!visible||!pageVisible) return;
-    const timer = setInterval(() => setIndex(previous => (previous + 1) % item.images.length), 3500);
-    return () => clearInterval(timer);
-  }, [item.images,visible,pageVisible]);
-  return <span ref={frameRef} className="sp-experience-images"><img src={item.images[index]} alt={`${item.organisation} photo ${index + 1}`} loading="lazy" decoding="async" style={{ objectFit: item.imageFit || 'contain' }} />{item.images.length > 1 && <span className="sp-image-counter">{index + 1} / {item.images.length}</span>}</span>;
+  return <span className={`sp-experience-images ${item.documentary ? 'ed-documentary-media' : ''}`}><img src={item.images[0]} alt={`${item.organisation} photo 1`} loading="lazy" decoding="async" style={{ objectFit: item.imageFit || 'contain', objectPosition: item.photoPosition }} />{item.images.length > 1 && <span className="sp-image-counter">+{item.images.length - 1} photos</span>}</span>;
 }
 ExperienceImages.propTypes = { item: PropTypes.object.isRequired };
 
@@ -152,7 +146,7 @@ function DetailDialog({ item, onClose }) {
       {!video && (Array.isArray(item.fullDescription) ? item.fullDescription : item.fullDescription ? [item.fullDescription] : item.experiences || [item.description]).map((text, index) => <p key={index}>{text}</p>)}
       {!video && <div className="sp-tech">{item.skills?.map((skill) => <span key={skill}>{skill}</span>)}</div>}
       {item.videoUrl && !video && <div className="sp-detail-video"><MemoMediaPreview item={item} playing controls /></div>}
-      {experience && item.images.length > 1 && <div className="sp-gallery">{item.images.map((image, index) => <a href={image} key={image} target="_blank" rel="noreferrer"><img src={image} alt={`${title} experience photo ${index + 1}`} loading="lazy" decoding="async" /></a>)}</div>}
+      {experience && item.images.length > 1 && <div className="sp-gallery">{item.images.slice(1).map((image, index) => <a href={image} key={image} target="_blank" rel="noreferrer"><img src={image} alt={`${title} experience photo ${index + 2}`} loading="lazy" decoding="async" /></a>)}</div>}
       <div className="sp-dialog-links">{item.demo && <a className="sp-button" href={item.demo} target="_blank" rel="noreferrer">View demo <ArrowUpRight size={16} /></a>}{item.source && <a className="sp-button sp-button-outline" href={item.source} target="_blank" rel="noreferrer">{item.source.includes('github.com') ? 'Source code' : 'Project page'} <ArrowUpRight size={16} /></a>}</div>
     </div>
   </dialog>;

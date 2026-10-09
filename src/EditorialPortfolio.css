@@ -177,3 +177,20 @@
   .ed-candid-gallery,.ed-award-moments{margin-top:50px;padding-top:35px}.ed-candid-gallery>header h2,.ed-award-moments>header h2{font-size:43px;letter-spacing:-2px}.ed-candid-grid{grid-template-columns:1fr;gap:35px;padding-inline:6px}.ed-candid-frame:nth-child(n){margin-top:0;transform:rotate(-1deg)}.ed-candid-frame:nth-child(2){transform:rotate(1deg)}.ed-candid-frame h3{font-size:33px}
   .ed-award-moments-grid{grid-template-columns:1fr;gap:35px}.ed-award-moments-grid figure:last-child{margin-top:0}.ed-award-moments-grid img{height:290px}.ed-award-moments-grid h3{font-size:33px}.ed-award-moments-grid p{font-size:14px}.ed-press-clipping{grid-template-columns:1fr;gap:28px;margin-top:45px;padding-top:35px}.ed-press-clipping img{border-width:6px}.ed-press-clipping h2{font-size:49px}
 }
+/* Documentary photographs are printed into the page, with quiet torn edges. */
+.editorial-portfolio .ed-documentary-media{background:var(--ed-card)}
+.editorial-portfolio .ed-documentary-media>img{padding:0;filter:grayscale(1) contrast(1.04);mask-image:linear-gradient(to right,transparent,#000 5%,#000 95%,transparent)}
+.editorial-portfolio .ed-candid-frame{border:0;padding:0;background:transparent;box-shadow:none}
+.editorial-portfolio .ed-candid-frame>a{overflow:hidden;clip-path:polygon(0 2%,13% 0,27% 2%,40% 0,53% 1%,67% 0,82% 2%,100% 0,99% 32%,100% 57%,99% 81%,100% 98%,86% 100%,72% 98%,57% 100%,43% 98%,27% 100%,13% 98%,0 100%,1% 67%,0 37%)}
+.editorial-portfolio .ed-candid-frame img{aspect-ratio:5/4;filter:grayscale(1) contrast(1.03);mask-image:linear-gradient(to bottom,#000 90%,transparent)}
+.editorial-portfolio .ed-candid-frame figcaption{padding:21px 6px 18px;border-bottom:1px solid var(--ed-line)}
+.editorial-portfolio .ed-candid-frame h3{font-size:clamp(26px,2.5vw,34px)}
+.editorial-portfolio .ed-nss-portrait>img{object-position:center 32%;mask-image:linear-gradient(to right,#000 95%,transparent)}
+.editorial-portfolio .ed-award-moments-grid img{border:0;filter:grayscale(1) contrast(1.04);mask-image:linear-gradient(to bottom,#000 93%,transparent)}
+.editorial-portfolio .ed-press-clipping img{border:0}
+.editorial-portfolio #research .sp-card-image>img{filter:grayscale(1);object-position:center}
+.editorial-portfolio .sp-media-poster{filter:saturate(.75)}
+@media(min-width:801px){.editorial-portfolio .sp-experience-card{grid-template-columns:230px minmax(0,1fr) 26px}.editorial-portfolio .sp-experience-card>.sp-experience-images{width:230px}}
+@media(max-width:800px){.editorial-portfolio .ed-nss-portrait>img{mask-image:linear-gradient(to bottom,#000 95%,transparent)}.editorial-portfolio .ed-candid-frame h3{font-size:33px}}
+@media(max-width:560px){.editorial-portfolio .ed-documentary-media>img{mask-image:linear-gradient(to bottom,#000 92%,transparent)}.editorial-portfolio .ed-candid-grid{gap:25px}.editorial-portfolio .ed-candid-frame:nth-child(n){transform:none}.editorial-portfolio .ed-candid-frame img{aspect-ratio:4/3}}
+.editorial-portfolio .sp-experience-card .ed-documentary-media>img{padding:0}
