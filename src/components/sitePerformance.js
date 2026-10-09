@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 
 export function lowPowerDevice() {
+  if(typeof navigator==='undefined') return false;
   return navigator.hardwareConcurrency<=4||navigator.deviceMemory<=4||navigator.connection?.saveData===true;
 }
 export function usePageVisible() {
-  const [visible,setVisible]=useState(!document.hidden);
+  const [visible,setVisible]=useState(typeof document==='undefined'||!document.hidden);
   useEffect(()=>{const update=()=>setVisible(!document.hidden);document.addEventListener('visibilitychange',update);return()=>document.removeEventListener('visibilitychange',update);},[]);
   return visible;
 }
