@@ -19,3 +19,12 @@ For each selected edit, `NAME` was respectively `research-in-action` and `diwali
 Saved paths, relative to the workspace:
 - `public/editorial/photos/research-in-action.webp`
 - `public/editorial/photos/diwali-on-stage.webp`
+
+## Original-color hover update
+
+The live site now uses the original color VR and Diwali photos, rather than the generated monochrome versions. Grayscale, exposure adjustment, and the transition back to original color happen in CSS, preserving the actual photo and its color data. The newly supplied ShellHacks team photo is included in Awards and the About contact sheet, with the full group in frame. Company logos and native video playback retain their original presentation.
+
+Active color source assets:
+- `public/editorial/photos/research-in-action-color.webp`
+- `public/editorial/photos/diwali-on-stage-color.webp`
+- `public/editorial/photos/paradise-shellhacks-win.webp`
