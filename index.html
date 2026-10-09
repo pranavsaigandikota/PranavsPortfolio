@@ -23,10 +23,14 @@
   <body>
     <div id="root"></div>
     <script>
-      // Restore a direct Flix visit after GitHub Pages serves our 404 fallback.
+      // Restore known portfolio routes after GitHub Pages serves our 404 fallback.
       const portfolioRoute = new URLSearchParams(window.location.search).get('__portfolio_route');
-      if (portfolioRoute && /^\/flix\/?(?:[?#]|$)/.test(portfolioRoute)) {
+      if (portfolioRoute && /^\/(?:about|experience|projects|skills|research|animations|films|awards|flix)\/?(?:[?#]|$)/.test(portfolioRoute)) {
         window.history.replaceState(null, '', portfolioRoute);
+      }
+      const portfolioSection = /^#(about|experience|projects|skills|research|animations|films|awards|achievements)$/.exec(window.location.hash);
+      if (!portfolioRoute && window.location.pathname === '/' && portfolioSection) {
+        window.history.replaceState(null, '', '/' + (portfolioSection[1] === 'achievements' ? 'awards' : portfolioSection[1]));
       }
     </script>
     <script type="module" src="/src/main.jsx"></script>

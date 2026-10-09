@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pranav's Portfolio</title>
     <script>
-      // GitHub Pages has no server-side SPA rewrites. Bootstrap Flix via the home page.
-      if (/^\/flix\/?$/.test(window.location.pathname)) {
+      // Bootstrap known routes; static editorial pages normally resolve directly.
+      if (/^\/(?:about|experience|projects|skills|research|animations|films|awards|flix)\/?$/.test(window.location.pathname)) {
         const route = window.location.pathname + window.location.search + window.location.hash;
         window.location.replace('/?__portfolio_route=' + encodeURIComponent(route));
       }
