@@ -1,11 +1,11 @@
 import { memo, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, ArrowDown, Github, Linkedin, Mail, Menu, X, Trophy, BriefcaseBusiness, Sparkles, Download, Play, MapPin, Sun, Moon } from 'lucide-react';
+import { ArrowUpRight, ArrowDown, Menu, X, Trophy, BriefcaseBusiness, Sparkles, Download, Play, Sun, Moon } from 'lucide-react';
 import projectMedia from './data/projects.json';
 import { projectsData, experiences as originalHistory, skillsData, achievements } from './data/portfolioContent';
 import { selectEditorialPhotos } from './data/editorialPhotos';
-import { OriginalAboutCopy } from './components/OriginalAboutCopy';
+import { RecruiterHome } from './components/RecruiterHome';
 import animations from './data/animations.json';
 import videoPreviews from './data/videoPreviews.json';
 import exodusPdf from './Research Papers/Exodus Winning First Paper.pdf';
@@ -16,6 +16,7 @@ import { CardArrow, EditorialAccent } from './components/SamuraiDetails';
 import { lowPowerDevice, usePageVisible, usePreviewSlot } from './components/sitePerformance';
 import './SamuraiPortfolio.css';
 import './EditorialPortfolio.css';
+import './components/RecruiterHome.css';
 import { editorialPages } from './data/editorialPages';
 
 const navigation = editorialPages;
@@ -45,16 +46,6 @@ const paperData = [
   { title: 'Cyber Sec Paper', description: 'Analysis of cyber security vulnerabilities, attack vectors, and mitigation.', imageSrc: '/projects/SentinelDemo.png', label: 'MOVEit Attack Analysis', color: '#3b82f6', link: cyberPdf },
 ];
 const nssExperience = originalHistory.find(item=>item.organisation==='National Space Society');
-const candidPhotos = [
-  {image:'/editorial/photos/research-in-action-color.webp',title:'IN THE FIELD.',caption:'Testing ideas with real people. A VR demonstration at UCF’s ISUE Lab.',alt:'Pranav assisting a VR demonstration at the ISUE Lab',position:'64% center'},
-  {image:'/editorial/photos/paradise-shellhacks-win.webp',title:'BUILT. SHIPPED. WON.',caption:'Paradise. 3rd Best Overall at ShellHacks 2026, built for DeafBlind accessibility.',alt:'The Paradise team at ShellHacks holding certificates alongside event organizers',position:'center',fit:'contain'},
-  {image:'/editorial/photos/diwali-on-stage-color.webp',title:'TAKING THE STAGE.',caption:'Planned and spoke at Diwali for 250+ attendees. Diwali and Banquet brought together 300+ attendees combined.',alt:'Pranav and a co-host presenting on stage at UCF Diwali',position:'65% center'},
-];
-
-function CandidGallery() {
-  return <div className="ed-candid-gallery" aria-labelledby="ed-candid-heading"><header><span className="sp-eyebrow">THE CONTACT SHEET / IN THE MOMENT</span><h2 id="ed-candid-heading">Life between<br /><em>the lines.</em></h2></header><div className="ed-candid-grid">{candidPhotos.map((photo,index)=><figure className="ed-candid-frame" key={photo.title}><a href={photo.image} target="_blank" rel="noreferrer" aria-label={`View full photo: ${photo.title}`}><img src={photo.image} alt={photo.alt} style={{objectPosition:photo.position,objectFit:photo.fit}} loading="lazy" decoding="async"/></a><figcaption><span className="ed-photo-index">FRAME 0{index+1}</span><h3>{photo.title}</h3><p>{photo.caption}</p></figcaption></figure>)}</div></div>;
-}
-
 function Tag({ children, color = '#e96758' }) {
   return <span className="sp-tag" style={{ '--tag-color': color }}>{children}</span>;
 }
@@ -64,11 +55,6 @@ function SectionHeading({ number, eyebrow, title, description }) {
   return <div className="sp-section-heading"><div><span className="sp-eyebrow"><span>{number} /</span> {eyebrow}</span><h1>{title}<span>.</span></h1></div>{description && <p>{description}</p>}<EditorialAccent kind={number === "06" ? "film" : number === "01" ? "music" : "code"} /></div>;
 }
 SectionHeading.propTypes = { number: PropTypes.string, eyebrow: PropTypes.string, title: PropTypes.string, description: PropTypes.string };
-
-function ContentsIssue() {
-  const teasers = ['Meet the engineer behind the work.','Cloud systems. Real results.','From an idea to a working product.','Play through the stack.','A closer look at the research.','Film, music, animation, and new experiments.','The work, recognized.'];
-  return <section className="ed-contents sp-container" aria-labelledby="ed-contents-title"><div className="ed-contents-heading"><span className="sp-eyebrow">INSIDE THIS ISSUE</span><h2 id="ed-contents-title">Built with purpose.<br />Shared with people<span>.</span></h2></div><div className="ed-contents-grid">{editorialPages.slice(1).map((item,index)=><Link key={item.id} className={`ed-contents-entry ed-contents-${item.id}`} to={item.path}><span className="ed-page-number">0{index+1}</span><div><h3>{item.label}</h3><p>{teasers[index]}</p></div><ArrowUpRight size={21}/></Link>)}</div></section>;
-}
 
 function CreativeIssue({playing,onSelect,onTogglePlaying}) {
   const works = animations.filter(item=>item.type!=='Link');
@@ -212,26 +198,12 @@ export function SamuraiPortfolio({ page = 'home' }) {
     <a className="sp-skip" href="#main">Skip to content</a>
     <header className="sp-header"><div className="sp-nav-wrap"><Link className="sp-brand" to="/" aria-label="Pranavsai Gandikota home"><span className="sp-brand-mark">P<span>G</span></span><span className="sp-full-name">PRANAVSAI GANDIKOTA</span></Link>
       <nav id="sp-navigation" className={menuOpen ? 'sp-nav sp-nav-open' : 'sp-nav'} aria-label="Main navigation">{navigation.map(({id, path, label}) => <Link key={id} to={path} aria-current={page === id ? 'page' : undefined} onClick={() => setMenuOpen(false)}>{label}</Link>)}<Link className="sp-flix-link" to="/flix">Flix</Link><a className="ed-mobile-resume" href="/Pranavsai_Gandikota_SWE.pdf" target="_blank" rel="noreferrer" onClick={()=>setMenuOpen(false)}>Resume <ArrowUpRight size={16}/></a></nav>
-      <a className="sp-nav-resume" href="/Pranavsai_Gandikota_SWE.pdf" target="_blank" rel="noreferrer">Resume <ArrowUpRight size={14} /></a>
+      <a className="sp-nav-resume" href="/Pranavsai_Gandikota_SWE.pdf" target="_blank" rel="noreferrer" download>Download PDF <Download size={14} /></a>
       <button className="ed-theme-toggle" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`} title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}>{theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}</button>
       <button className="sp-menu-toggle" aria-label={menuOpen ? 'Close menu' : 'Open menu'} aria-expanded={menuOpen} aria-controls="sp-navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X /> : <Menu />}</button>
     </div></header>
     <main id="main">
-      {page === 'home' && (<section id="home" className="sp-hero sp-container">
-        <div className="ed-issue-strip"><span>THE INDEPENDENT PORTFOLIO</span><span>ORLANDO, FL · UCF</span><span>VOL. 01 / 2026</span></div>
-        <h1 className="ed-masthead">PRANAVSAI <span>GANDIKOTA</span></h1>
-        <div className="sp-hero-content"><span className="sp-eyebrow">SOFTWARE ENGINEER · APPLIED AI</span><p className="sp-hero-description">I’m a software engineer who loves exploring new ideas, <em>shipping useful software</em>, and helping people build.</p>
-          <p className="ed-hero-intent">At Ford, in hackathons, and across UCF, I turn unfamiliar problems into working systems. I lead teams, share what I learn, and follow through, from a faster cloud service to a platform our community uses every week.</p>
-          <div className="sp-hero-actions"><a href="/projects" className="sp-button">Explore the work <ArrowUpRight size={18} /></a><a href="/Pranavsai_Gandikota_SWE.pdf" target="_blank" rel="noreferrer" className="sp-button sp-button-outline">Read my resume <Download size={18} /></a></div>
-          <div className="sp-hero-socials"><a href="https://github.com/pranavsaigandikota" target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={19} /><span>GitHub</span></a><a href="https://www.linkedin.com/in/pranavsaig" target="_blank" rel="noreferrer" aria-label="LinkedIn"><Linkedin size={19} /><span>LinkedIn</span></a><a href="https://pranavsaigandikota.wixsite.com/filmasticpg" target="_blank" rel="noreferrer" aria-label="FilmasticPG creative portfolio"><Sparkles size={19} /><span>Film</span></a><a href="mailto:pranavsaigandikota@gmail.com" aria-label="Email Pranav"><Mail size={19} /><span>Email</span></a><p><MapPin size={13} /> Orlando, Florida · UCF</p></div>
-        </div><figure className="sp-hero-art" data-parallax><span className="ed-art-orbit" aria-hidden="true"/><span className="ed-art-word" aria-hidden="true">CREATE.</span><img src="/editorial/creative-mind.webp" width="1024" height="1536" alt="Black-and-white collage of a classical bust, computer, piano keys, camera and film reel" /><figcaption><span>FIG. 01 / CODE MEETS CREATIVITY</span><span>CODE / COMMUNITY / CURIOSITY</span></figcaption></figure>
-        <div className="ed-cover-note"><span>THE ENGINEERING ISSUE</span><p>Curious enough to explore.<br />Committed enough to ship.</p></div>
-        <div className="ed-proof-strip"><a href="/about"><strong>92%</strong><span>Less processing time<br />Ford cloud modernization</span></a><a href="/about"><strong>3<span>rd</span></strong><span>Best Overall<br />ShellHacks 2026 / Paradise</span></a><a href="/about"><strong>230+</strong><span>Registered SASE members<br />on the platform I helped build</span></a></div>
-      </section>)}
-      {page === 'home' && <div className="sp-marquee" aria-label="Areas of focus"><div><span>FULL-STACK ENGINEERING</span><i>✦</i><span>ARTIFICIAL INTELLIGENCE</span><i>✦</i><span>CLOUD & AUTOMATION</span><i>✦</i><span>CREATIVE TECHNOLOGY</span><i>✦</i></div></div>}
-      {page === 'home' && <section className="ed-home-about sp-section sp-container" aria-labelledby="ed-home-about-title"><div className="ed-home-about-masthead" aria-hidden="true"><span>THE PERSONAL EDITION / UCF</span><strong>The Builder’s Journal</strong><span>LEARN. CONTRIBUTE. SHIP.</span></div><div className="sp-about-copy"><span className="sp-eyebrow">ABOUT ME / BUILDING & GIVING BACK</span><h2 id="ed-home-about-title">Curiosity, <em>put to work.</em></h2><OriginalAboutCopy /><Link className="sp-text-link" to="/about">My recent work <ArrowUpRight size={17}/></Link></div><figure className="ed-about-portrait ed-suit-portrait"><span className="ed-portrait-orbit" aria-hidden="true"/><span className="ed-portrait-word" aria-hidden="true">BUILD.</span><img src="/editorial/pranav-suit-color-v2.png" width="1182" height="1331" alt="Pranav smiling in a navy three-piece suit and burgundy tie" loading="lazy" decoding="async"/><figcaption><span>02 / HELLO, I’M PRANAV</span><span>BUILD / LEARN / SHARE</span></figcaption></figure></section>}
-      {page === 'home' && <section className="ed-home-moments sp-container" aria-label="Moments behind the work"><CandidGallery /></section>}
-      {page === 'home' && <ContentsIssue />}
+      {page === 'home' && <RecruiterHome />}
       {page === 'about' && (<section id="about" className="sp-section sp-container"><SectionHeading number="01" eyebrow="THE PERSON BEHIND THE CODE" title="About Me" />
         <section id="recent-work" className="ed-recent-work" aria-labelledby="ed-recent-work-title"><header><span className="sp-eyebrow">LATELY / ENGINEERING & COMMUNITY</span><h2 id="ed-recent-work-title">Recent work<span>.</span></h2></header><div className="ed-recent-work-list">{recentWork.map((work, index) => <article className="ed-recent-work-item" key={work.title}>{work.title === 'Ford Motor Company' ? <figure className="ed-about-portrait"><span className="ed-portrait-orbit" aria-hidden="true"/><span className="ed-portrait-word" aria-hidden="true">BUILD.</span><img src="/editorial/pranav-bill-ford-cutout-v2.png" width="1020" height="1541" alt="Black-and-white paper cutout of Pranav with Bill Ford"/><figcaption><span>01 / WITH BILL FORD</span><span>SUMMER 2026 / FORD</span></figcaption></figure> : <figure><img src={work.image} alt={work.alt} style={{objectFit: work.fit}} loading="lazy" decoding="async"/><figcaption><span>FIELD NOTE / 0{index + 1}</span><span>{work.title.split(':')[0]}</span></figcaption></figure>}<div><span className="sp-eyebrow">{work.eyebrow}</span><h3>{work.title}</h3><p>{work.description}</p><p className="ed-recent-work-stack">{work.stack}</p><Link className="sp-text-link" to={work.path}>Explore the work <ArrowUpRight size={16}/></Link></div></article>)}</div></section>
       </section>)}

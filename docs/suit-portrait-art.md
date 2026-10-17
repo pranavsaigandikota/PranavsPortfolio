@@ -1,6 +1,6 @@
 # Homepage suit portrait
 
-Active asset: `public/editorial/pranav-suit-cutout-v1.png`.
+Previous asset: `public/editorial/pranav-suit-cutout-v1.png`.
 Source: user-provided `Smiling Man in a Three-Piece Suit.png` in Downloads. Original untouched.
 Tool: built-in imagegen; alpha checked at background and subject sample points.
 
@@ -22,6 +22,12 @@ The original collage is restored to the opening hero. The suit portrait accompan
 
 ## Full-color About Me revision
 
-Active asset: `public/editorial/pranav-suit-color-v2.png`. Color kept by request; original opening collage retained. The About Me section uses a code-native abstract newspaper background, serif masthead, rules and column textures.
+Previous asset: `public/editorial/pranav-suit-color-v2.png`. Color kept by request; original opening collage retained. The About Me section uses a code-native abstract newspaper background, serif masthead, rules and column textures.
 
 Built-in imagegen prompt: Precise photo cutout edit. Preserve the supplied man's original full COLOR photograph exactly: natural warm skin tones, dark navy three-piece suit, burgundy tie, white shirt, face, smile, hair, body proportions, hands in pockets pose. Do not convert to black-and-white, desaturate, beautify, redraw, or change his likeness. Remove ONLY the white background around him and leave genuine alpha transparency everywhere outside his exact silhouette. No halo, vignette, paper border, gray haze, glow, shadow, backdrop, text or added objects. Crop with narrow margins around head and shoulders through the existing waist/upper-thigh boundary; do not invent lower body. Tall clean transparent full-color photographic subject for an editorial About Me section. Preserve original color and identity above all.
+
+## Corrected source portrait
+
+Active asset: `public/editorial/pranav-suit-original-v3.png`. Replaced the generated color cutout with the user-supplied corrected photo from Downloads (`Smiling Man in a Three-Piece Suit.png`), copied without editing. Native dimensions: 1053 x 1494. Original colors and white background preserved.
+
+The recruiter-focused homepage now places this original photo in its compact hero, alongside the professional summary.

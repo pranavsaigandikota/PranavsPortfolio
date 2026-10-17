@@ -1,11 +1,2 @@
-export const editorialPages = [
-  {id:'home',path:'/',label:'Home',title:'The Engineering Issue'},
-  {id:'about',path:'/about',label:'About',title:'The Person Behind the Code'},
-  {id:'experience',path:'/experience',label:'Experience',title:'My Experience'},
-  {id:'projects',path:'/projects',label:'Projects',title:'My Projects'},
-  {id:'skills',path:'/skills',label:'Skills',title:'My Skills'},
-  {id:'research',path:'/research',label:'Research',title:'My Research'},
-  {id:'hobbies',path:'/hobbies',label:'Hobbies',title:'Hobbies'},
-  {id:'awards',path:'/awards',label:'Awards',title:'Recognition'},
-];
+export const editorialPages = [{id:'home',path:'/',label:'Home',title:'Pranavsai Gandikota'}];
 export const portfolioRoutePattern = /^\/(?:about|experience|projects|skills|research|hobbies|animations|films|awards|flix)\/?(?:[?#]|$)/;
