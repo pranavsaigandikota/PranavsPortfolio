@@ -11,3 +11,9 @@ Edit target: supplied photograph. Isolate ONLY the young man standing on the LEF
 ## Presentation
 
 Uses existing theme colors, serif typography, paper textures, red accents, and a thin orbital line. Work photos retain their source colors and use CSS grayscale with color on hover. Original image files remain unchanged. Alternating desktop rows collapse to image-first rows on mobile; reduced-motion preferences disable the photo transitions.
+
+## Two-person revision
+
+Active asset: `public/editorial/pranav-bill-ford-cutout-v2.png`. Generated with built-in imagegen from the same original, preserving both Pranav and Bill Ford. The original solo version remains archived.
+
+Prompt: Edit the supplied photograph into one faithful black-and-white photographic newspaper cutout containing BOTH people together: the young man on the left wearing the Ford jacket AND Bill Ford on the right wearing the blazer. Keep their original side-by-side positions, faces, hair, smiles, clothing, posture, and relative proportions. Preserve the complete visible parts of BOTH people; do not isolate only one person. Remove only the background and all background lettering. Do not invent body parts or extend beyond the source crop. Subtle print grain, natural high-contrast monochrome tones, narrow irregular off-white paper border around the combined silhouette. Real alpha transparency outside the silhouette. No added text, no extra objects, no baked background or shadow. Leave a little transparent margin around the pair. This is an asset for an editorial software engineer portfolio; preserve likeness and photographic authenticity.
