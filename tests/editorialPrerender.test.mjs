@@ -20,7 +20,7 @@ test('the portfolio is readable without a client runtime',()=>{
   }
   for(const page of pages.filter(item=>item.id!=='home')) assert.ok(html.includes(`href="${page.path}"`));
   assert.ok(html.includes('PRANAVSAI'));
-  assert.ok(html.includes('shipping useful software'));
+  assert.ok(html.includes('I build cloud systems, full-stack applications, and'));
   assert.ok(!html.includes('id="skills"'));
   assert.ok(pages.find(page=>page.id==='experience').html.includes('Ford Motor Company'));
   assert.ok(pages.find(page=>page.id==='projects').html.includes('Paradise'));
