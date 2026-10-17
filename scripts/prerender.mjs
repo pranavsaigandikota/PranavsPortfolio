@@ -20,10 +20,9 @@ for(const page of editorialPages){
   if(page.id==='home') await writeFile('dist/portfolio.txt',text+'\n');
 }
 await writeFile('dist/sitemap.xml',`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${editorialPages.map(page=>`<url><loc>https://pranavsaig.dev${page.path}</loc></url>`).join('')}</urlset>`);
-// Former pages are redirects, not separate portfolio content.
-const legacySections = {about:'home',experience:'work',projects:'work',research:'work',skills:'skills',awards:'work',hobbies:'contact',films:'contact',animations:'contact',flix:'home'};
-for (const [alias, section] of Object.entries(legacySections)) {
+// Preserve bookmarks for both former creative-page URLs.
+for (const alias of ['films', 'animations']) {
   await mkdir(`dist/${alias}`, {recursive:true});
-  await writeFile(`dist/${alias}/index.html`, `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=/#${section}"><link rel="canonical" href="https://pranavsaig.dev/"><title>Pranavsai Gandikota</title></head><body><a href="/#${section}">Continue to the portfolio</a><script>location.replace('/'+location.search+'#${section}')</script></body></html>`);
+  await writeFile(`dist/${alias}/index.html`, await readFile('dist/hobbies/index.html','utf8'));
 }
-console.log('Pre-rendered one portfolio page, legacy redirects, structured data, sitemap, and text edition.');
+console.log(`Pre-rendered ${editorialPages.length} editorial pages, structured data, sitemap, and text edition.`);

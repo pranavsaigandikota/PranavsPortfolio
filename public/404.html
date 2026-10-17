@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pranav's Portfolio</title>
     <script>
-      // Restore old bookmarks to the single-page portfolio.
+      // Bootstrap known routes; static editorial pages normally resolve directly.
       if (/^\/(?:about|experience|projects|skills|research|hobbies|animations|films|awards|flix)\/?$/.test(window.location.pathname)) {
         const route = window.location.pathname + window.location.search + window.location.hash;
         window.location.replace('/?__portfolio_route=' + encodeURIComponent(route));
       }
     </script>
   </head>
-  <body style="background:#000;color:#fff;font-family:system-ui;padding:32px">
-    <p>Looking for the portfolio? <a href="/" style="color:#d6af52">Go home</a>.</p>
+  <body style="background:#09090b;color:#eee;font-family:system-ui;padding:32px">
+    <p>Looking for the portfolio? <a href="/" style="color:#ef3946">Go home</a>.</p>
   </body>
 </html>
