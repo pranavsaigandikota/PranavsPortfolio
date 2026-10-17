@@ -23,17 +23,22 @@
   <body>
     <div id="root"></div>
     <script>
-      // Restore known portfolio routes after GitHub Pages serves our 404 fallback.
+      // Keep old bookmarks working after consolidating research and awards.
+      function mergedPortfolioRoute(route) {
+        return route.replace(/^\/research\/?(\?[^#]*)?(?:#.*)?$/, (_, query) => '/projects' + (query || '') + '#research')
+          .replace(/^\/awards\/?(\?[^#]*)?(?:#.*)?$/, (_, query) => '/experience' + (query || '') + '#awards')
+          .replace(/^\/(?:films|animations)\/?(?=[?#]|$)/, '/hobbies');
+      }
       const portfolioRoute = new URLSearchParams(window.location.search).get('__portfolio_route');
       if (portfolioRoute && /^\/(?:about|experience|projects|skills|research|hobbies|animations|films|awards|flix)\/?(?:[?#]|$)/.test(portfolioRoute)) {
-        window.history.replaceState(null, '', portfolioRoute.replace(/^\/(?:films|animations)(?=\/?(?:[?#]|$))/, '/hobbies'));
+        window.history.replaceState(null, '', mergedPortfolioRoute(portfolioRoute));
       }
       const portfolioSection = /^#(about|experience|projects|skills|research|hobbies|animations|films|awards|achievements)$/.exec(window.location.hash);
       if (!portfolioRoute && window.location.pathname === '/' && portfolioSection) {
-        window.history.replaceState(null, '', '/' + (portfolioSection[1] === 'achievements' ? 'awards' : ['films', 'animations'].includes(portfolioSection[1]) ? 'hobbies' : portfolioSection[1]));
+        window.history.replaceState(null, '', mergedPortfolioRoute('/' + (portfolioSection[1] === 'achievements' ? 'awards' : portfolioSection[1])));
       }
-      if (/^\/(?:films|animations)\/?$/.test(window.location.pathname)) {
-        window.history.replaceState(null, '', '/hobbies' + window.location.search + window.location.hash);
+      if (/^\/(?:research|awards|films|animations)\/?$/.test(window.location.pathname)) {
+        window.history.replaceState(null, '', mergedPortfolioRoute(window.location.pathname + window.location.search + window.location.hash));
       }
     </script>
     <script type="module" src="/src/main.jsx"></script>

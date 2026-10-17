@@ -73,3 +73,23 @@ test('home separates the collage from the portrait and reflects current impact',
   assert.ok(text.includes('250+ attendees'));
   assert.ok(text.includes('300+ attendees across the two events combined'));
 });
+
+test('navigation groups secondary pages and embeds awards and research in relevant pages',()=>{
+  const nav=html.match(/<nav id="sp-navigation"[\s\S]*?<\/nav>/)[0];
+  const primary=nav.split('<details')[0];
+  for(const path of ['experience','projects','skills']) assert.ok(primary.includes(`href="/${path}"`));
+  for(const path of ['about','hobbies','research','awards','flix']) assert.ok(!primary.includes(`href="/${path}"`));
+  assert.ok(nav.includes('>More</summary>'));
+  for(const path of ['about','hobbies','flix']) assert.ok(nav.includes(`href="/${path}"`));
+  assert.ok(!editorialPages.some(page=>['research','awards'].includes(page.id)));
+  const experience=pages.find(page=>page.id==='experience').html;
+  const projects=pages.find(page=>page.id==='projects').html;
+  assert.ok(experience.includes('id="awards"'));
+  assert.ok(experience.includes('National Space Society') || experience.includes('NSS SPACE SETTLEMENT'));
+  assert.ok(projects.includes('id="research"'));
+  for(const title of ['Exodus Paper','Stylus Paper','Cyber Sec Paper']) assert.ok(projects.includes(title));
+  for(const [alias,target] of [['research','/projects#research'],['awards','/experience#awards']]){
+    const redirect=readFileSync(new URL(`../dist/${alias}/index.html`,import.meta.url),'utf8');
+    assert.ok(redirect.includes(`url=${target}`));
+  }
+});
