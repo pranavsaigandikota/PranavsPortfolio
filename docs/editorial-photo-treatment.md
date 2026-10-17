@@ -28,3 +28,7 @@ Active color source assets:
 - `public/editorial/photos/research-in-action-color.webp`
 - `public/editorial/photos/diwali-on-stage-color.webp`
 - `public/editorial/photos/paradise-shellhacks-win.webp`
+
+## Local revision, awaiting additional user edits
+
+The cover artwork has an open background again, without the red field. Foreground name lettering uses the theme’s contrasting ink and paper outline on desktop and mobile. Experience photos and Project screenshots retain their color; grayscale-to-color hover is limited to photos outside those pages. Do not publish this revision until the user authorizes publishing again.

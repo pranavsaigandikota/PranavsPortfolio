@@ -18,7 +18,7 @@ export function renderPortfolio(page = 'home') {
     'Email: pranavsaigandikota@gmail.com',
     'GitHub: https://github.com/pranavsaigandikota',
     'LinkedIn: https://www.linkedin.com/in/pranavsaig',
-    'Resume: https://pranavsaig.dev/PranavNovemberResume.pdf',
+    'Resume: https://pranavsaig.dev/Pranavsai_Gandikota_SWE.pdf',
     '\nABOUT\n'+plain(<OriginalAboutCopy />),
     '\nEXPERIENCE',
     ...experiences.map(item=>`${item.organisation} | ${item.role} | ${item.startDate} — ${item.endDate}\n${item.experiences.map(plain).join('\n')}`),

@@ -82,10 +82,10 @@ export const projectsData = [
     title: "UCF SASE Official Website",
     imageSrc: saseImg,
     imageFit: "contain",
-    shortDescription: "A QR check-in system replacing manual attendance tracking for over 200 UCF SASE members.",
+    shortDescription: "A club platform serving 220+ registered members with event registration, QR check-ins, membership, and attendance analytics.",
     fullDescription: [
-      "Led the web team as CS Tech Chair to build the official UCF SASE website and replace manual attendance tracking with a Next.js and Supabase QR check-in system.",
-      "Implemented row-level security policies and duplicate-check-in protection for over 200 members. Development began in July 2026 and continues today."
+      "Led the web team as CS Tech Chair, planned and delegated frontend and backend tasks, and integrated contributor features into a Next.js and Supabase platform supporting 220+ registered members, weekly event registration, membership, attendance, and email engagement.",
+      "Built the QR check-in and attendance system, designed the PostgreSQL schema, and integrated an admin dashboard for event and form creation, RSVP tracking, and club demographics."
     ],
     skills: ["Next.js", "TypeScript", "Supabase", "PostgreSQL", "Vercel"],
     themeColor: "#2563eb",
@@ -109,9 +109,9 @@ export const projectsData = [
   {
     title: "uKnight",
     imageSrc: uknightImg,
-    shortDescription: "Anonymous university video chat, built by a six-member team and used by 72 verified students in its first three weeks.",
+    shortDescription: "University video chat with WebRTC connectivity and distributed Redis matchmaking, built by a six-member team.",
     fullDescription: [
-      'Led a six-member team building an anonymous university video-chat platform; deployed the Spring Boot and WebSocket backend on GCP Cloud Run for WebRTC signaling, reaching 72 verified users in three weeks.',
+      'Led a six-member team building an anonymous university video-chat platform; deployed the Spring Boot and WebSocket backend on GCP Cloud Run for WebRTC signaling.',
       'Moved matchmaking and session state to a distributed Redis sorted set, using an atomic Lua operation to prevent double-matches and stale-session pruning to support multiple backend instances.',
     ],
     skills: ["React", "Spring Boot", "WebRTC", "PostgreSQL", "Redis", "GCP", "WebSockets", "OAuth", "Next.js", "Docker", "Lua"],

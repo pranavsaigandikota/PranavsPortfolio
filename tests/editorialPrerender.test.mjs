@@ -14,7 +14,7 @@ test('the portfolio is readable without a client runtime',()=>{
     assert.ok(page.html.includes(`id="${page.id}"`),page.id);
     assert.ok(page.html.includes('data-theme="dark"'));
     assert.ok(!page.html.includes('<div id="root"></div>'));
-    assert.ok(page.html.includes('href="/PranavNovemberResume.pdf"'));
+    assert.ok(page.html.includes('href="/Pranavsai_Gandikota_SWE.pdf"'));
     assert.equal((page.html.match(/<h1[ >]/g)||[]).length,1);
     assert.ok(page.html.includes(`rel="canonical" href="https://pranavsaig.dev${page.path}"`));
   }
