@@ -35,24 +35,24 @@ test('restoration rejects external destinations and unrelated routes', () => {
 });
 
 test('each editorial page survives a fallback and preserves query strings',()=>{
-  for(const page of ['about','experience','projects','skills','research','animations','films','awards']){
+  for(const page of ['about','experience','projects','skills','research','hobbies','animations','films','awards']){
     let redirect,restored;
     runInNewContext(fallback,{window:{location:{pathname:`/${page}`,search:'?from=cover',hash:'',replace:value=>{redirect=value;}}}});
     runInNewContext(restore,{URLSearchParams,window:{location:{search:new URL(redirect,'https://pranavsaig.dev').search},history:{replaceState:(_state,_title,value)=>{restored=value;}}}});
-    assert.equal(restored,`/${page}?from=cover`);
+    assert.equal(restored,`/${['animations','films'].includes(page)?'hobbies':page}?from=cover`);
   }
 });
 
 test('old section bookmarks resolve to their new pages',()=>{
-  for(const [hash,route] of [['#experience','/experience'],['#skills','/skills'],['#achievements','/awards'],['#films','/animations']]){
+  for(const [hash,route] of [['#experience','/experience'],['#skills','/skills'],['#achievements','/awards'],['#films','/hobbies'],['#animations','/hobbies'],['#hobbies','/hobbies']]){
     let restored;
     runInNewContext(restore,{URLSearchParams,window:{location:{pathname:'/',search:'',hash},history:{replaceState:(_state,_title,value)=>{restored=value;}}}});
     assert.equal(restored,route);
   }
 });
 
-test('the former film page resolves to the single video collage',()=>{
+test('the former film page resolves to Hobbies with query and anchor intact',()=>{
   let restored;
   runInNewContext(restore,{URLSearchParams,window:{location:{pathname:'/films/',search:'?from=bookmark',hash:'#main'},history:{replaceState:(_state,_title,value)=>{restored=value;}}}});
-  assert.equal(restored,'/animations?from=bookmark#main');
+  assert.equal(restored,'/hobbies?from=bookmark#main');
 });

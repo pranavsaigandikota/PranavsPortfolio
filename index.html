@@ -7,7 +7,7 @@
     <link rel="alternate" type="text/plain" href="/portfolio.txt" title="Readable portfolio text" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pranavsai Gandikota — Software Engineer &amp; Creative Technologist</title>
-    <meta name="description" content="Pranavsai Gandikota — software engineer, AI builder, and creative technologist. Explore award-winning projects, Ford internship experience, research, and animation." />
+    <meta name="description" content="Pranavsai Gandikota — software engineer, AI builder, and creative technologist. Explore award-winning projects, Ford internship experience, research, and hobbies." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,600;6..96,700&family=Bungee&family=Manrope:wght@400;500;600;700;800&family=Permanent+Marker&family=Space+Grotesk:wght@500;600;700&display=swap" />
@@ -25,15 +25,15 @@
     <script>
       // Restore known portfolio routes after GitHub Pages serves our 404 fallback.
       const portfolioRoute = new URLSearchParams(window.location.search).get('__portfolio_route');
-      if (portfolioRoute && /^\/(?:about|experience|projects|skills|research|animations|films|awards|flix)\/?(?:[?#]|$)/.test(portfolioRoute)) {
-        window.history.replaceState(null, '', portfolioRoute);
+      if (portfolioRoute && /^\/(?:about|experience|projects|skills|research|hobbies|animations|films|awards|flix)\/?(?:[?#]|$)/.test(portfolioRoute)) {
+        window.history.replaceState(null, '', portfolioRoute.replace(/^\/(?:films|animations)(?=\/?(?:[?#]|$))/, '/hobbies'));
       }
-      const portfolioSection = /^#(about|experience|projects|skills|research|animations|films|awards|achievements)$/.exec(window.location.hash);
+      const portfolioSection = /^#(about|experience|projects|skills|research|hobbies|animations|films|awards|achievements)$/.exec(window.location.hash);
       if (!portfolioRoute && window.location.pathname === '/' && portfolioSection) {
-        window.history.replaceState(null, '', '/' + (portfolioSection[1] === 'achievements' ? 'awards' : portfolioSection[1] === 'films' ? 'animations' : portfolioSection[1]));
+        window.history.replaceState(null, '', '/' + (portfolioSection[1] === 'achievements' ? 'awards' : ['films', 'animations'].includes(portfolioSection[1]) ? 'hobbies' : portfolioSection[1]));
       }
-      if (/^\/films\/?$/.test(window.location.pathname)) {
-        window.history.replaceState(null, '', '/animations' + window.location.search + window.location.hash);
+      if (/^\/(?:films|animations)\/?$/.test(window.location.pathname)) {
+        window.history.replaceState(null, '', '/hobbies' + window.location.search + window.location.hash);
       }
     </script>
     <script type="module" src="/src/main.jsx"></script>

@@ -15,3 +15,13 @@ Precise background removal correction. Keep the photographed man, face, hair, su
 ## Name treatment
 
 White name lettering uses CSS difference blending inside the existing isolated hero. The backdrop is the theme paper plus the rendered portrait, so each letter inverts the pixels beneath it, including partial overlaps. Stroke and text shadows are removed to avoid a fixed-color halo. Unsupported browsers retain the theme ink. Forced-color mode restores normal system-colored text.
+
+## Placement update
+
+The original collage is restored to the opening hero. The suit portrait accompanies the About Me preview immediately below the opening hero and focus strip. The name inversion still applies to the opening collage.
+
+## Full-color About Me revision
+
+Active asset: `public/editorial/pranav-suit-color-v2.png`. Color kept by request; original opening collage retained. The About Me section uses a code-native abstract newspaper background, serif masthead, rules and column textures.
+
+Built-in imagegen prompt: Precise photo cutout edit. Preserve the supplied man's original full COLOR photograph exactly: natural warm skin tones, dark navy three-piece suit, burgundy tie, white shirt, face, smile, hair, body proportions, hands in pockets pose. Do not convert to black-and-white, desaturate, beautify, redraw, or change his likeness. Remove ONLY the white background around him and leave genuine alpha transparency everywhere outside his exact silhouette. No halo, vignette, paper border, gray haze, glow, shadow, backdrop, text or added objects. Crop with narrow margins around head and shoulders through the existing waist/upper-thigh boundary; do not invent lower body. Tall clean transparent full-color photographic subject for an editorial About Me section. Preserve original color and identity above all.

@@ -6,7 +6,7 @@
     <title>Pranav's Portfolio</title>
     <script>
       // Bootstrap known routes; static editorial pages normally resolve directly.
-      if (/^\/(?:about|experience|projects|skills|research|animations|films|awards|flix)\/?$/.test(window.location.pathname)) {
+      if (/^\/(?:about|experience|projects|skills|research|hobbies|animations|films|awards|flix)\/?$/.test(window.location.pathname)) {
         const route = window.location.pathname + window.location.search + window.location.hash;
         window.location.replace('/?__portfolio_route=' + encodeURIComponent(route));
       }

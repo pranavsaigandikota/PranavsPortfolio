@@ -95,7 +95,7 @@ const experiences = [
     themeColor: "#2563eb",
     images: [saseImg],
     experiences: [
-      "Develop and maintain the official UCF SASE website.",
+      "Lead the team taking the official UCF SASE website from a static site to a full platform serving every club event and 230+ registered members, with features built from the ground up.",
       "Leading frontend and backend developers for SASE website upgrades.",
       "Design and facilitate technical and project based computer science workshops tailored to members' academic and professional development needs.",
       "Cultivate partnerships with external academic and professional organizations to expand networking and collaborative event opportunities.",
@@ -172,8 +172,8 @@ const experiences = [
     themeColor: "#ec4899", // Pink
     images: [diwaliBackdrop, diwaliSpeech, diwaliCrowd, diwaliBoard, diwaliFood],
     experiences: [
-      "Leading the planning and execution of Diwali and Banquet events for UCF’s largest Indian student organization.",
-      "Coordinating with multiple teams and clubs to deliver engaging experiences for the campus community with turnouts up-to almost 300+ attendees.",
+      "Planned and delivered Diwali and Banquet for UCF’s Indian Student Association, with 300+ attendees across the two events combined.",
+      "Planned and spoke at Diwali for 250+ attendees, coordinating teams and clubs to bring the event to life.",
       "Contributed innovative ideas and guided team members to ensure successful event execution.",
     ],
   },
@@ -200,7 +200,7 @@ const experiences = [
     images: [nssSpeech, nssPoster, nssStandalone, nssMeeting, nssNewspaper],
     experiences: [
       <>Authored a <strong>50</strong>-page research paper on sustainable space habitation.</>,
-      <>First Place Winner among <strong>17,000+</strong> students (<strong>3,000+</strong> entries) from <strong>22</strong> countries for 'Exodus' space settlement design.</>,
+      <>First Place Winner among <strong>17,000+</strong> students (<strong>3,000+</strong> entries) from <strong>22</strong> countries for &apos;Exodus&apos; space settlement design.</>,
       <>Presented the research paper to industry leaders at the International Space Development Conference <strong>2022</strong>.</>,
     ],
   },

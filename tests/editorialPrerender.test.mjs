@@ -20,7 +20,7 @@ test('the portfolio is readable without a client runtime',()=>{
   }
   for(const page of pages.filter(item=>item.id!=='home')) assert.ok(html.includes(`href="${page.path}"`));
   assert.ok(html.includes('PRANAVSAI'));
-  assert.ok(html.includes('AI-powered systems'));
+  assert.ok(html.includes('shipping useful software'));
   assert.ok(!html.includes('id="skills"'));
   assert.ok(pages.find(page=>page.id==='experience').html.includes('Ford Motor Company'));
   assert.ok(pages.find(page=>page.id==='projects').html.includes('Paradise'));
@@ -47,13 +47,29 @@ test('pre-rendered media and document URLs point to shipped files',()=>{
   }
 });
 
-test('one creative page presents all six videos without individual printed titles',()=>{
-    assert.equal(editorialPages.filter(item=>['animations','films'].includes(item.id)).length,1);
+test('the Hobbies page preserves the video archive and legacy URLs',()=>{
+    assert.equal(editorialPages.filter(item=>['hobbies','animations','films'].includes(item.id)).length,1);
     assert.ok(!html.includes('href="/films"'));
-    const page=pages.find(item=>item.id==='animations').html;
+    const page=pages.find(item=>item.id==='hobbies').html;
     assert.equal((page.match(/class="ed-collage-tile /g)||[]).length,6);
     assert.ok(!page.includes('<h3'));
     assert.equal((page.match(/aria-label="Watch /g)||[]).length,6);
     const alias=readFileSync(new URL('../dist/films/index.html',import.meta.url),'utf8');
     assert.equal(alias,page);
+    assert.equal(readFileSync(new URL('../dist/animations/index.html',import.meta.url),'utf8'),page);
+    assert.ok(page.includes('>HOBBIES</h1>'));
+    assert.ok(html.includes('href="/hobbies"'));
+});
+
+test('home separates the collage from the portrait and reflects current impact',()=>{
+  const hero=html.split('id="home"')[1].split('</section>')[0];
+  assert.ok(hero.includes('creative-mind.webp'));
+  assert.ok(!hero.includes('pranav-suit-cutout'));
+  assert.ok(html.includes('ed-home-about'));
+  assert.ok(html.includes('pranav-suit-color-v2.png'));
+  assert.ok(html.includes('230+'));
+  assert.ok(!html.includes('220+'));
+  assert.ok(!html.includes('same mind'));
+  assert.ok(text.includes('250+ attendees'));
+  assert.ok(text.includes('300+ attendees across the two events combined'));
 });

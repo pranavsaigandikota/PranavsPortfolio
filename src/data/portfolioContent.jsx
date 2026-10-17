@@ -82,9 +82,9 @@ export const projectsData = [
     title: "UCF SASE Official Website",
     imageSrc: saseImg,
     imageFit: "contain",
-    shortDescription: "A club platform serving 220+ registered members with event registration, QR check-ins, membership, and attendance analytics.",
+    shortDescription: "From a static site to a full event platform: features built from the ground up for 230+ registered UCF SASE members.",
     fullDescription: [
-      "Led the web team as CS Tech Chair, planned and delegated frontend and backend tasks, and integrated contributor features into a Next.js and Supabase platform supporting 220+ registered members, weekly event registration, membership, attendance, and email engagement.",
+      "Led the web team as CS Tech Chair to transform a static website into a Next.js and Supabase platform serving every UCF SASE event and 230+ registered members. Planned and delegated frontend and backend work as we built event registration, membership, attendance, forms, and email engagement features from the ground up.",
       "Built the QR check-in and attendance system, designed the PostgreSQL schema, and integrated an admin dashboard for event and form creation, RSVP tracking, and club demographics."
     ],
     skills: ["Next.js", "TypeScript", "Supabase", "PostgreSQL", "Vercel"],
@@ -335,7 +335,7 @@ export const experiences = [
     themeColor: "#2563eb",
     images: [saseImg],
     experiences: [
-      'Led the web team as CS Tech Chair to replace manual attendance tracking with a Next.js and Supabase QR check-in system for over 200 members, with row-level security policies and duplicate-check-in protection.',
+      'Led the web team in transforming a static site into a full event platform for 230+ registered members, building registration, membership, QR attendance, forms, and admin features from the ground up for every UCF SASE event.',
       'Lead frontend and backend developers maintaining the official UCF SASE website and facilitate technical, project-based computer science workshops for members.',
     ],
     imageFit: "contain",
@@ -407,8 +407,8 @@ export const experiences = [
     themeColor: "#ec4899", // Pink
     images: [diwaliBackdrop, diwaliSpeech, diwaliCrowd, diwaliBoard, diwaliFood],
     experiences: [
-      "Leading the planning and execution of Diwali and Banquet events for UCF’s largest Indian student organization.",
-      "Coordinating with multiple teams and clubs to deliver engaging experiences for the campus community with turnouts up-to almost 300+ attendees.",
+      "Planned and delivered Diwali and Banquet for UCF’s Indian Student Association, with 300+ attendees across the two events combined.",
+      "Planned and spoke at Diwali for 250+ attendees, coordinating teams and clubs to bring the event to life.",
       "Contributed innovative ideas and guided team members to ensure successful event execution.",
     ],
   },
