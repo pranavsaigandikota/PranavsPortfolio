@@ -14,6 +14,7 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/about" element={<Navigate to="/" replace />} />
         <Route path="/research" element={<LegacyPageRedirect />} />
         <Route path="/awards" element={<LegacyPageRedirect />} />
         {editorialPages.map(page => <Route key={page.id} path={page.path} element={<SamuraiPortfolio page={page.id} />} />)}

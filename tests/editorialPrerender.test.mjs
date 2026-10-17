@@ -57,16 +57,23 @@ test('the Hobbies page preserves the video archive and legacy URLs',()=>{
     const alias=readFileSync(new URL('../dist/films/index.html',import.meta.url),'utf8');
     assert.equal(alias,page);
     assert.equal(readFileSync(new URL('../dist/animations/index.html',import.meta.url),'utf8'),page);
-    assert.ok(page.includes('>HOBBIES</h1>'));
+    assert.ok(page.includes('>My Animations</h1>'));
     assert.ok(html.includes('href="/hobbies"'));
 });
 
 test('home separates the collage from the portrait and reflects current impact',()=>{
   const hero=html.split('id="home"')[1].split('</section>')[0];
-  assert.ok(hero.includes('creative-mind.webp'));
+  assert.ok(hero.includes('pranav-suit-transparent-v4.png'));
+  assert.ok(hero.includes('About me.'));
   assert.ok(!hero.includes('pranav-suit-cutout'));
-  assert.ok(html.includes('ed-home-about'));
-  assert.ok(html.includes('pranav-suit-original-v3.png'));
+  assert.ok(html.includes('ed-home-story'));
+  assert.ok(html.includes('ed-home-biography'));
+  assert.ok(!html.includes('My background and work'));
+  assert.ok(html.includes('143 tests'));
+  assert.ok(html.includes('166 students'));
+  assert.ok(html.includes('Research in practice'));
+  assert.ok(html.includes('Testing ideas with real people.'));
+  assert.ok(html.includes('pranav-suit-transparent-v4.png'));
   assert.ok(html.includes('230+'));
   assert.ok(!html.includes('220+'));
   assert.ok(!html.includes('same mind'));
@@ -74,21 +81,28 @@ test('home separates the collage from the portrait and reflects current impact',
   assert.ok(text.includes('300+ attendees across the two events combined'));
 });
 
-test('navigation groups secondary pages and embeds awards and research in relevant pages',()=>{
+test('flat navigation starts with the About homepage and keeps awards and papers in relevant pages',()=>{
   const nav=html.match(/<nav id="sp-navigation"[\s\S]*?<\/nav>/)[0];
-  const primary=nav.split('<details')[0];
-  for(const path of ['experience','projects','skills']) assert.ok(primary.includes(`href="/${path}"`));
-  for(const path of ['about','hobbies','research','awards','flix']) assert.ok(!primary.includes(`href="/${path}"`));
-  assert.ok(nav.includes('>More</summary>'));
-  for(const path of ['about','hobbies','flix']) assert.ok(nav.includes(`href="/${path}"`));
-  assert.ok(!editorialPages.some(page=>['research','awards'].includes(page.id)));
+  assert.ok(nav.indexOf('>About Me</a>') < nav.indexOf('>Experience</a>'));
+  for(const path of ['experience','projects','skills','hobbies']) assert.ok(nav.includes(`href="/${path}"`));
+  assert.ok(nav.includes('>My Animations</a>'));
+  assert.ok(!nav.includes('<details'));
+  assert.ok(!nav.includes('>More<'));
+  for(const path of ['about','research','awards']) assert.ok(!nav.includes(`href="/${path}"`));
+  assert.ok(!editorialPages.some(page=>['about','research','awards'].includes(page.id)));
   const experience=pages.find(page=>page.id==='experience').html;
   const projects=pages.find(page=>page.id==='projects').html;
+  const skills=pages.find(page=>page.id==='skills').html;
+  const animations=pages.find(page=>page.id==='hobbies').html;
   assert.ok(experience.includes('id="awards"'));
-  assert.ok(experience.includes('National Space Society') || experience.includes('NSS SPACE SETTLEMENT'));
   assert.ok(projects.includes('id="research"'));
   for(const title of ['Exodus Paper','Stylus Paper','Cyber Sec Paper']) assert.ok(projects.includes(title));
-  for(const [alias,target] of [['research','/projects#research'],['awards','/experience#awards']]){
+  assert.ok(projects.includes('Atomic') || projects.includes('atomic Lua'));
+  assert.ok(projects.includes('Integrated TMDB API'));
+  assert.ok(skills.includes('Play golf'));
+  assert.ok(!animations.includes('PICTURE THIS.'));
+  assert.ok(animations.includes('I love animating in my free time.'));
+  for(const [alias,target] of [['about','/#home'],['research','/projects#research'],['awards','/experience#awards']]){
     const redirect=readFileSync(new URL(`../dist/${alias}/index.html`,import.meta.url),'utf8');
     assert.ok(redirect.includes(`url=${target}`));
   }

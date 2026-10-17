@@ -39,7 +39,7 @@ test('each editorial page survives a fallback and preserves query strings',()=>{
     let redirect,restored;
     runInNewContext(fallback,{window:{location:{pathname:`/${page}`,search:'?from=cover',hash:'',replace:value=>{redirect=value;}}}});
     runInNewContext(restore,{URLSearchParams,window:{location:{search:new URL(redirect,'https://pranavsaig.dev').search},history:{replaceState:(_state,_title,value)=>{restored=value;}}}});
-    const targets={research:'/projects?from=cover#research',awards:'/experience?from=cover#awards'};
+    const targets={about:'/?from=cover#home',research:'/projects?from=cover#research',awards:'/experience?from=cover#awards'};
     assert.equal(restored,targets[page] || `/${['animations','films'].includes(page)?'hobbies':page}?from=cover`);
   }
 });

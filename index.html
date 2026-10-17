@@ -6,8 +6,8 @@
     <link rel="canonical" href="https://pranavsaig.dev/" />
     <link rel="alternate" type="text/plain" href="/portfolio.txt" title="Readable portfolio text" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pranavsai Gandikota — Software Engineer &amp; Creative Technologist</title>
-    <meta name="description" content="Pranavsai Gandikota — software engineer, AI builder, and creative technologist. Explore award-winning projects, Ford internship experience, research, and hobbies." />
+    <title>Pranavsai Gandikota — Software Engineer</title>
+    <meta name="description" content="Pranavsai Gandikota — software engineer working on cloud systems, full-stack applications, and applied AI. Explore experience, projects, and research." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,600;6..96,700&family=Bungee&family=Manrope:wght@400;500;600;700;800&family=Permanent+Marker&family=Space+Grotesk:wght@500;600;700&display=swap" />
@@ -25,7 +25,8 @@
     <script>
       // Keep old bookmarks working after consolidating research and awards.
       function mergedPortfolioRoute(route) {
-        return route.replace(/^\/research\/?(\?[^#]*)?(?:#.*)?$/, (_, query) => '/projects' + (query || '') + '#research')
+        return route.replace(/^\/about\/?(\?[^#]*)?(?:#.*)?$/, (_, query) => '/' + (query || '') + '#home')
+          .replace(/^\/research\/?(\?[^#]*)?(?:#.*)?$/, (_, query) => '/projects' + (query || '') + '#research')
           .replace(/^\/awards\/?(\?[^#]*)?(?:#.*)?$/, (_, query) => '/experience' + (query || '') + '#awards')
           .replace(/^\/(?:films|animations)\/?(?=[?#]|$)/, '/hobbies');
       }
@@ -37,7 +38,7 @@
       if (!portfolioRoute && window.location.pathname === '/' && portfolioSection) {
         window.history.replaceState(null, '', mergedPortfolioRoute('/' + (portfolioSection[1] === 'achievements' ? 'awards' : portfolioSection[1])));
       }
-      if (/^\/(?:research|awards|films|animations)\/?$/.test(window.location.pathname)) {
+      if (/^\/(?:about|research|awards|films|animations)\/?$/.test(window.location.pathname)) {
         window.history.replaceState(null, '', mergedPortfolioRoute(window.location.pathname + window.location.search + window.location.hash));
       }
     </script>

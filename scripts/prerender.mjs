@@ -27,7 +27,7 @@ for (const alias of ['films', 'animations']) {
 }
 console.log(`Pre-rendered ${editorialPages.length} editorial pages, structured data, sitemap, and text edition.`);
 
-for (const [alias, target] of Object.entries({research:'/projects#research',awards:'/experience#awards'})) {
+for (const [alias, target] of Object.entries({about:'/#home',research:'/projects#research',awards:'/experience#awards'})) {
   const [path, hash] = target.split('#');
   await mkdir(`dist/${alias}`, {recursive:true});
   await writeFile(`dist/${alias}/index.html`, `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=${target}"><link rel="canonical" href="https://pranavsaig.dev${path}"><title>Pranavsai Gandikota</title></head><body><a href="${target}">Continue to ${alias === 'research' ? 'research papers' : 'awards'}</a><script>location.replace('${path}'+location.search+'#${hash}')</script></body></html>`);
