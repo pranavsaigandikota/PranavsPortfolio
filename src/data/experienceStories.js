@@ -13,7 +13,7 @@ export const experienceStories = {
     personalNote: 'My work at NextGen Federal is in full-stack development and software engineering.',
   },
   'SASE (UCF)': {
-    personalNote: 'As CS Tech Chair, I lead the web team building tools for the same SASE community I help organize and teach.',
+    personalNote: 'As CS Tech Chair, I led a 12-person team to build the complete SASE website, taking it from a static site to a fully functional platform for the community I help organize and teach.',
     restoredDetails: [
       'I design and facilitate technical and project-based computer science workshops around members\' academic and professional development.',
       'I cultivate partnerships with academic and professional organizations to create networking and collaborative event opportunities.',

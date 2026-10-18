@@ -82,9 +82,9 @@ export const projectsData = [
     title: "UCF SASE Official Website",
     imageSrc: "/history/sase-group.webp",
     imageFit: "contain",
-    shortDescription: "From a static site to a full event platform: features built from the ground up for 230+ registered UCF SASE members.",
+    shortDescription: "Led a 12-person team to take the UCF SASE website from a static site to a fully functional event platform for 230+ registered members.",
     fullDescription: [
-      "Led the web team as CS Tech Chair to transform a static website into a Next.js and Supabase platform serving every UCF SASE event and 230+ registered members. Planned and delegated frontend and backend work as we built event registration, membership, attendance, forms, and email engagement features from the ground up.",
+      "Led a 12-person team as CS Tech Chair to build the complete UCF SASE website, transforming a static site into a fully functional Next.js and Supabase event platform serving 230+ registered members. Planned and delegated frontend and backend work as we built event registration, membership, attendance, forms, and email engagement features from the ground up.",
       "Built the QR check-in and attendance system, designed the PostgreSQL schema, and integrated an admin dashboard for event and form creation, RSVP tracking, and club demographics."
     ],
     skills: ["Next.js", "TypeScript", "Supabase", "PostgreSQL", "Vercel"],
@@ -335,7 +335,7 @@ export const experiences = [
     themeColor: "#2563eb",
     images: ["/history/sase-group.webp", saseImg],
     experiences: [
-      'Led the web team in transforming a static site into a full event platform for 230+ registered members, building registration, membership, QR attendance, forms, and admin features from the ground up for every UCF SASE event.',
+      'Led a 12-person team to build the complete UCF SASE website, taking it from a static site to a fully functional event platform for 230+ registered members. Built registration, membership, QR attendance, forms, email engagement, and admin analytics from the ground up.',
       'Lead frontend and backend developers maintaining the official UCF SASE website and facilitate technical, project-based computer science workshops for members.',
     ],
     imageFit: "contain",
