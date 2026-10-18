@@ -1,0 +1,138 @@
+/* A quieter, readable layer shared by the portfolio pages. */
+.editorial-portfolio {
+  font-size: 16px;
+  background-image: none;
+}
+.editorial-portfolio :is(h1, h2, h3, h4, button, a, span, figcaption) {
+  text-transform: none;
+}
+.editorial-portfolio :is(h1, h2, h3) { letter-spacing: -.035em; }
+.editorial-portfolio .sp-container { width: min(1160px, calc(100% - 80px)); }
+.editorial-portfolio .sp-header { border-top: 0; border-bottom-color: var(--ed-line); }
+.editorial-portfolio .sp-full-name { font-size: 17px; letter-spacing: -.025em; }
+.editorial-portfolio .sp-brand-mark { font-size: 25px; }
+.editorial-portfolio .ed-flat-nav a { font-size: 14px; }
+.editorial-portfolio .sp-nav-resume { border-radius: 10px; font-size: 14px; }
+.editorial-portfolio .sp-eyebrow { font-size: 14px; letter-spacing: .02em; }
+.editorial-portfolio .sp-button {
+  min-height: 48px;
+  padding: 13px 21px;
+  border-radius: 12px;
+  font-size: 15px !important;
+  font-weight: 700;
+  letter-spacing: 0;
+  box-shadow: none;
+}
+.editorial-portfolio .sp-button:hover { box-shadow: none; transform: translateY(-2px); }
+.editorial-portfolio .sp-button-outline { border-color: var(--ed-line); }
+.editorial-portfolio .ed-about-home {
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, .85fr);
+  gap: 64px 72px;
+  padding-top: 76px;
+  align-items: center;
+}
+.editorial-portfolio .ed-about-home-copy { min-width: 0; }
+.editorial-portfolio .ed-intro-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--ed-ink);
+}
+.ed-intro-label::before { content: ''; width: 8px; height: 8px; background: var(--ed-link); border-radius: 50%; }
+.editorial-portfolio .ed-about-home-copy .ed-home-name {
+  width: auto;
+  margin: 23px 0 15px;
+  font: 800 clamp(40px, 4.5vw, 64px)/1.12 'Nunito', 'Segoe UI', sans-serif;
+  letter-spacing: -.055em;
+  color: var(--ed-ink);
+}
+.ed-about-home-copy .ed-home-name > span { display: inline; color: var(--ed-link); }
+.editorial-portfolio .ed-about-home-copy .ed-intro-heading {
+  font-size: clamp(28px, 2.8vw, 38px);
+  line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: -.035em;
+  margin: 0 0 26px;
+  color: var(--ed-muted);
+}
+.editorial-portfolio .ed-about-home-copy > p:not(.ed-about-roles) {
+  font-size: 18px;
+  line-height: 1.8;
+  max-width: 56ch;
+  margin: 0 0 20px;
+}
+.editorial-portfolio .ed-about-home-copy > .ed-intro-description { color: var(--ed-ink); }
+.ed-intro-education { display: grid; gap: 4px; padding-left: 16px; border-left: 2px solid var(--ed-line); margin: 27px 0; color: var(--ed-muted); font-size: 15px; line-height: 1.7; }
+.ed-intro-education > span:first-child { color: var(--ed-ink); font-weight: 700; }
+.editorial-portfolio .sp-hero-actions { gap: 12px; }
+.editorial-portfolio .sp-hero-socials { gap: 24px; font-size: 14px; margin-top: 28px; }
+.editorial-portfolio .sp-hero-socials > a { gap: 8px; padding-block: 5px; }
+.editorial-portfolio .ed-about-home-portrait { height: 570px; width: 100%; align-self: center; overflow: hidden; }
+.editorial-portfolio .ed-about-disc { inset: 65px 0 65px; border-radius: 45% 45% 24px 24px; border: 0; background: var(--ed-wash); }
+.editorial-portfolio .ed-about-home-portrait img { height: calc(100% - 55px); filter: none; mask-image: linear-gradient(to bottom, #000 92%, transparent); }
+.ed-about-home-portrait figcaption { position: absolute; bottom: 0; inset-inline: 0; text-align: center; color: var(--ed-ink); font-weight: 700; font-size: 17px; line-height: 1.6; }
+.ed-about-home-portrait figcaption span { display: block; font-size: 14px; font-weight: 400; color: var(--ed-muted); }
+.editorial-portfolio .ed-home-story { margin-top: 12px; }
+.editorial-portfolio .ed-biography-block { gap: 72px; padding-block: 56px; }
+.editorial-portfolio .ed-biography-copy h2 { font-size: 32px; line-height: 1.25; margin-bottom: 22px; }
+.editorial-portfolio .ed-home-biography p { font-size: 17px; line-height: 1.9; }
+.editorial-portfolio .ed-metric { color: inherit; font-weight: 700; }
+.editorial-portfolio .ed-home-biography .ed-metric,
+.editorial-portfolio .ed-project-description .ed-metric { color: inherit; font-weight: 700; }
+.editorial-portfolio .ed-biography-block img { border-radius: 16px; }
+.editorial-portfolio :is(figcaption, .sp-date, .sp-tag, .sp-tech, .sp-card-event) { font-size: 13px; letter-spacing: 0; line-height: 1.65; }
+.editorial-portfolio :is(.sp-feature-copy > p, .sp-card-body > p, .sp-skill-card > p, .ed-project-description p, .ed-mantis p, .ed-award-ticket p, .ed-nss-copy > p, .ed-award-lead-copy > p) { font-size: 16px; line-height: 1.85; color: var(--ed-muted); }
+.editorial-portfolio .sp-experience-description { font-size: 15px !important; line-height: 1.8; color: var(--ed-muted) !important; }
+.editorial-portfolio .sp-role-heading { text-transform: none; letter-spacing: -.025em !important; line-height: 1.25 !important; }
+.editorial-portfolio .sp-company-subtitle { font-size: 16px !important; }
+.editorial-portfolio .sp-text-link { font-size: 15px; letter-spacing: 0; }
+.editorial-portfolio .sp-section-heading { margin-bottom: 40px; }
+.editorial-portfolio .sp-section-heading h1 { letter-spacing: -.045em; }
+.editorial-portfolio .sp-feature { border-radius: 16px; overflow: hidden; }
+.editorial-portfolio .sp-feature::after { display: none; }
+.editorial-portfolio :is(.sp-card, .sp-skill-card, .sp-experience-card) { border-radius: 14px; overflow: hidden; box-shadow: none; }
+.editorial-portfolio .sp-card-body { padding: 26px; }
+.editorial-portfolio .sp-card-body h3 { font-size: 28px; line-height: 1.25; }
+.editorial-portfolio .sp-tech { gap: 8px; }
+.editorial-portfolio .ed-about-impact { gap: 32px; padding-block: 32px; }
+.editorial-portfolio .ed-about-impact span { font-size: 15px; max-width: 190px; }
+.editorial-portfolio .ed-home-photo-strip { gap: 28px; padding-block: 45px 65px; }
+.editorial-portfolio .ed-home-photo-strip img { border-radius: 14px; }
+.editorial-portfolio .ed-home-photo-strip figcaption p { font-size: 15px; line-height: 1.8; }
+.editorial-portfolio .ed-animation-intro p { font-size: 18px; line-height: 1.85; max-width: 72ch; }
+.editorial-portfolio .sp-dialog-body > p { font-size: 17px; line-height: 1.85; }
+.editorial-portfolio .sp-footer { font-size: 13px; }
+@media (max-width: 1100px) {
+  .editorial-portfolio .ed-about-home { gap: 48px 35px; }
+  .editorial-portfolio .ed-about-home-portrait { height: 520px; }
+}
+@media (max-width: 800px) {
+  .editorial-portfolio .sp-container { width: calc(100% - 48px); }
+  .editorial-portfolio .ed-about-home { grid-template-columns: minmax(0, 1fr); padding-top: 42px; gap: 36px; }
+  .editorial-portfolio .ed-about-home-copy .ed-home-name { font-size: clamp(38px, 7vw, 56px); }
+  .editorial-portfolio .ed-about-home-portrait { width: min(380px, 100%); height: 440px; }
+  .editorial-portfolio .ed-home-story { margin-top: 0; }
+  .editorial-portfolio .ed-biography-block,
+  .editorial-portfolio .ed-biography-block:nth-child(even) { grid-template-columns: minmax(0, 1fr); gap: 30px; padding-block: 38px; }
+  .editorial-portfolio .ed-biography-photos { order: 0; }
+  .editorial-portfolio .ed-about-impact { gap: 20px; }
+  .editorial-portfolio .ed-about-impact span { font-size: 14px; }
+}
+@media (max-width: 560px) {
+  .editorial-portfolio .sp-container { width: calc(100% - 40px); }
+  .editorial-portfolio .sp-nav-wrap { padding-inline: 20px; gap: 12px; }
+  .editorial-portfolio .sp-full-name { font-size: 14px; }
+  .editorial-portfolio .sp-brand-mark { display: none; }
+  .editorial-portfolio .sp-nav-resume { padding: 8px 10px; font-size: 12px; }
+  .editorial-portfolio .ed-flat-nav a { font-size: 13px; }
+  .editorial-portfolio .ed-about-home-copy > p:not(.ed-about-roles) { font-size: 17px; }
+  .editorial-portfolio .sp-hero-actions { flex-direction: column; align-items: stretch; }
+  .editorial-portfolio .sp-button { justify-content: center; }
+  .editorial-portfolio .ed-about-impact { grid-template-columns: 1fr; gap: 20px; }
+  .editorial-portfolio .ed-about-impact a { flex-direction: row; align-items: center; gap: 22px; }
+  .editorial-portfolio .ed-about-impact strong { min-width: 90px; font-size: 36px; }
+  .editorial-portfolio .ed-home-photo-strip { grid-template-columns: 1fr; }
+  .editorial-portfolio .ed-biography-copy h2 { font-size: 28px; }
+  .editorial-portfolio .sp-section-heading { padding-right: 0; }
+  .editorial-portfolio .sp-small-art { display: none; }
+}
