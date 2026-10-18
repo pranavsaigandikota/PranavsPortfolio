@@ -21,7 +21,7 @@ export function renderPortfolio(page = 'home') {
   const html=renderToString(<StaticRouter location={current.path}><SamuraiPortfolio page={page}/></StaticRouter>);
   const text=[
     'PRANAVSAI GANDIKOTA — SOFTWARE ENGINEER / APPLIED AI',
-    'Orlando, Florida | B.S. Computer Science, University of Central Florida | GPA 3.99 | Graduation May 2028',
+    'Orlando, Florida | B.S. Computer Science, University of Central Florida | GPA 3.99',
     'Email: pranavsaigandikota@gmail.com',
     'GitHub: https://github.com/pranavsaigandikota',
     'LinkedIn: https://www.linkedin.com/in/pranavsaig',

@@ -269,3 +269,4 @@
 .ed-biography-copy p+p{margin-top:18px}
 @media(max-width:560px){.editorial-portfolio .sp-nav.ed-flat-nav{flex-wrap:wrap;justify-content:space-between;gap:0 16px;overflow:visible}.editorial-portfolio .ed-flat-nav a{min-height:44px;text-align:center;flex:1 0 25%}}
 .editorial-portfolio .sp-feature-image{min-width:0;max-width:100%}.editorial-portfolio .sp-feature-image .sp-media-preview{min-width:0;max-width:100%}
+.ed-biography-photos{min-width:0;display:grid;gap:24px}.ed-biography-block:nth-child(even)>.ed-biography-photos{order:-1}@media(max-width:800px){.ed-biography-block:nth-child(even)>.ed-biography-photos{order:0}}

@@ -407,8 +407,8 @@ export const experiences = [
     themeColor: "#ec4899", // Pink
     images: [diwaliBackdrop, diwaliSpeech, diwaliCrowd, diwaliBoard, diwaliFood],
     experiences: [
-      "Planned and delivered Diwali and Banquet for UCF’s Indian Student Association, with 300+ attendees across the two events combined.",
-      "Planned and spoke at Diwali for 250+ attendees, coordinating teams and clubs to bring the event to life.",
+      "Planned and delivered Diwali and Banquet events for UCF’s Indian Student Association.",
+      "Planned and spoke at Diwali for 230+ attendees, coordinating teams and clubs to bring the event to life.",
       "Contributed innovative ideas and guided team members to ensure successful event execution.",
     ],
   },
@@ -578,7 +578,7 @@ export const achievements = [
 export const codeString = `const pranav = {
   role: "Software Engineer · Applied AI",
   basedIn: "Orlando, FL",
-  education: "B.S. CS @ UCF · May 2028",
+  education: "B.S. Computer Science @ UCF",
   gpa: "3.99 / 4.0",
   build: ["Full-stack", "Cloud", "AI"],
   stack: ["React", "Spring Boot", "Python"],

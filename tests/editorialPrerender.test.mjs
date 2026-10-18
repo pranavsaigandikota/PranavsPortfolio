@@ -78,8 +78,10 @@ test('home separates the collage from the portrait and reflects current impact',
   assert.ok(html.includes('230+'));
   assert.ok(!html.includes('220+'));
   assert.ok(!html.includes('same mind'));
-  assert.ok(text.includes('250+ attendees'));
-  assert.ok(text.includes('300+ attendees across the two events combined'));
+  assert.ok(text.includes('230+ attendees'));
+  assert.ok(!html.includes('May 2028'));
+  assert.ok(html.includes('Diwali event'));
+  assert.ok(html.includes('SWE Intern @ NextGen Federal'));
 });
 
 test('flat navigation starts with the About homepage and keeps awards and papers in relevant pages',()=>{
