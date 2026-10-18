@@ -265,3 +265,7 @@
 
 .ed-mantis{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);align-items:center;gap:40px;margin-top:38px;padding-top:35px;border-top:1px solid var(--ed-line)}.ed-mantis h2{font:500 clamp(36px,4vw,52px)/1.15 'Bodoni Moda',Georgia,serif;letter-spacing:-1px;margin:0 0 18px}.ed-mantis p{font-size:14px;line-height:1.9;color:var(--ed-muted);margin:0 0 22px}.ed-mantis figure{min-width:0;margin:0}.ed-mantis video{display:block;width:100%;max-height:520px;object-fit:contain;background:#000}.ed-mantis figcaption{font-size:10px;color:var(--ed-muted);line-height:1.7;margin-top:10px}
 @media(max-width:800px){.ed-mantis{grid-template-columns:1fr;gap:24px;margin-top:28px;padding-top:28px}.ed-mantis p{font-size:13px}.ed-mantis figcaption{font-size:11px}}
+
+.ed-biography-copy p+p{margin-top:18px}
+@media(max-width:560px){.editorial-portfolio .sp-nav.ed-flat-nav{flex-wrap:wrap;justify-content:space-between;gap:0 16px;overflow:visible}.editorial-portfolio .ed-flat-nav a{min-height:44px;text-align:center;flex:1 0 25%}}
+.editorial-portfolio .sp-feature-image{min-width:0;max-width:100%}.editorial-portfolio .sp-feature-image .sp-media-preview{min-width:0;max-width:100%}

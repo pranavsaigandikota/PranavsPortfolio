@@ -86,7 +86,7 @@ test('flat navigation starts with the About homepage and keeps awards and papers
   const nav=html.match(/<nav id="sp-navigation"[\s\S]*?<\/nav>/)[0];
   assert.ok(nav.indexOf('>About Me</a>') < nav.indexOf('>Experience</a>'));
   for(const path of ['experience','projects','skills','hobbies']) assert.ok(nav.includes(`href="/${path}"`));
-  assert.ok(nav.includes('>My Animations</a>'));
+  assert.ok(nav.includes('>Hobbies</a>'));
   assert.ok(!nav.includes('<details'));
   assert.ok(!nav.includes('>More<'));
   for(const path of ['about','research','awards']) assert.ok(!nav.includes(`href="/${path}"`));
@@ -102,7 +102,7 @@ test('flat navigation starts with the About homepage and keeps awards and papers
   assert.ok(projects.includes('Integrated TMDB API'));
   assert.ok(skills.includes('Play golf'));
   assert.ok(!animations.includes('PICTURE THIS.'));
-  assert.ok(animations.includes('I love animating in my free time.'));
+  assert.ok(animations.includes('During COVID-19, I got into Blender'));
   for(const [alias,target] of [['about','/#home'],['research','/projects#research'],['awards','/experience#awards']]){
     const redirect=readFileSync(new URL(`../dist/${alias}/index.html`,import.meta.url),'utf8');
     assert.ok(redirect.includes(`url=${target}`));

@@ -15,7 +15,7 @@ import jumblehotImg from "../assets/optimized/jumblehot.webp";
 
 import humanotoneImg from "../assets/optimized/humanotone.webp";
 
-import exodusImg from "../assets/optimized/exodus.webp";
+const exodusImg = "/projects/exodus-settlement.png";
 
 import roboticsImg from "../assets/optimized/robotic-animatronics.webp";
 
