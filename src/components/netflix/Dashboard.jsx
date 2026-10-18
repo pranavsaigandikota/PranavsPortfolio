@@ -4,6 +4,7 @@ import { HeroBanner } from './HeroBanner';
 import { ContentRow } from './ContentRow';
 import { PreviewModal } from './PreviewModal';
 import { SkillsBubbles } from './SkillsBubbles';
+import { PosterWall } from '../EditorialEffects';
 
 // Import Data
 import projectsData from '../../data/projects.json';
@@ -119,12 +120,17 @@ export const Dashboard = ({ profile }) => {
           <SkillsBubbles />
         </div>
 
-        <ContentRow 
-          id="animations"
-          title="My Animations" 
-          items={animationsData} 
-          onSelect={handleSelect} 
-        />
+        <div className="relative overflow-hidden py-2">
+          <PosterWall images={animationsData.filter(item => item.imageSrc).map(item => item.imageSrc)} />
+          <div className="relative z-10">
+            <ContentRow
+              id="animations"
+              title="My Animations"
+              items={animationsData}
+              onSelect={handleSelect}
+            />
+          </div>
+        </div>
 
         {/* Copyright Notice */}
         <footer className="w-full text-center py-8 px-4 mt-8 border-t border-gray-800 text-[#808080] text-xs max-w-4xl mx-auto">
