@@ -111,7 +111,7 @@ test('flat navigation starts with the About homepage and keeps awards and papers
 
 test('homepage biography pairs every paragraph with a relevant photo and emphasizes metrics',()=>{
   const biography=html.split('class="ed-home-biography"')[1].split('class="ed-about-impact')[0];
-  assert.equal((biography.match(/class="ed-biography-block"/g)||[]).length,7);
+  assert.equal((biography.match(/class="ed-biography-block"/g)||[]).length,6);
   assert.ok(biography.includes('bill%20ford.png'));
   assert.ok(biography.includes('sase-group.webp'));
   assert.ok(biography.includes('>92%</strong>'));
