@@ -35,6 +35,7 @@ export function renderPortfolio(page = 'home') {
     '\nACHIEVEMENTS',...achievements.map(item=>`${item.title} | ${item.subtitle}\n${item.description}\n${item.points.map(plain).join('\n')}`),
     '\nANIMATIONS',...animations.filter(item=>item.type!=='Link').map(item=>`${item.title}\n${item.description}\nhttps://pranavsaig.dev${item.videoUrl}`),
     '\nAnimations: https://www.youtube.com/@earthlytomcat11',
+    '\nTHE MANTIS\nA robot animatronic head I designed, built, and programmed, with controller support to operate its movements.\nVideo: https://pranavsaig.dev/videos/the-mantis.mp4\nOther creations: https://filmasticpg.wixsite.com/mysteriousunloaded',
   ].join('\n\n');
   const structuredData={
     '@context':'https://schema.org','@type':'Person',name:'Pranavsai Gandikota',url:'https://pranavsaig.dev/',
