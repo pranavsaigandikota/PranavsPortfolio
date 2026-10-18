@@ -5,6 +5,7 @@ import { editorialPages } from '../src/data/editorialPages.js';
 
 // Run after npm run build: verify the deployed output, without executing JavaScript.
 const html=readFileSync(new URL('../dist/index.html',import.meta.url),'utf8');
+const visibleText=html.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ');
 const text=readFileSync(new URL('../dist/portfolio.txt',import.meta.url),'utf8');
 const data=JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
 const pages=editorialPages.map(page=>({...page,html:readFileSync(new URL(`../dist/${page.id==='home'?'':page.id+'/'}index.html`,import.meta.url),'utf8')}));
@@ -69,8 +70,8 @@ test('home separates the collage from the portrait and reflects current impact',
   assert.ok(html.includes('ed-home-story'));
   assert.ok(html.includes('ed-home-biography'));
   assert.ok(!html.includes('My background and work'));
-  assert.ok(html.includes('143 tests'));
-  assert.ok(html.includes('166 students'));
+  assert.ok(visibleText.includes('143 tests'));
+  assert.ok(visibleText.includes('166 students'));
   assert.ok(html.includes('Research in practice'));
   assert.ok(html.includes('Testing ideas with real people.'));
   assert.ok(html.includes('pranav-suit-transparent-v4.png'));
@@ -106,4 +107,16 @@ test('flat navigation starts with the About homepage and keeps awards and papers
     const redirect=readFileSync(new URL(`../dist/${alias}/index.html`,import.meta.url),'utf8');
     assert.ok(redirect.includes(`url=${target}`));
   }
+});
+
+test('homepage biography pairs every paragraph with a relevant photo and emphasizes metrics',()=>{
+  const biography=html.split('class="ed-home-biography"')[1].split('class="ed-about-impact')[0];
+  assert.equal((biography.match(/class="ed-biography-block"/g)||[]).length,8);
+  assert.ok(biography.includes('bill%20ford.png'));
+  assert.ok(biography.includes('sase-group.webp'));
+  assert.ok(biography.includes('>92%</strong>'));
+  assert.ok(biography.includes('class="ed-metric"'));
+  const cssPath=html.match(/href="(\/assets\/[^" ]+\.css)"/)[1];
+  const css=readFileSync(new URL('../dist'+cssPath,import.meta.url),'utf8');
+  assert.ok(css.includes('--ed-metric:'));
 });

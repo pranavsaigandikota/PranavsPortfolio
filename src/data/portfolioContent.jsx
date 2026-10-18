@@ -80,7 +80,7 @@ import saseImg from "../assets/ExperiencesPics/saselogo.png";
 export const projectsData = [
   {
     title: "UCF SASE Official Website",
-    imageSrc: saseImg,
+    imageSrc: "/history/sase-group.webp",
     imageFit: "contain",
     shortDescription: "From a static site to a full event platform: features built from the ground up for 230+ registered UCF SASE members.",
     fullDescription: [
@@ -333,7 +333,7 @@ export const experiences = [
     endDate: "Present",
     type: "Part-time",
     themeColor: "#2563eb",
-    images: [saseImg],
+    images: ["/history/sase-group.webp", saseImg],
     experiences: [
       'Led the web team in transforming a static site into a full event platform for 230+ registered members, building registration, membership, QR attendance, forms, and admin features from the ground up for every UCF SASE event.',
       'Lead frontend and backend developers maintaining the official UCF SASE website and facilitate technical, project-based computer science workshops for members.',

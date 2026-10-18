@@ -1,11 +1,18 @@
 import { renderToString, renderToStaticMarkup } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
-import { SamuraiPortfolio } from './SamuraiPortfolio';
+import { SamuraiPortfolio, DetailDialog } from './SamuraiPortfolio';
 import { projectsData, experiences, skillsData, achievements } from './data/portfolioContent';
 import { OriginalAboutCopy } from './components/OriginalAboutCopy';
+import { selectEditorialPhotos } from './data/editorialPhotos';
 import { editorialPages } from './data/editorialPages';
 import animations from './data/animations.json';
 export { editorialPages };
+export const editorialExperienceArchive = selectEditorialPhotos(experiences);
+export function renderExperienceDetails(organisation) {
+  const item = editorialExperienceArchive.find(experience => experience.organisation === organisation);
+  if (!item) throw new Error(`Unknown experience: ${organisation}`);
+  return renderToStaticMarkup(<DetailDialog item={item} onClose={() => {}}/>);
+}
 
 const plain = value => (typeof value==='string' ? value : renderToStaticMarkup(value)).replace(/<br\s*\/?\s*>/gi,' ').replace(/<\/(?:p|h[1-6]|article|div)>/gi,' ').replace(/<[^>]+>/g,'').replace(/&#x([0-9a-f]+);/gi,(_,code)=>String.fromCodePoint(parseInt(code,16))).replace(/&#(\d+);/g,(_,code)=>String.fromCodePoint(Number(code))).replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&apos;/g,"'").replace(/\s+/g,' ').trim();
 const paragraphs = value => (Array.isArray(value) ? value : value ? [value] : []).map(plain);
@@ -21,7 +28,7 @@ export function renderPortfolio(page = 'home') {
     'Resume: https://pranavsaig.dev/Pranavsai_Gandikota_SWE.pdf',
     '\nABOUT\n'+plain(<OriginalAboutCopy />),
     '\nEXPERIENCE',
-    ...experiences.map(item=>`${item.organisation} | ${item.role} | ${item.startDate} — ${item.endDate}\n${item.experiences.map(plain).join('\n')}`),
+    ...editorialExperienceArchive.map(item=>`${item.organisation} | ${item.role} | ${item.startDate} — ${item.endDate}\n${[item.personalNote, ...item.experiences].filter(Boolean).map(plain).join('\n')}`),
     '\nPROJECTS',
     ...projectsData.map(item=>`${item.title}${item.event?' | '+item.event:''}\n${item.shortDescription}\n${paragraphs(item.fullDescription).join('\n')}\nTechnologies: ${item.skills.join(', ')}${item.demo?'\nDemo: '+item.demo:''}${item.source?'\nSource: '+item.source:''}`),
     '\nSKILLS',...skillsData.map(group=>`${group.category}: ${group.skills.join(', ')}`),
