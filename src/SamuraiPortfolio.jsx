@@ -193,7 +193,7 @@ export function SamuraiPortfolio({ page = 'home' }) {
   },[page,lowPower,pageVisible]);
 
   return <div ref={rootRef} data-theme={theme} className={`samurai-portfolio editorial-portfolio ed-page-${page} ${lowPower?'sp-low-power':''} ${!pageVisible?'sp-page-hidden':''}`}>
-    {(page === 'experience' || page === 'projects') && <EditorialEffects />}
+    {page !== 'hobbies' && <EditorialEffects />}
     <a className="sp-skip" href="#main">Skip to content</a>
     <header className="sp-header"><div className="sp-nav-wrap"><Link className="sp-brand" to="/" aria-label="Pranavsai Gandikota home"><span className="sp-brand-mark">P<span>G</span></span><span className="sp-full-name">PRANAVSAI GANDIKOTA</span></Link>
       <nav id="sp-navigation" className="sp-nav ed-flat-nav" aria-label="Main navigation">{navigation.map(({id, path, label}) => <Link key={id} to={path} aria-current={page === id ? 'page' : undefined}>{label}</Link>)}<Link className="sp-flix-link" to="/flix">Flix</Link></nav>

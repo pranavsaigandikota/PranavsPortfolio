@@ -34,8 +34,8 @@ function Wave({ index, pointer }) {
     points.forEach((point, pointIndex) => {
       const x = (pointIndex / 95) * 15 - 7.5;
       point.set(
-        x + pointer.x * 0.12 * (index - 1),
-        Math.sin(x * 0.82 + time * 0.38 + index * 0.45) * 0.34 + pointer.y * 0.18 + (index - 1) * 0.13,
+        x + pointer.x * 0.35 * (index - 1),
+        Math.sin(x * 0.82 + time * 0.38 + index * 0.45) * 0.34 + pointer.y * 0.38 + (index - 1) * 0.13,
         -1.5 + index * 0.08,
       );
     });
@@ -120,8 +120,7 @@ function EffectsCanvas({ className, children }) {
 
   useEffect(() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const lowPower = navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4;
-    setEnabled(!reduced && !lowPower);
+    setEnabled(!reduced);
   }, []);
 
   if (!enabled) return null;

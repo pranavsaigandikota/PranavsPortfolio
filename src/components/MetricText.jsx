@@ -2,7 +2,7 @@ import { Children, cloneElement, isValidElement } from 'react';
 import PropTypes from 'prop-types';
 
 // Highlight text nodes only; links, attributes, and the original copy stay intact.
-const metricPattern = /(\b\d[\d,]*(?:\.\d+)?(?:%|\+|st\b|nd\b|rd\b|th\b)?|\b(?:six|three|two|first prize|first place)\b)/gi;
+const metricPattern = /(\b\d[\d,]*(?:\.\d+)?(?:%|\+|st\b|nd\b|rd\b|th\b)?(?![A-Za-z])|\b(?:six|three|two|first prize|first place)\b)/gi;
 
 function emphasize(value) {
   if (typeof value === 'string') {
