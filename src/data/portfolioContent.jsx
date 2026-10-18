@@ -322,7 +322,7 @@ export const experiences = [
     themeColor: "#0f766e",
     images: ["/history/nextgenlogo.jpg"],
     experiences: [
-      "Contributing to full-stack development and software engineering initiatives."
+      "Contributing to new features and report generation tools in C#."
     ],
     imageFit: "contain",
   },

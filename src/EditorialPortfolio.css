@@ -268,6 +268,9 @@
 
 .ed-biography-copy p+p{margin-top:18px}
 @media(max-width:560px){.editorial-portfolio .sp-nav.ed-flat-nav{flex-wrap:wrap;justify-content:space-between;gap:0 16px;overflow:visible}.editorial-portfolio .ed-flat-nav a{min-height:44px;text-align:center;flex:1 0 25%}}
+.editorial-portfolio .sp-role-heading{font-family:'Nunito','Arial Rounded MT Bold','Segoe UI',sans-serif!important;font-size:clamp(26px,3vw,43px)!important;line-height:1.1!important;letter-spacing:.01em!important;text-transform:uppercase;margin:16px 0 6px!important;color:var(--ed-ink)}
+.editorial-portfolio .sp-company-subtitle{font-family:'Nunito','Arial Rounded MT Bold','Segoe UI',sans-serif;font-size:15px!important;line-height:1.4;color:var(--ed-muted);margin:0!important}
+.editorial-portfolio .sp-experience-card .sp-role-heading{font-size:23px!important;margin:10px 0 4px!important}
 .editorial-portfolio,.editorial-portfolio .sp-dialog{font-family:'Nunito','Arial Rounded MT Bold','Segoe UI',sans-serif}
 .editorial-portfolio h1,.editorial-portfolio h2,.editorial-portfolio h3,.editorial-portfolio .sp-full-name,.editorial-portfolio .sp-button{font-family:'Nunito','Arial Rounded MT Bold','Segoe UI',sans-serif;text-transform:uppercase;letter-spacing:.02em}
 .editorial-portfolio .ed-about-home>.ed-home-name{font-family:'Nunito','Arial Rounded MT Bold','Segoe UI',sans-serif;font-size:clamp(42px,6vw,82px);letter-spacing:.02em}
